@@ -39,5 +39,25 @@
       To begin the development, run `npm start` or `yarn start`.
       To create a production bundle, use `npm run build` or `yarn build`.
     -->
+
+    <script>
+      try {
+        let themeAppearance = localStorage.getItem("themeAppearance");
+        let prefersDarkAppearance =
+                typeof window !== undefined &&
+                window.matchMedia("(prefers-color-scheme: dark)").matches;
+        if (
+                themeAppearance === "dark" ||
+                (themeAppearance === null && prefersDarkAppearance)
+        ) {
+          document.documentElement.setAttribute("data-theme", "dark");
+        } else {
+          document.documentElement.setAttribute("data-theme", "light");
+        }
+      } catch (e) {
+        // no-op
+      }
+    </script>
+
   </body>
 </html>

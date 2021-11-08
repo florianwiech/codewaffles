@@ -1,10 +1,10 @@
-import React from "react";
+import { Layout } from "./ui";
 
 function App() {
   return (
-    <div className="App">
-      App
-    </div>
+    <Layout>
+      <h1>App</h1>
+    </Layout>
   );
 }
 
