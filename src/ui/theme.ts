@@ -32,6 +32,8 @@ export const theme: DefaultTheme = {
   ...base,
 
   primaryColor: "var(--color-primary)",
+  secondaryColor: "var(--color-secondary)",
+
   textColor: "var(--color-text)",
   textColorSubtle: "var(--color-text-subtle)",
 
@@ -45,6 +47,7 @@ export const theme: DefaultTheme = {
 export const cssColors = css`
   :root {
     --color-primary: #ec775c;
+    --color-secondary: #539bf5;
 
     --color-text: #24292f;
     --color-text-subtle: #57606a;

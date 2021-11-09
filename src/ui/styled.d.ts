@@ -8,6 +8,8 @@ declare module "styled-components" {
     zIndex: number;
 
     primaryColor: string;
+    secondaryColor: string;
+
     textColor: string;
     textColorSubtle: string;
 
