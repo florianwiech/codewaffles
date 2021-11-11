@@ -12,16 +12,15 @@ export const Editor = () => {
     if (!ref.current) return;
 
     const startState = EditorState.create({
-      extensions: [basicSetup, keymap.of([indentWithTab])]
+      extensions: [basicSetup, keymap.of([indentWithTab])],
     });
 
     viewRef.current = new EditorView({
       state: startState,
-      parent: document.body
+      parent: document.body,
     });
 
     return () => viewRef.current?.destroy();
-
   }, [ref]);
 
   return <div ref={ref} />;

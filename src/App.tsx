@@ -3,10 +3,7 @@ import { useKeyPress } from "./utils/useKeyPress";
 import { Editor } from "./editor";
 
 function App() {
-
-  const handleKeyPress = () => {
-    console.log("pressed");
-  };
+  const handleKeyPress = () => {};
 
   useKeyPress("k", handleKeyPress);
 

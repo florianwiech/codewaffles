@@ -16,7 +16,6 @@ export const useKeyPress = (
 
   const handleKeyPress = useCallback(
     (event: KeyboardEvent) => {
-
       const pressedOptionKey = isAppleDevice ? event.metaKey : event.ctrlKey;
 
       if (pressedOptionKey && event.key === key) {

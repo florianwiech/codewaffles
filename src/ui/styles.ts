@@ -7,22 +7,22 @@ export const cssColors = css`
 
     --color-text: #24292f;
     --color-text-subtle: #57606a;
-    
+
     --color-main-bg: #11111;
     --color-subtle-bg: #f6f8fa;
     --color-invert-bg: #f6f8fa;
-    
+
     --color-border: #d0d7de;
   }
 
   [data-theme="dark"] {
     --color-text: #adbac7;
     --color-text-subtle: #768390;
-    
+
     --color-main-bg: #22272e;
     --color-subtle-bg: #2d333b;
     --color-invert-bg: #1c2128;
-    
+
     --color-border: #444c56;
   }
 `;

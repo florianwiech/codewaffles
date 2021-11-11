@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { ThemeProvider } from "styled-components";
-import { theme } from "./theme";
 import { BehaviorSubject } from "rxjs";
+import { theme } from "./theme";
 import { GlobalStyle } from "./styles";
 
 export enum ThemeState {
@@ -83,7 +83,7 @@ export const Layout: React.FC = ({ children }) => {
 
   useEffect(() => {
     const channel = new BroadcastChannel("penstack-appearance");
-    channel.onmessage = function(e) {
+    channel.onmessage = function (e) {
       let { data } = e;
       if (data !== theme$.value) {
         updateAppearance(data);

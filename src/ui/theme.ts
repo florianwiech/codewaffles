@@ -27,7 +27,6 @@ export const base = {
   zIndex: 100,
 };
 
-
 export const theme: DefaultTheme = {
   ...base,
 
