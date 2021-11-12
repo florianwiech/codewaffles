@@ -1,24 +1,8 @@
 import "styled-components";
+import light from "@primer/primitives/dist/js/colors/light";
 
 declare module "styled-components" {
-  export interface DefaultTheme {
-    fontFamily: string;
-    fontFamilyMono: string;
+  type Theme = typeof light;
 
-    zIndex: number;
-
-    primaryColor: string;
-    secondaryColor: string;
-
-    textColor: string;
-    textColorSubtle: string;
-
-    backgroundColor: string;
-    backgroundColorSubtle: string;
-    backgroundColorInvert: string;
-
-    borderColor: string;
-
-    [key: string]: any;
-  }
+  export interface DefaultTheme extends Theme {}
 }

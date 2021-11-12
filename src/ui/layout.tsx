@@ -1,102 +1,19 @@
 import React, { useEffect, useState } from "react";
 import { ThemeProvider } from "styled-components";
-import { BehaviorSubject } from "rxjs";
-import { theme } from "./theme";
+import dark from "@primer/primitives/dist/ts/colors/dark";
+import light from "@primer/primitives/dist/ts/colors/light";
 import { GlobalStyle } from "./styles";
-
-export enum ThemeState {
-  SYSTEM = "system",
-  DARK = "dark",
-  LIGHT = "light",
-}
-
-export const theme$ = new BehaviorSubject<ThemeState>(ThemeState.SYSTEM);
-
-export const getActiveAppearance = (): ThemeState => {
-  try {
-    const themeAppearance = window.localStorage.getItem("themeAppearance");
-    if (themeAppearance === "dark") {
-      return ThemeState.DARK;
-    } else if (themeAppearance === "light") {
-      return ThemeState.LIGHT;
-    } else {
-      return ThemeState.SYSTEM;
-    }
-  } catch (e) {
-    return ThemeState.SYSTEM;
-  }
-};
-
-export const updateAppearance = (next: ThemeState) => {
-  const prefersDarkAppearance =
-    typeof window !== undefined &&
-    window.matchMedia("(prefers-color-scheme: dark)").matches;
-
-  switch (next) {
-    case ThemeState.SYSTEM:
-      theme$.next(next);
-      localStorage.removeItem("themeAppearance");
-
-      if (prefersDarkAppearance) {
-        document.documentElement.setAttribute("data-theme", "dark");
-      } else {
-        document.documentElement.setAttribute("data-theme", "light");
-      }
-      break;
-    case ThemeState.LIGHT:
-      theme$.next(next);
-      localStorage.setItem("themeAppearance", ThemeState.LIGHT);
-      document.documentElement.setAttribute("data-theme", "light");
-      break;
-    case ThemeState.DARK:
-      theme$.next(next);
-      localStorage.setItem("themeAppearance", next);
-      document.documentElement.setAttribute("data-theme", "dark");
-      break;
-  }
-};
-
-export const emitAppearance = (next: ThemeState) => {
-  const channel = new BroadcastChannel("penstack-appearance");
-  channel.postMessage(next);
-  channel.close();
-};
+import { appearance$, AppearanceState } from "./appearance";
+import { useBrowserAppearanceListener } from "./useBrowserAppearanceListener";
+import { useCrossTabAppearanceSync } from "./useCrossTabAppearanceSync";
 
 export const Layout: React.FC = ({ children }) => {
-  useEffect(() => {
-    const handleSystemThemeChange = () => {
-      const appearance = getActiveAppearance();
-      updateAppearance(appearance);
-      emitAppearance(appearance);
-    };
-
-    window
-      .matchMedia("(prefers-color-scheme: dark)")
-      .addEventListener("change", handleSystemThemeChange);
-
-    return () => {
-      window
-        .matchMedia("(prefers-color-scheme: dark)")
-        .removeEventListener("change", handleSystemThemeChange);
-    };
-  }, []);
-
-  useEffect(() => {
-    const channel = new BroadcastChannel("penstack-appearance");
-    channel.onmessage = function (e) {
-      let { data } = e;
-      if (data !== theme$.value) {
-        updateAppearance(data);
-      }
-    };
-
-    return () => {
-      channel.close();
-    };
-  }, []);
+  const theme = useLayout();
+  useBrowserAppearanceListener();
+  useCrossTabAppearanceSync();
 
   return (
-    <ThemeProvider theme={theme}>
+    <ThemeProvider theme={theme === AppearanceState.DARK ? dark : light}>
       <GlobalStyle />
       {children}
     </ThemeProvider>
@@ -104,17 +21,17 @@ export const Layout: React.FC = ({ children }) => {
 };
 
 export const useLayout = () => {
-  const [theme, setTheme] = useState<Omit<ThemeState, "system">>("dark");
+  const [theme, setTheme] = useState<Omit<AppearanceState, "system">>("dark");
 
   useEffect(() => {
     const prefersDarkAppearance =
       typeof window !== undefined &&
       window.matchMedia("(prefers-color-scheme: dark)").matches;
 
-    const subscription = theme$.subscribe((next) => {
-      if (next === ThemeState.SYSTEM) {
-        if (prefersDarkAppearance) next = ThemeState.DARK;
-        else next = ThemeState.LIGHT;
+    const subscription = appearance$.subscribe((next) => {
+      if (next === AppearanceState.SYSTEM) {
+        if (prefersDarkAppearance) next = AppearanceState.DARK;
+        else next = AppearanceState.LIGHT;
       }
       setTheme(next);
     });
