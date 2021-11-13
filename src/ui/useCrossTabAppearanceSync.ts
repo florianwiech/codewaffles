@@ -3,6 +3,8 @@ import { appearance$, updateAppearance } from "./appearance";
 
 export const useCrossTabAppearanceSync = () => {
   useEffect(() => {
+    if (window.BroadcastChannel === undefined) return;
+
     const channel = new BroadcastChannel("appearance");
 
     channel.onmessage = function (e) {
