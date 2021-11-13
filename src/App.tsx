@@ -1,4 +1,3 @@
-import { Layout } from "./ui";
 import { useKeyPress } from "./utils/useKeyPress";
 import { Editor } from "./editor";
 
@@ -8,9 +7,9 @@ function App() {
   useKeyPress("k", handleKeyPress);
 
   return (
-    <Layout>
+    <>
       <Editor />
-    </Layout>
+    </>
   );
 }
 
