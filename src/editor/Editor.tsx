@@ -25,10 +25,14 @@ import { defaultHighlightStyle } from "@codemirror/highlight";
 import { autocompletion, completionKeymap } from "@codemirror/autocomplete";
 import { rectangularSelection } from "@codemirror/rectangular-selection";
 import { bracketMatching } from "@codemirror/matchbrackets";
+import { useLayout } from "../ui";
+import { AppearanceState } from "../ui/appearance";
 import { StyledEditor } from "./Editor.style";
 import { initialContent } from "./initialContent";
+import { primerDark, primerLight } from "./primerTheme";
 
 export const Editor = () => {
+  const theme = useLayout();
   const ref = createRef<HTMLDivElement>();
   const viewRef = useRef<EditorView>();
 
@@ -66,6 +70,7 @@ export const Editor = () => {
           indentWithTab,
         ]),
         javascript(),
+        theme === AppearanceState.LIGHT ? primerLight : primerDark,
       ],
     });
 
@@ -75,7 +80,7 @@ export const Editor = () => {
     });
 
     return () => viewRef.current?.destroy();
-  }, [ref]);
+  }, [ref, theme]);
 
   return <StyledEditor ref={ref} />;
 };
