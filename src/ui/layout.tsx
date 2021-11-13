@@ -24,11 +24,12 @@ export const useLayout = () => {
   const [theme, setTheme] = useState<Omit<AppearanceState, "system">>("dark");
 
   useEffect(() => {
-    const prefersDarkAppearance =
-      typeof window !== undefined &&
-      window.matchMedia("(prefers-color-scheme: dark)").matches;
-
     const subscription = appearance$.subscribe((next) => {
+      const prefersDarkAppearance =
+        typeof window !== undefined &&
+        window.matchMedia &&
+        window.matchMedia("(prefers-color-scheme: dark)").matches;
+
       if (next === AppearanceState.SYSTEM) {
         if (prefersDarkAppearance) next = AppearanceState.DARK;
         else next = AppearanceState.LIGHT;
