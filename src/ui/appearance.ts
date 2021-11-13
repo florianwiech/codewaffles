@@ -60,7 +60,9 @@ export const updateAppearance = (next: AppearanceState) => {
 };
 
 export const emitAppearance = (next: AppearanceState) => {
-  const channel = new BroadcastChannel("penstack-appearance");
+  if (window.BroadcastChannel === undefined) return;
+
+  const channel = new BroadcastChannel("appearance");
   channel.postMessage(next);
   channel.close();
 };
