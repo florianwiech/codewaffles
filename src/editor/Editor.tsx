@@ -25,6 +25,7 @@ import { defaultHighlightStyle } from "@codemirror/highlight";
 import { autocompletion, completionKeymap } from "@codemirror/autocomplete";
 import { rectangularSelection } from "@codemirror/rectangular-selection";
 import { bracketMatching } from "@codemirror/matchbrackets";
+import { StyledEditor } from "./Editor.style";
 import { initialContent } from "./initialContent";
 
 export const Editor = () => {
@@ -76,5 +77,5 @@ export const Editor = () => {
     return () => viewRef.current?.destroy();
   }, [ref]);
 
-  return <div ref={ref} />;
+  return <StyledEditor ref={ref} />;
 };
