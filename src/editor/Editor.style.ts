@@ -11,5 +11,9 @@ export const StyledEditor = styled.div`
       font-family: "SFMono Regular", Menlo, Monaco, Consolas, "Liberation Mono",
         "Courier New", monospace;
     }
+
+    .cm-cursor {
+      border-left-width: 2px;
+    }
   }
 `;
