@@ -8,6 +8,7 @@ import { StyledEditor } from "./Editor.style";
 import { initialContent } from "./initialContent";
 import { primerDark, primerLight } from "./primerTheme";
 import { basics } from "./setup/basics";
+import { panels } from "./panels";
 
 const themeConf = new Compartment();
 
@@ -33,7 +34,7 @@ export const Editor = () => {
 
     const startState = EditorState.create({
       doc: initialContent,
-      extensions: [basics, javascript(), themeConf.of(styles)],
+      extensions: [basics, javascript(), themeConf.of(styles), panels],
     });
 
     viewRef.current = new EditorView({
