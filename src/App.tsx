@@ -1,14 +1,11 @@
-import { useKeyPress } from "./utils/useKeyPress";
 import { Editor } from "./editor";
+import { Spotlight } from "./spotlight-search";
 
 function App() {
-  const handleKeyPress = () => {};
-
-  useKeyPress("k", handleKeyPress);
-
   return (
     <>
       <Editor />
+      <Spotlight />
     </>
   );
 }

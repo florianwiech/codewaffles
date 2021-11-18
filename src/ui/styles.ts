@@ -14,5 +14,6 @@ export const GlobalStyle = createGlobalStyle`
     line-height: ${typography.lineHeight.default};
 
     overflow: hidden;
+    box-sizing: border-box;
   }
 `;
