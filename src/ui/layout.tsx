@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { ThemeProvider } from "styled-components";
-import dark from "@primer/primitives/dist/ts/colors/dark";
-import light from "@primer/primitives/dist/ts/colors/light";
+import dark from "@primer/primitives/dist/js/colors/dark";
+import light from "@primer/primitives/dist/js/colors/light";
 import { GlobalStyle } from "./styles";
 import { appearance$, AppearanceState } from "./appearance";
 import { useBrowserAppearanceListener } from "./useBrowserAppearanceListener";

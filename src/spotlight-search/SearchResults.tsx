@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import typography from "@primer/primitives/dist/ts/typography/normal";
+import typography from "@primer/primitives/dist/js/typography/normal";
 
 export const StyledSearchResults = styled.div`
   display: flex;

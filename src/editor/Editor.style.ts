@@ -1,5 +1,5 @@
 import styled, { css } from "styled-components";
-import typography from "@primer/primitives/dist/ts/typography/normal";
+import typography from "@primer/primitives/dist/js/typography/normal";
 
 const styledPanels = css`
   .cm-panel.cm-search {

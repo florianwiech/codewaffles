@@ -4,12 +4,15 @@ import Fuse from "fuse.js";
 import { useKeyPress } from "../utils/useKeyPress";
 import { TransformDefinition, TransformList } from "../transforms";
 import { StyledBackdrop, StyledSpotlight } from "./Spotlight.style";
-import { StyledInput } from "./Input";
+import { StyledInput, StyledLabel } from "./Input";
 import { StyledSearchResults } from "./SearchResults";
 
 export type Props = {
   scripts: TransformList;
 };
+
+export const SPOTLIGHT_LABEL = "Search command";
+
 export const Spotlight: FC<Props> = ({ scripts }) => {
   const fuse = new Fuse(scripts, { keys: ["label"] });
 
@@ -67,7 +70,9 @@ export const Spotlight: FC<Props> = ({ scripts }) => {
     <>
       <StyledBackdrop onClick={closeSearch} />
       <StyledSpotlight>
+        <StyledLabel htmlFor="spotlight-search">{SPOTLIGHT_LABEL}</StyledLabel>
         <StyledInput
+          id="spotlight-search"
           type="text"
           placeholder="Search command..."
           value={searchInput}

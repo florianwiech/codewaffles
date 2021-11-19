@@ -7,6 +7,8 @@ import {
 
 export const useBrowserAppearanceListener = () => {
   useEffect(() => {
+    if (!window.matchMedia) return;
+
     const handleSystemThemeChange = () => {
       const appearance = getActiveAppearance();
       updateAppearance(appearance);
