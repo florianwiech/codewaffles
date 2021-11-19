@@ -1,11 +1,12 @@
 import { Editor } from "./editor";
 import { Spotlight } from "./spotlight-search";
+import { scriptList } from "./transforms/scripts";
 
 function App() {
   return (
     <>
       <Editor />
-      <Spotlight />
+      <Spotlight scripts={scriptList} />
     </>
   );
 }

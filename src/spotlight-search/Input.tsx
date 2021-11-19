@@ -1,10 +1,9 @@
 import styled from "styled-components";
 import typography from "@primer/primitives/dist/ts/typography/normal";
-import { FC, KeyboardEventHandler } from "react";
 
 export const StyledInput = styled.input`
   width: 100%;
-  padding: 4px;
+  padding: 10px 15px;
 
   color: ${({ theme }) => theme.fg.default};
   background-color: transparent;
@@ -43,18 +42,3 @@ export const StyledInput = styled.input`
     background: ${({ theme }) => theme.input.disabledBg};
   }
 `;
-
-export const Input: FC<{
-  onKeyUp: KeyboardEventHandler<HTMLInputElement>;
-  onKeyDown: KeyboardEventHandler<HTMLInputElement>;
-}> = ({ onKeyUp, onKeyDown }) => {
-  return (
-    <StyledInput
-      type="text"
-      placeholder="Search command..."
-      onKeyUp={onKeyUp}
-      onKeyDown={onKeyDown}
-      autoFocus
-    />
-  );
-};

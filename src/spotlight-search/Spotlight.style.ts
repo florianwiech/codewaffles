@@ -20,7 +20,7 @@ export const StyledSpotlight = styled.div`
   max-width: 100%;
   // todo responsiveness
   margin: 0 20px;
-  padding: 5px 10px;
+  //padding: 5px 10px;
 
   transform: translateX(-50%);
 
