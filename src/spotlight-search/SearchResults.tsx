@@ -34,7 +34,7 @@ export const StyledSearchResults = styled.div`
     cursor: default;
     box-sizing: border-box;
 
-    &:hover {
+    &.active {
       background-color: ${({ theme }) => theme.canvas.subtle};
     }
   }
