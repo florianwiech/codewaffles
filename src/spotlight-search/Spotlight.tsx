@@ -22,7 +22,6 @@ export const Spotlight: FC<Props> = ({ scripts }) => {
   const handleKeyPress = () => setVisible(!visible);
   useKeyPress("k", handleKeyPress);
 
-  // todo style spotlight (responsiveness)
   // todo keyboard navigation between results
 
   const closeSearch = () => {

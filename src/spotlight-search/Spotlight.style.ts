@@ -12,17 +12,22 @@ export const StyledBackdrop = styled.div`
   background: ${({ theme }) => theme.primer.canvas.backdrop};
 `;
 
+const spotlightWidth = 680;
+const spotlightMargin = 20;
+
 export const StyledSpotlight = styled.div`
   position: absolute;
   top: 20%;
-  left: 50%;
-  width: 680px;
-  max-width: 100%;
-  // todo responsiveness
-  margin: 0 20px;
-  //padding: 5px 10px;
+  width: ${spotlightWidth}px;
+  max-width: calc(100% - ${spotlightMargin * 2}px);
 
-  transform: translateX(-50%);
+  @media (max-width: ${spotlightWidth}px) {
+    margin: 0 ${spotlightMargin}px;
+  }
+  @media (min-width: ${spotlightWidth}px) {
+    left: 50%;
+    transform: translateX(-50%);
+  }
 
   z-index: 111;
   box-sizing: border-box;
