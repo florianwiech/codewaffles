@@ -7,7 +7,7 @@ const isAppleDevice = OSName && ["Mac OS", "iOS"].includes(OSName);
 export const useKeyPress = (
   key: string,
   callback: (event: KeyboardEvent) => void,
-  node = null
+  node: HTMLElement | null = null
 ) => {
   const callbackRef = useRef(callback);
   useLayoutEffect(() => {
@@ -26,11 +26,12 @@ export const useKeyPress = (
   );
 
   useEffect(() => {
-    const targetNode = node ?? document;
-
-    targetNode && targetNode.addEventListener("keydown", handleKeyPress);
-
-    return () =>
-      targetNode && targetNode.removeEventListener("keydown", handleKeyPress);
+    if (node) {
+      node.addEventListener("keydown", handleKeyPress);
+      return () => node.removeEventListener("keydown", handleKeyPress);
+    } else {
+      document.addEventListener("keydown", handleKeyPress);
+      return () => document.removeEventListener("keydown", handleKeyPress);
+    }
   }, [handleKeyPress, node]);
 };
