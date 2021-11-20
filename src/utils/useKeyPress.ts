@@ -1,8 +1,10 @@
 import { useCallback, useEffect, useLayoutEffect, useRef } from "react";
 import UAParser from "ua-parser-js";
 
-const OSName = new UAParser().getOS().name;
-const isAppleDevice = OSName && ["Mac OS", "iOS"].includes(OSName);
+const isAppleDevice = () => {
+  const osName = new UAParser().getOS().name;
+  return osName && ["Mac OS", "iOS"].includes(osName);
+};
 
 export const useKeyPress = (
   key: string,
@@ -18,7 +20,7 @@ export const useKeyPress = (
   const handleKeyPress = useCallback(
     (event: KeyboardEvent) => {
       const optionKey = metaKey
-        ? isAppleDevice
+        ? isAppleDevice()
           ? event.metaKey
           : event.ctrlKey
         : true;
