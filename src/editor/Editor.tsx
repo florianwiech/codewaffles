@@ -1,6 +1,6 @@
 import { EditorState } from "@codemirror/state";
 import { EditorView } from "@codemirror/view";
-import { useEffect, useRef } from "react";
+import { useLayoutEffect, useRef } from "react";
 import { javascript } from "@codemirror/lang-javascript";
 import { StyledEditor } from "./Editor.style";
 import { initialContent } from "./initialContent";
@@ -12,7 +12,7 @@ export const Editor = () => {
   const ref = useRef<HTMLDivElement>(null);
   const viewRef = useRef<EditorView>();
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     if (!ref.current) return;
 
     const startState = EditorState.create({
