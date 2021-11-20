@@ -10,8 +10,8 @@ import Fuse from "fuse.js";
 import { useKeyPress } from "../utils/useKeyPress";
 import { TransformDefinition, TransformList } from "../transforms";
 import { StyledBackdrop, StyledSpotlight } from "./Spotlight.style";
-import { StyledInput } from "./Input";
-import { StyledSearchResults } from "./SearchResults";
+import { StyledInput } from "./Input.style";
+import { StyledSearchResults } from "./SearchResults.style";
 
 export type Props = {
   scripts: TransformList;
