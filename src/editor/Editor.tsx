@@ -3,7 +3,7 @@ import { EditorView } from "@codemirror/view";
 import { useEffect, useRef } from "react";
 import { javascript } from "@codemirror/lang-javascript";
 import { useLayout } from "../ui";
-import { AppearanceState, getActiveAppearance } from "../ui/appearance";
+import { AppearanceState } from "../ui/appearance";
 import { StyledEditor } from "./Editor.style";
 import { initialContent } from "./initialContent";
 import { primerDark, primerLight } from "./primerTheme";
@@ -20,21 +20,9 @@ export const Editor = () => {
   useEffect(() => {
     if (!ref.current) return;
 
-    const appearance = getActiveAppearance();
-    const prefersDarkAppearance =
-      typeof window !== undefined &&
-      window.matchMedia &&
-      window.matchMedia("(prefers-color-scheme: dark)").matches;
-
-    const styles =
-      appearance === AppearanceState.DARK ||
-      (appearance === AppearanceState.SYSTEM && prefersDarkAppearance)
-        ? primerDark
-        : primerLight;
-
     const startState = EditorState.create({
       doc: initialContent,
-      extensions: [basics, javascript(), themeConf.of(styles), panels],
+      extensions: [basics, javascript(), themeConf.of([]), panels],
     });
 
     viewRef.current = new EditorView({
