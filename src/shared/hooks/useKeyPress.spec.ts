@@ -4,7 +4,7 @@ import {
   mockUserAgent,
   userAgentMacOSMock,
   userAgentWindowsMock,
-} from "../shared/testing/mockUserAgent";
+} from "../testing/mockUserAgent";
 import { useKeyPress } from "./useKeyPress";
 
 describe("useKeyPress", () => {
