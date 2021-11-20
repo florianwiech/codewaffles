@@ -41,6 +41,7 @@ export const Editor = () => {
       state: startState,
       parent: ref.current,
     });
+    viewRef.current?.focus();
     return () => viewRef.current?.destroy();
   }, []);
 
