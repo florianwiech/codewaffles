@@ -7,6 +7,7 @@ const isAppleDevice = OSName && ["Mac OS", "iOS"].includes(OSName);
 export const useKeyPress = (
   key: string,
   callback: (event: KeyboardEvent) => void,
+  metaKey = true,
   node: HTMLElement | null = null
 ) => {
   const callbackRef = useRef(callback);
@@ -16,13 +17,17 @@ export const useKeyPress = (
 
   const handleKeyPress = useCallback(
     (event: KeyboardEvent) => {
-      const pressedOptionKey = isAppleDevice ? event.metaKey : event.ctrlKey;
+      const optionKey = metaKey
+        ? isAppleDevice
+          ? event.metaKey
+          : event.ctrlKey
+        : true;
 
-      if (pressedOptionKey && event.key === key) {
+      if (optionKey && event.key === key) {
         callbackRef.current(event);
       }
     },
-    [key]
+    [key, metaKey]
   );
 
   useEffect(() => {
