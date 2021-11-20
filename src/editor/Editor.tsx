@@ -1,34 +1,12 @@
-import { EditorState } from "@codemirror/state";
-import { EditorView } from "@codemirror/view";
-import { useLayoutEffect, useRef } from "react";
-import { javascript } from "@codemirror/lang-javascript";
+import { useRef } from "react";
 import { StyledEditor } from "./Editor.style";
-import { initialContent } from "./initialContent";
-import { basics } from "./setup/basics";
-import { panels } from "./panels";
-import { initialThemeSetup, useEditorTheme } from "./useEditorTheme";
+import { useEditorTheme } from "./useEditorTheme";
+import { useEditor } from "./useEditor";
 
 export const Editor = () => {
   const ref = useRef<HTMLDivElement>(null);
-  const viewRef = useRef<EditorView>();
-
-  useLayoutEffect(() => {
-    if (!ref.current) return;
-
-    const startState = EditorState.create({
-      doc: initialContent,
-      extensions: [basics, javascript(), initialThemeSetup, panels],
-    });
-
-    viewRef.current = new EditorView({
-      state: startState,
-      parent: ref.current,
-    });
-    viewRef.current?.focus();
-    return () => viewRef.current?.destroy();
-  }, []);
-
-  useEditorTheme(viewRef);
+  const editor = useEditor(ref);
+  useEditorTheme(editor);
 
   return <StyledEditor ref={ref} />;
 };
