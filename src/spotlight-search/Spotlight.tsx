@@ -7,14 +7,15 @@ import {
 } from "react";
 import debounce from "lodash.debounce";
 import Fuse from "fuse.js";
-import { useKeyPress } from "../utils/useKeyPress";
-import { TransformDefinition, TransformList } from "../transforms";
+import { useKeyPress } from "../shared/hooks/useKeyPress";
+import { CommandTypes, ScriptExtension, ScriptList } from "../types";
+import { command$ } from "../modifier";
 import { StyledBackdrop, StyledSpotlight } from "./Spotlight.style";
 import { StyledInput } from "./Input.style";
 import { StyledSearchResults } from "./SearchResults.style";
 
 export type Props = {
-  scripts: TransformList;
+  scripts: ScriptList;
 };
 
 export const SPOTLIGHT_LABEL = "Search command...";
@@ -26,7 +27,7 @@ export const Spotlight: FC<Props> = ({ scripts }) => {
 
   const [visible, setVisible] = useState(false);
   const [searchInput, setSearchInput] = useState("");
-  const [hits, setHits] = useState<Fuse.FuseResult<TransformDefinition>[]>([]);
+  const [hits, setHits] = useState<Fuse.FuseResult<ScriptExtension>[]>([]);
   const [activeHit, setActiveHit] = useState<number | null>(null);
 
   const handleKeyPress = () => setVisible(!visible);
@@ -35,6 +36,7 @@ export const Spotlight: FC<Props> = ({ scripts }) => {
   const closeSearch = () => {
     setVisible(false);
     resetSearch();
+    command$.next({ type: CommandTypes.SEARCH_CLOSED });
   };
 
   const resetSearch = () => {
@@ -110,7 +112,10 @@ export const Spotlight: FC<Props> = ({ scripts }) => {
 
   const performOperation = () => {
     if (activeHit !== null) {
-      console.log("perform operation:", hits[activeHit].item.key);
+      command$.next({
+        type: CommandTypes.PERFORM_TRANSFORM,
+        key: hits[activeHit].item.key,
+      });
       closeSearch();
     } else {
       setActiveHit(0);
