@@ -5,12 +5,12 @@ import { javascript } from "@codemirror/lang-javascript";
 import { initialContent } from "./initialContent";
 import { basics } from "./setup/basics";
 import { initialThemeSetup } from "./useEditorTheme";
-import { panels } from "./panels";
+import { statusbar } from "./statusbar";
 
 const createEditor = (node: HTMLElement) => {
   const startState = EditorState.create({
     doc: initialContent,
-    extensions: [basics, javascript(), initialThemeSetup, panels],
+    extensions: [basics, javascript(), initialThemeSetup, statusbar],
   });
 
   const view = new EditorView({
