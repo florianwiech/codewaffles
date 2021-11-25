@@ -1,13 +1,13 @@
 import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 import Fuse from "fuse.js";
 import { Spotlight, SPOTLIGHT_LABEL } from "../Spotlight";
-import { TransformList } from "../../transforms";
 import { Layout } from "../../ui";
+import { ScriptList } from "../../types";
 
-export const scriptsMock: TransformList = [
-  { key: "one", label: "one", version: 1, handler: () => "" },
-  { key: "two", label: "two", version: 1, handler: () => "" },
-  { key: "three", label: "three", version: 1, handler: () => "" },
+export const scriptsMock: ScriptList = [
+  { key: "one", label: "one", handler: () => "" },
+  { key: "two", label: "two", handler: () => "" },
+  { key: "three", label: "three", handler: () => "" },
 ];
 
 export const setupOpenSpotlight = async () => {
