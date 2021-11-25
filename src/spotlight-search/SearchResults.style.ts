@@ -17,6 +17,9 @@ export const StyledSearchResults = styled.div`
     margin: 0;
     padding: 0;
     list-style-type: none;
+
+    max-height: 400px;
+    overflow-y: scroll;
   }
 
   li {
