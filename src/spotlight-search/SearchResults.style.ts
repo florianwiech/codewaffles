@@ -5,7 +5,7 @@ export const StyledSearchResults = styled.div`
   display: flex;
   flex-direction: column;
 
-  padding: 10px;
+  padding: 10px 0;
 
   border-top: 1px solid ${({ theme }) => theme.border.default};
   border-bottom-left-radius: 8px;
@@ -23,8 +23,8 @@ export const StyledSearchResults = styled.div`
   }
 
   li {
-    width: 100%;
     padding: 5px 10px;
+    margin: 0 10px;
 
     color: ${({ theme }) => theme.fg.default};
     background-color: transparent;
