@@ -1,9 +1,9 @@
 import { useEffect } from "react";
 import { Compartment } from "@codemirror/state";
-import { AppearanceState } from "../ui/appearance";
-import { useLayout } from "../ui";
-import { primerDark, primerLight } from "./setup/primerTheme";
-import { CodeMirrorEditor } from "./editor.types";
+import { AppearanceState } from "../../ui/appearance";
+import { useLayout } from "../../ui";
+import { CodeMirrorEditor } from "../editor.types";
+import { primerDark, primerLight } from "./primerTheme";
 
 export const themeConf = new Compartment();
 

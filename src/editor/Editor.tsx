@@ -1,6 +1,9 @@
 import { useRef } from "react";
 import { StyledEditor } from "./Editor.style";
-import { initialThemeSetup, useCodeMirrorTheme } from "./useCodeMirrorTheme";
+import {
+  initialThemeSetup,
+  useCodeMirrorTheme,
+} from "./theme/useCodeMirrorTheme";
 import { useCodeMirror } from "./useCodeMirror";
 import { useEditorTransforms } from "./useEditorTransforms";
 import { initialLanguageSetup } from "./setup/language";
