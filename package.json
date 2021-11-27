@@ -9,7 +9,8 @@
     "format:check": "prettier 'src/**/*' --check --ignore-unknown",
     "format:write": "prettier 'src/**/*' --write --ignore-unknown",
     "lint": "eslint --ext .js,.jsx,.ts,.tsx --format friendly src/",
-    "lint:fix": "eslint --ext .js,.jsx,.ts,.tsx --format friendly --fix src/"
+    "lint:fix": "eslint --ext .js,.jsx,.ts,.tsx --format friendly --fix src/",
+    "dep:check": "npx npm-check-updates"
   },
   "dependencies": {
     "@codemirror/autocomplete": "0.19.8",
