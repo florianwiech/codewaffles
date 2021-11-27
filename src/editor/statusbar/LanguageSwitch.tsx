@@ -4,7 +4,7 @@ import {
   languageConf,
   languageExtensions,
   supportedLanguages,
-} from "../language";
+} from "../setup/language";
 
 export const LanguageSwitch: FC<{ view: EditorView }> = ({ view }) => {
   const [lang, setLang] = useState(languageExtensions[0].name);

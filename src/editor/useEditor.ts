@@ -1,11 +1,11 @@
 import { RefObject, useLayoutEffect, useRef } from "react";
 import { EditorView } from "@codemirror/view";
 import { EditorState } from "@codemirror/state";
-import { initialContent } from "./initialContent";
+import { initialContent } from "./setup/initialContent";
 import { basics } from "./setup/basics";
 import { initialThemeSetup } from "./useEditorTheme";
 import { statusbar } from "./statusbar";
-import { initialLanguageSetup } from "./language";
+import { initialLanguageSetup } from "./setup/language";
 
 const createEditor = (node: HTMLElement) => {
   const startState = EditorState.create({
