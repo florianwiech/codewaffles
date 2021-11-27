@@ -9,7 +9,7 @@ export const themeConf = new Compartment();
 
 export const initialThemeSetup = themeConf.of([]);
 
-export const useEditorTheme = (editor: CodeMirrorEditor) => {
+export const useCodeMirrorTheme = (editor: CodeMirrorEditor) => {
   const theme = useLayout();
 
   useEffect(() => {

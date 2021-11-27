@@ -1,6 +1,6 @@
 import { useRef } from "react";
 import { StyledEditor } from "./Editor.style";
-import { initialThemeSetup, useEditorTheme } from "./useEditorTheme";
+import { initialThemeSetup, useCodeMirrorTheme } from "./useCodeMirrorTheme";
 import { useCodeMirror } from "./useCodeMirror";
 import { useEditorTransforms } from "./useEditorTransforms";
 import { initialLanguageSetup } from "./setup/language";
@@ -15,7 +15,7 @@ export const Editor = () => {
     initialLanguageSetup,
     statusbar,
   ]);
-  useEditorTheme(editor);
+  useCodeMirrorTheme(editor);
   useEditorTransforms(editor);
 
   return <StyledEditor ref={ref} />;
