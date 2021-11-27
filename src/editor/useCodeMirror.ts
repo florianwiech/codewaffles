@@ -1,16 +1,12 @@
 import { RefObject, useLayoutEffect, useRef } from "react";
 import { EditorView } from "@codemirror/view";
-import { EditorState } from "@codemirror/state";
+import { EditorState, Extension } from "@codemirror/state";
 import { initialContent } from "./setup/initialContent";
-import { basics } from "./setup/basics";
-import { initialThemeSetup } from "./useEditorTheme";
-import { statusbar } from "./statusbar";
-import { initialLanguageSetup } from "./setup/language";
 
-const createEditor = (node: HTMLElement) => {
+const createEditor = (node: HTMLElement, extensions: Extension[] = []) => {
   const startState = EditorState.create({
     doc: initialContent,
-    extensions: [basics, initialThemeSetup, initialLanguageSetup, statusbar],
+    extensions: extensions,
   });
 
   const view = new EditorView({
@@ -22,16 +18,19 @@ const createEditor = (node: HTMLElement) => {
   return view;
 };
 
-export const useEditor = (ref: RefObject<HTMLElement>) => {
+export const useCodeMirror = (
+  ref: RefObject<HTMLElement>,
+  extensions?: Extension[]
+) => {
   const editorRef = useRef<EditorView>();
 
   useLayoutEffect(() => {
     if (!ref.current) return;
 
-    editorRef.current = createEditor(ref.current);
+    editorRef.current = createEditor(ref.current, extensions);
 
     return () => editorRef.current?.destroy();
-  }, [ref]);
+  }, [extensions, ref]);
 
   return editorRef;
 };
