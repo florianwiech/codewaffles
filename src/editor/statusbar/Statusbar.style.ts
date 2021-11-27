@@ -13,7 +13,7 @@ export const StyledStatusbar = styled.div`
 
   padding: 0 7px;
 
-  & > div {
+  & > * {
     padding: 0 7px;
   }
 `;
