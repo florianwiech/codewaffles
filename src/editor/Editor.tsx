@@ -4,7 +4,7 @@ import {
   initialThemeSetup,
   useCodeMirrorTheme,
 } from "./theme/useCodeMirrorTheme";
-import { useCodeMirror } from "./useCodeMirror";
+import { useCodeMirror } from "./setup/useCodeMirror";
 import { useEditorTransforms } from "./useEditorTransforms";
 import { initialLanguageSetup } from "./setup/language";
 import { basics } from "./setup/basics";

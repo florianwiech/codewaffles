@@ -1,7 +1,7 @@
 import { RefObject, useLayoutEffect, useRef } from "react";
 import { EditorView } from "@codemirror/view";
 import { EditorState, Extension } from "@codemirror/state";
-import { initialContent } from "./setup/initialContent";
+import { initialContent } from "./initialContent";
 
 const createEditor = (node: HTMLElement, extensions: Extension[] = []) => {
   const startState = EditorState.create({
