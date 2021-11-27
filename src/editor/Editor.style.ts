@@ -68,6 +68,10 @@ export const StyledEditor = styled.div`
       line-height: ${typography.lineHeight.default};
     }
 
+    .cm-line {
+      padding-right: 25px;
+    }
+
     .cm-cursor {
       border-left-width: 2px;
     }
