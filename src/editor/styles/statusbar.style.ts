@@ -12,6 +12,8 @@ export const styledStatusbar = css`
       background-color: ${({ theme }) => theme.canvas.default};
       outline: none;
       border: none;
+      appearance: none;
+      text-align: center;
 
       &:hover {
         background-color: ${({ theme }) => theme.canvas.overlay};
