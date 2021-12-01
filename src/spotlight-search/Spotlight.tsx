@@ -39,10 +39,10 @@ export const Spotlight: FC<Props> = ({ scripts }) => {
   const handleKeyPress = () => setVisible(!visible);
   useKeyPress("k", handleKeyPress);
 
-  const closeSearch = () => {
+  const closeSearch = (emitClose = true) => {
     setVisible(false);
     resetSearch();
-    command$.next({ type: CommandTypes.SEARCH_CLOSED });
+    if (emitClose) command$.next({ type: CommandTypes.SEARCH_CLOSED });
   };
 
   const resetSearch = () => {
@@ -122,7 +122,8 @@ export const Spotlight: FC<Props> = ({ scripts }) => {
         type: CommandTypes.PERFORM_TRANSFORM,
         key: hits[activeHit].item.key,
       });
-      closeSearch();
+      closeSearch(false);
+      // closeSearch();
     } else {
       setActiveHit(0);
     }
@@ -134,7 +135,7 @@ export const Spotlight: FC<Props> = ({ scripts }) => {
 
   return (
     <>
-      <StyledBackdrop onClick={closeSearch} />
+      <StyledBackdrop onClick={() => closeSearch()} />
       <StyledSpotlight>
         <StyledInput
           ref={inputRef}

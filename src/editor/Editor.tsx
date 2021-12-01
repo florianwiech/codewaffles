@@ -5,7 +5,7 @@ import {
   useCodeMirrorTheme,
 } from "./theme/useCodeMirrorTheme";
 import { useCodeMirror } from "./setup/useCodeMirror";
-import { useEditorTransforms } from "./useEditorTransforms";
+import { useEditorTransforms } from "./commands/useEditorTransforms";
 import { initialLanguageSetup } from "./setup/language";
 import { basics } from "./setup/basics";
 import { statusbar } from "./statusbar";

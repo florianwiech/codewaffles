@@ -2,6 +2,7 @@ import { RefObject, useLayoutEffect, useRef } from "react";
 import { EditorView } from "@codemirror/view";
 import { EditorState, Extension } from "@codemirror/state";
 import { initialContent } from "./initialContent";
+import { view$ } from "./view-subject";
 
 const createEditor = (node: HTMLElement, extensions: Extension[] = []) => {
   const startState = EditorState.create({
@@ -27,9 +28,12 @@ export const useCodeMirror = (
   useLayoutEffect(() => {
     if (!ref.current) return;
 
-    editorRef.current = createEditor(ref.current, extensions);
+    const view = createEditor(ref.current, extensions);
 
-    return () => editorRef.current?.destroy();
+    editorRef.current = view;
+    view$.next(view);
+
+    return () => view.destroy();
   }, [extensions, ref]);
 
   return editorRef;
