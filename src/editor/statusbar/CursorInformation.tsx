@@ -35,7 +35,7 @@ export const CursorInformation: FC<{ state: EditorState }> = ({ state }) => {
   const cursor = getCursorPosition(state);
   const caretCount = getCursorCount(state);
 
-  const cursorPosition = `${cursor?.lineNumber}:${cursor?.cursorPosition}`;
+  const cursorPosition = `Ln ${cursor?.lineNumber}, Col ${cursor?.cursorPosition}`;
   const selectionLineBreaks = `${cursor?.selection?.lineBreaks} line breaks`;
   const singleSelection = `(${cursor?.selection?.chars} chars${
     cursor?.selection?.lineBreaks ? `, ${selectionLineBreaks}` : ""
