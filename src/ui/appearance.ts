@@ -1,4 +1,4 @@
-import { BehaviorSubject } from "rxjs";
+import { BehaviorSubject, map } from "rxjs";
 
 export enum AppearanceState {
   SYSTEM = "system",
@@ -13,6 +13,30 @@ const APPEARANCE_ATTRIBUTE = "data-theme";
 
 export const appearance$ = new BehaviorSubject<AppearanceState>(
   AppearanceState.SYSTEM
+);
+
+export const theme$ = appearance$.pipe(
+  map((appearance) => ({
+    appearance,
+    prefersDarkAppearance:
+      typeof window !== undefined &&
+      window.matchMedia &&
+      window.matchMedia("(prefers-color-scheme: dark)").matches,
+  })),
+
+  map(({ appearance, prefersDarkAppearance }) => {
+    if (appearance !== AppearanceState.SYSTEM) {
+      return appearance;
+    }
+
+    if (prefersDarkAppearance) {
+      appearance = AppearanceState.DARK;
+    } else {
+      appearance = AppearanceState.LIGHT;
+    }
+
+    return appearance;
+  })
 );
 
 export const getActiveAppearance = (): AppearanceState => {

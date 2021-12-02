@@ -5,7 +5,7 @@ import {
   updateAppearance,
 } from "./appearance";
 
-export const useBrowserAppearanceListener = () => {
+export const useBrowserColorSchemeListener = () => {
   useEffect(() => {
     if (!window.matchMedia) return;
 
