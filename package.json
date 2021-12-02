@@ -10,6 +10,7 @@
     "format:write": "prettier 'src/**/*' --write --ignore-unknown",
     "lint": "eslint --ext .js,.jsx,.ts,.tsx --format friendly src/",
     "lint:fix": "eslint --ext .js,.jsx,.ts,.tsx --format friendly --fix src/",
+    "check:types": "tsc --noEmit",
     "dep:check": "npx npm-check-updates"
   },
   "dependencies": {
