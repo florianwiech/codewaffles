@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { EditorSelection } from "@codemirror/state";
 import { scriptCollection } from "../scripts";
 import { CommandTypes } from "../types";
-import { command$ } from "../modifier";
+import { command$ } from "../streams";
 import { CodeMirrorEditor } from "./editor.types";
 
 export const useEditorTransforms = (editor: CodeMirrorEditor) => {
