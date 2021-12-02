@@ -6,12 +6,14 @@ const isAppleDevice = () => {
   return osName && ["Mac OS", "iOS"].includes(osName);
 };
 
+// https://devtrium.com/posts/how-keyboard-shortcut
 export const useKeyPress = (
   key: string,
   callback: (event: KeyboardEvent) => void,
   metaKey = true,
   node: HTMLElement | null = null
 ) => {
+  // https://epicreact.dev/the-latest-ref-pattern-in-react/
   const callbackRef = useRef(callback);
   useLayoutEffect(() => {
     callbackRef.current = callback;
