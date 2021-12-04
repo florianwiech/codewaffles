@@ -9,6 +9,13 @@ export type EditorTransform = {
   tr?: Transaction;
 };
 
+export type EditorTransformResult = {
+  command: PerformTransformCommand;
+  view: EditorView;
+  script: string | string[];
+  tr: Transaction;
+};
+
 export function isEditorView(value: EditorView | null): value is EditorView {
   return value !== null;
 }
