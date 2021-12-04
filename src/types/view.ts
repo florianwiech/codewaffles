@@ -1,6 +1,6 @@
 import { EditorView } from "@codemirror/view";
 import { Transaction } from "@codemirror/state";
-import { isPerformTransformCommand, PerformTransformCommand } from "./command";
+import { PerformTransformCommand } from "./command";
 
 export type EditorTransform = {
   command: PerformTransformCommand;
@@ -9,11 +9,11 @@ export type EditorTransform = {
   tr?: Transaction;
 };
 
-export const isEditorTransform = (value: object): value is EditorTransform =>
-  (value as EditorTransform).view !== null &&
-  isPerformTransformCommand((value as EditorTransform).command);
+type MightHaveEditorView<T> = T & { view?: EditorView | null };
+type HasEditorView<T> = T & { view: EditorView };
 
-export const hasEditorView = (
-  value: object,
-): value is { view: EditorView; [key: string]: any } =>
-  (value as EditorTransform).view !== null;
+export function hasEditorView<T>(
+  value: MightHaveEditorView<T>,
+): value is HasEditorView<T> {
+  return value.view !== null;
+}
