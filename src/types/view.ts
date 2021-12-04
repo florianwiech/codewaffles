@@ -9,11 +9,6 @@ export type EditorTransform = {
   tr?: Transaction;
 };
 
-type MightHaveEditorView<T> = T & { view?: EditorView | null };
-type HasEditorView<T> = T & { view: EditorView };
-
-export function hasEditorView<T>(
-  value: MightHaveEditorView<T>,
-): value is HasEditorView<T> {
-  return value.view !== null;
+export function isEditorView(value: EditorView | null): value is EditorView {
+  return value !== null;
 }

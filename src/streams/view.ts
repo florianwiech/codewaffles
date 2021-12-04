@@ -2,7 +2,7 @@ import { BehaviorSubject, merge } from "rxjs";
 import { filter, map, tap } from "rxjs/operators";
 import { EditorView } from "@codemirror/view";
 import { combineLatestObject } from "rxjs-etc";
-import { hasEditorView } from "../types";
+import { isEditorView } from "../types";
 import { execScript, isAppendableScript } from "../scripts";
 import {
   buildTransaction,
@@ -18,15 +18,17 @@ import { closeSearch$, performTransform$ } from "./command";
 
 export const editor$ = new BehaviorSubject<EditorView | null>(null);
 
+export const view$ = editor$.pipe(filter(isEditorView));
+
 export const performTransformExtended$ = combineLatestObject({
   command: performTransform$,
-  view: editor$,
-}).pipe(filter(hasEditorView));
+  view: view$,
+});
 
 export const closeSearchExtended$ = combineLatestObject({
   command: closeSearch$,
-  view: editor$,
-}).pipe(filter(hasEditorView));
+  view: view$,
+});
 
 export const transformContent$ = performTransformExtended$.pipe(
   filter(({ view }) => isSingleCursorWithoutSelection(view)),
