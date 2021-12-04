@@ -12,9 +12,10 @@ export const getEditorDocument = (view: EditorView) =>
 export const getEditorDocumentLength = (view: EditorView) =>
   view.state.doc.length;
 
-export const isSingleCursorWithoutSelection = (
-  ranges: readonly SelectionRange[],
-) => ranges.length === 1 && ranges[0].from === ranges[0].to;
+export const isSingleCursorWithoutSelection = (view: EditorView) => {
+  const ranges = view.state.selection.ranges;
+  return ranges.length === 1 && ranges[0].from === ranges[0].to;
+};
 
 export const getSingleCursorPosition = (view: EditorView) =>
   view.state.selection.ranges[0].from;

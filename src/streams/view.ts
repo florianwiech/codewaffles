@@ -24,9 +24,7 @@ const editorTransform$ = performTransform$.pipe(
 );
 
 export const transformContent$ = editorTransform$.pipe(
-  filter(({ view }) =>
-    isSingleCursorWithoutSelection(view.state.selection.ranges),
-  ),
+  filter(({ view }) => isSingleCursorWithoutSelection(view)),
 
   map((params) => ({
     ...params,
@@ -51,9 +49,7 @@ export const transformContent$ = editorTransform$.pipe(
 );
 
 export const transformRanges$ = editorTransform$.pipe(
-  filter(
-    ({ view }) => !isSingleCursorWithoutSelection(view.state.selection.ranges),
-  ),
+  filter(({ view }) => !isSingleCursorWithoutSelection(view)),
 
   map((params) => {
     const { command, view } = params;
