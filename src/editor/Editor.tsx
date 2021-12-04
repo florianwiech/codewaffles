@@ -9,15 +9,14 @@ import { useCodeMirror } from "./useCodeMirror";
 import { initialLanguageSetup } from "./setup/language";
 import { basics } from "./setup/basics";
 import { statusbar } from "./statusbar";
+import { initialContent } from "./setup/initialContent";
 
 export const Editor = () => {
   const ref = useRef<HTMLDivElement>(null);
-  const editor = useCodeMirror(ref, [
-    basics,
-    initialThemeSetup,
-    initialLanguageSetup,
-    statusbar,
-  ]);
+  const editor = useCodeMirror(ref, {
+    doc: initialContent,
+    extensions: [basics, initialThemeSetup, initialLanguageSetup, statusbar],
+  });
   useCodeMirrorTheme(editor);
 
   useEffect(() => {

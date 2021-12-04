@@ -1,20 +1,13 @@
 import { EditorView } from "@codemirror/view";
-import { EditorState, Extension } from "@codemirror/state";
-import { initialContent } from "./initialContent";
+import { EditorState, EditorStateConfig } from "@codemirror/state";
 
 export const createEditor = (
   node: HTMLElement,
-  extensions: Extension[] = [],
+  options: EditorStateConfig = {},
 ) => {
-  const state = EditorState.create({
-    doc: initialContent,
-    extensions: extensions,
-  });
+  const state = EditorState.create(options);
 
-  const view = new EditorView({
-    state,
-    parent: node,
-  });
+  const view = new EditorView({ state, parent: node });
   view.focus();
 
   return view;

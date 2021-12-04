@@ -1,25 +1,25 @@
 import { RefObject, useLayoutEffect, useRef } from "react";
 import { EditorView } from "@codemirror/view";
-import { Extension } from "@codemirror/state";
+import { EditorStateConfig } from "@codemirror/state";
 import { editor$ } from "../streams";
 import { createEditor } from "./setup/createEditor";
 
 export const useCodeMirror = (
   ref: RefObject<HTMLElement>,
-  extensions?: Extension[],
+  options?: EditorStateConfig,
 ) => {
   const editorRef = useRef<EditorView>();
 
   useLayoutEffect(() => {
     if (!ref.current) return;
 
-    const view = createEditor(ref.current, extensions);
+    const view = createEditor(ref.current, options);
 
     editorRef.current = view;
     editor$.next(view);
 
     return () => view.destroy();
-  }, [extensions, ref]);
+  }, [ref, options]);
 
   return editorRef;
 };
