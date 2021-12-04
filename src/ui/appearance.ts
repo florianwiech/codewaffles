@@ -6,13 +6,27 @@ export enum AppearanceState {
   LIGHT = "light",
 }
 
-// fyi: the same attribute is used in the index.html
-// so if you want to change the attribute name you should also change it
-// in the index.html
-const APPEARANCE_ATTRIBUTE = "data-theme";
+// FYI: the same attribute values are used in the index.html
+// so if you want to change an attribute value you should also change it there
+const APPEARANCE_ATTRIBUTE = window.appearanceAttributeKey || "data-theme";
+const APPEARANCE_STORAGE = window.appearanceStorageKey || "themeAppearance";
+
+const getInitialAppearance = (): AppearanceState => {
+  try {
+    const themeAppearance = window.localStorage.getItem(APPEARANCE_STORAGE);
+
+    if (
+      themeAppearance === AppearanceState.DARK ||
+      themeAppearance === AppearanceState.LIGHT
+    ) {
+      return themeAppearance;
+    }
+  } catch (e) {}
+  return AppearanceState.SYSTEM;
+};
 
 export const appearance$ = new BehaviorSubject<AppearanceState>(
-  AppearanceState.SYSTEM,
+  getInitialAppearance(),
 );
 
 export const getActiveAppearance = (): AppearanceState => {

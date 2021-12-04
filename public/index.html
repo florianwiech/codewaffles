@@ -41,18 +41,21 @@
     -->
 
     <script>
+      window.appearanceStorageKey = "themeAppearance";
+      window.appearanceAttributeKey = "data-theme";
       try {
-        let themeAppearance = localStorage.getItem("themeAppearance");
+        let themeAppearance = localStorage.getItem(window.appearanceStorageKey);
         let prefersDarkAppearance =
-                typeof window !== undefined &&
-                window.matchMedia("(prefers-color-scheme: dark)").matches;
+          typeof window !== undefined &&
+          window.matchMedia !== undefined &&
+          window.matchMedia("(prefers-color-scheme: dark)").matches;
         if (
-                themeAppearance === "dark" ||
-                (themeAppearance === null && prefersDarkAppearance)
+          themeAppearance === "dark" ||
+          (themeAppearance === null && prefersDarkAppearance)
         ) {
-          document.documentElement.setAttribute("data-theme", "dark");
+          document.documentElement.setAttribute(window.appearanceAttributeKey, "dark");
         } else {
-          document.documentElement.setAttribute("data-theme", "light");
+          document.documentElement.setAttribute(window.appearanceAttributeKey, "light");
         }
       } catch (e) {
         // no-op
