@@ -8,5 +8,5 @@ export const closeSearch$ = command$.pipe(
 );
 
 export const performTransform$ = command$.pipe(
-  filter((command) => isPerformTransformCommand(command))
+  filter(isPerformTransformCommand)
 );
