@@ -1,4 +1,5 @@
-import { filter, Subject } from "rxjs";
+import { Subject } from "rxjs";
+import { filter } from "rxjs/operators";
 import { Command, CommandTypes, isPerformTransformCommand } from "../types";
 
 export const command$ = new Subject<Command>();

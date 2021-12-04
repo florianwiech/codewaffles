@@ -1,6 +1,8 @@
-import { BehaviorSubject, combineLatest, filter, map, merge, tap } from "rxjs";
+import { BehaviorSubject, merge } from "rxjs";
+import { filter, map, tap } from "rxjs/operators";
 import { EditorView } from "@codemirror/view";
-import { isEditorViewDefined } from "../types";
+import { combineLatestObject } from "rxjs-etc";
+import { hasEditorView, isEditorTransform } from "../types";
 import { execScript, isAppendableScript } from "../scripts";
 import {
   buildTransaction,
@@ -12,17 +14,19 @@ import {
   getSingleCursorPosition,
   isSingleCursorWithoutSelection,
 } from "../editor";
-import { performTransform$ } from "./command";
+import { closeSearch$, performTransform$ } from "./command";
 
 export const editor$ = new BehaviorSubject<EditorView | null>(null);
 
-const performTransformExtended$ = combineLatest([
-  performTransform$,
-  editor$,
-]).pipe(
-  map(([command, view]) => ({ command, view })),
-  filter(isEditorViewDefined),
-);
+export const performTransformExtended$ = combineLatestObject({
+  command: performTransform$,
+  view: editor$,
+}).pipe(filter(isEditorTransform));
+
+export const closeSearchExtended$ = combineLatestObject({
+  command: closeSearch$,
+  view: editor$,
+}).pipe(filter(hasEditorView));
 
 export const transformContent$ = performTransformExtended$.pipe(
   filter(({ view }) => isSingleCursorWithoutSelection(view)),
@@ -65,7 +69,10 @@ export const transformRanges$ = performTransformExtended$.pipe(
   }),
 );
 
-export const transform$ = merge(transformContent$, transformRanges$).pipe(
+export const transforms$ = merge(transformContent$, transformRanges$).pipe(
   tap(({ view, tr }) => view.dispatch(tr)),
+);
+
+export const editorChanges$ = merge(closeSearchExtended$, transforms$).pipe(
   tap(({ view }) => view.focus()),
 );
