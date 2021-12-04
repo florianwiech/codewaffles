@@ -14,15 +14,13 @@ import {
 } from "../editor";
 import { performTransform$ } from "./command";
 
-export const viewSubject = new BehaviorSubject<EditorView | null>(null);
+export const editor$ = new BehaviorSubject<EditorView | null>(null);
 
 const editorTransform$ = performTransform$.pipe(
   map((command) => ({ command })),
 
-  filter(() => isEditorView(viewSubject.getValue())),
-  map(
-    (params): EditorTransform => ({ ...params, view: viewSubject.getValue()! }),
-  ),
+  filter(() => isEditorView(editor$.getValue())),
+  map((params): EditorTransform => ({ ...params, view: editor$.getValue()! })),
 );
 
 export const transformContent$ = editorTransform$.pipe(

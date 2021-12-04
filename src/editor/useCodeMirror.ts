@@ -1,7 +1,7 @@
 import { RefObject, useLayoutEffect, useRef } from "react";
 import { EditorView } from "@codemirror/view";
 import { Extension } from "@codemirror/state";
-import { viewSubject } from "../streams";
+import { editor$ } from "../streams";
 import { createEditor } from "./setup/createEditor";
 
 export const useCodeMirror = (
@@ -16,7 +16,7 @@ export const useCodeMirror = (
     const view = createEditor(ref.current, extensions);
 
     editorRef.current = view;
-    viewSubject.next(view);
+    editor$.next(view);
 
     return () => view.destroy();
   }, [extensions, ref]);
