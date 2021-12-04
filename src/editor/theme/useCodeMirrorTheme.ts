@@ -17,7 +17,7 @@ export const useCodeMirrorTheme = (editor: CodeMirrorEditor) => {
 
     editor.current.dispatch({
       effects: themeConf.reconfigure(
-        theme === AppearanceState.DARK ? primerDark : primerLight
+        theme === AppearanceState.DARK ? primerDark : primerLight,
       ),
     });
   }, [editor, theme]);

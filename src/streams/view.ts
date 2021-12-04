@@ -21,13 +21,13 @@ const editorTransform$ = performTransform$.pipe(
 
   filter(() => isEditorView(viewSubject.getValue())),
   map(
-    (params): EditorTransform => ({ ...params, view: viewSubject.getValue()! })
-  )
+    (params): EditorTransform => ({ ...params, view: viewSubject.getValue()! }),
+  ),
 );
 
 export const transformContent$ = editorTransform$.pipe(
   filter(({ view }) =>
-    isSingleCursorWithoutSelection(view.state.selection.ranges)
+    isSingleCursorWithoutSelection(view.state.selection.ranges),
   ),
 
   map((params) => ({
@@ -42,19 +42,19 @@ export const transformContent$ = editorTransform$.pipe(
       isAppendableScript(params.command.key)
         ? createAppendContentTransaction(
             getSingleCursorPosition(params.view),
-            params.script
+            params.script,
           )
         : createReplaceContentTransaction(
             getEditorDocumentLength(params.view),
-            params.script
-          )
+            params.script,
+          ),
     ),
-  }))
+  })),
 );
 
 export const transformRanges$ = editorTransform$.pipe(
   filter(
-    ({ view }) => !isSingleCursorWithoutSelection(view.state.selection.ranges)
+    ({ view }) => !isSingleCursorWithoutSelection(view.state.selection.ranges),
   ),
 
   map((params) => {
@@ -67,10 +67,10 @@ export const transformRanges$ = editorTransform$.pipe(
       script,
       tr: buildTransaction(view, spec),
     };
-  })
+  }),
 );
 
 export const transform$ = merge(transformContent$, transformRanges$).pipe(
   tap(({ view, tr }) => view.dispatch(tr)),
-  tap(({ view }) => view.focus())
+  tap(({ view }) => view.focus()),
 );

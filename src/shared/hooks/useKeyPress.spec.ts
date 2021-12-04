@@ -21,7 +21,7 @@ describe("useKeyPress", () => {
           key,
           metaKey: true,
           ctrlKey: true,
-        })
+        }),
       );
 
       expect(callback).toHaveBeenCalled();
@@ -38,7 +38,7 @@ describe("useKeyPress", () => {
           key,
           metaKey: true,
           ctrlKey: true,
-        })
+        }),
       );
 
       expect(callback).toHaveBeenCalled();
@@ -55,7 +55,7 @@ describe("useKeyPress", () => {
           key,
           metaKey: false,
           ctrlKey: false,
-        })
+        }),
       );
 
       expect(callback).toHaveBeenCalled();
@@ -92,7 +92,7 @@ describe("useKeyPress", () => {
 
         it("should fire with meta key", () => {
           document.dispatchEvent(
-            new KeyboardEvent("keydown", { key, [device.key]: true })
+            new KeyboardEvent("keydown", { key, [device.key]: true }),
           );
 
           expect(callback).toHaveBeenCalled();

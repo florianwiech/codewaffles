@@ -4,7 +4,7 @@ import { initialContent } from "./initialContent";
 
 export const createEditor = (
   node: HTMLElement,
-  extensions: Extension[] = []
+  extensions: Extension[] = [],
 ) => {
   const state = EditorState.create({
     doc: initialContent,

@@ -19,7 +19,7 @@ describe("cancel search", () => {
 
     await waitFor(() => {
       expect(
-        screen.queryByPlaceholderText(SPOTLIGHT_LABEL)
+        screen.queryByPlaceholderText(SPOTLIGHT_LABEL),
       ).not.toBeInTheDocument();
     });
   });

@@ -14,7 +14,7 @@ export const setupOpenSpotlight = async () => {
   const utils = render(
     <Layout>
       <Spotlight scripts={scriptsMock} />
-    </Layout>
+    </Layout>,
   );
 
   fireEvent.keyDown(utils.baseElement, {
@@ -46,7 +46,7 @@ it("hidden by default", () => {
   render(<Spotlight scripts={scriptsMock} />);
 
   expect(
-    screen.queryByPlaceholderText(SPOTLIGHT_LABEL)
+    screen.queryByPlaceholderText(SPOTLIGHT_LABEL),
   ).not.toBeInTheDocument();
 });
 

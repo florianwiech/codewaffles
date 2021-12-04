@@ -12,7 +12,7 @@ export enum AppearanceState {
 const APPEARANCE_ATTRIBUTE = "data-theme";
 
 export const appearance$ = new BehaviorSubject<AppearanceState>(
-  AppearanceState.SYSTEM
+  AppearanceState.SYSTEM,
 );
 
 export const getActiveAppearance = (): AppearanceState => {

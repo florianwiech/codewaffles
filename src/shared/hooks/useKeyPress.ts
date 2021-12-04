@@ -11,7 +11,7 @@ export const useKeyPress = (
   key: string,
   callback: (event: KeyboardEvent) => void,
   metaKey = true,
-  node: HTMLElement | null = null
+  node: HTMLElement | null = null,
 ) => {
   // https://epicreact.dev/the-latest-ref-pattern-in-react/
   const callbackRef = useRef(callback);
@@ -31,7 +31,7 @@ export const useKeyPress = (
         callbackRef.current(event);
       }
     },
-    [key, metaKey]
+    [key, metaKey],
   );
 
   useEffect(() => {

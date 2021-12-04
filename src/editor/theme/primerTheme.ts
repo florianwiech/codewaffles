@@ -214,19 +214,19 @@ const getPrimerHighlightSpecs = ({
 };
 
 const primerLightHighlightStyle = HighlightStyle.define(
-  getPrimerHighlightSpecs({ name: "light", theme: light })
+  getPrimerHighlightSpecs({ name: "light", theme: light }),
 );
 const primerDarkHighlightStyle = HighlightStyle.define(
-  getPrimerHighlightSpecs({ name: "dark", theme: dark })
+  getPrimerHighlightSpecs({ name: "dark", theme: dark }),
 );
 
 const primerLightTheme = EditorView.theme(
   getPrimerThemeSpec({ name: "light", theme: light }),
-  { dark: false }
+  { dark: false },
 );
 const primerDarkTheme = EditorView.theme(
   getPrimerThemeSpec({ name: "dark", theme: dark }),
-  { dark: true }
+  { dark: true },
 );
 
 export const primerLight: Extension = [

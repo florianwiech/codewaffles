@@ -61,7 +61,7 @@ export const Spotlight: FC<Props> = ({ scripts }) => {
       : undefined;
 
   const handleKeyboardShortcuts: KeyboardEventHandler<HTMLInputElement> = (
-    event
+    event,
   ) => {
     switch (event.key) {
       case "ArrowUp":
@@ -190,7 +190,7 @@ export const SearchResult: FC<{
 
 function useScrollIntoView<T extends HTMLElement>(
   shouldScrollIntoView: boolean,
-  holder = document.body.getBoundingClientRect()
+  holder = document.body.getBoundingClientRect(),
 ) {
   const ref = useRef<T>(null);
 

@@ -12,7 +12,7 @@ export const LanguageSwitch: FC<{ view: EditorView }> = ({ view }) => {
   const onChange = async (event: ChangeEvent<HTMLSelectElement>) => {
     const nextLangName = event.target.value;
     const nextLang = languageExtensions.find(
-      (item) => item.name === nextLangName
+      (item) => item.name === nextLangName,
     );
     if (!nextLang) return;
 

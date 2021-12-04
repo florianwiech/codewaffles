@@ -6,7 +6,7 @@ import { createEditor } from "./setup/createEditor";
 
 export const useCodeMirror = (
   ref: RefObject<HTMLElement>,
-  extensions?: Extension[]
+  extensions?: Extension[],
 ) => {
   const editorRef = useRef<EditorView>();
 
