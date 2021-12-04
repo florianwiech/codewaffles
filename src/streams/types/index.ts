@@ -1,2 +1,2 @@
 export * from "./command";
-export * from "./view";
+export * from "./editor";
