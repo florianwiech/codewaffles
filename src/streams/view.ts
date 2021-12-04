@@ -1,6 +1,6 @@
-import { BehaviorSubject, filter, map, merge, tap } from "rxjs";
+import { BehaviorSubject, combineLatest, filter, map, merge, tap } from "rxjs";
 import { EditorView } from "@codemirror/view";
-import { EditorTransform, isEditorView } from "../types";
+import { isEditorViewDefined } from "../types";
 import { execScript, isAppendableScript } from "../scripts";
 import {
   buildTransaction,
@@ -16,14 +16,15 @@ import { performTransform$ } from "./command";
 
 export const editor$ = new BehaviorSubject<EditorView | null>(null);
 
-const editorTransform$ = performTransform$.pipe(
-  map((command) => ({ command })),
-
-  filter(() => isEditorView(editor$.getValue())),
-  map((params): EditorTransform => ({ ...params, view: editor$.getValue()! })),
+const performTransformExtended$ = combineLatest([
+  performTransform$,
+  editor$,
+]).pipe(
+  map(([command, view]) => ({ command, view })),
+  filter(isEditorViewDefined),
 );
 
-export const transformContent$ = editorTransform$.pipe(
+export const transformContent$ = performTransformExtended$.pipe(
   filter(({ view }) => isSingleCursorWithoutSelection(view)),
 
   map((params) => ({
@@ -48,7 +49,7 @@ export const transformContent$ = editorTransform$.pipe(
   })),
 );
 
-export const transformRanges$ = editorTransform$.pipe(
+export const transformRanges$ = performTransformExtended$.pipe(
   filter(({ view }) => !isSingleCursorWithoutSelection(view)),
 
   map((params) => {

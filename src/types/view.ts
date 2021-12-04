@@ -9,5 +9,7 @@ export type EditorTransform = {
   tr?: Transaction;
 };
 
-export const isEditorView = (view: EditorView | null): view is EditorView =>
-  view !== null;
+export const isEditorViewDefined = (param: {
+  command: PerformTransformCommand;
+  view: EditorView | null;
+}): param is EditorTransform => (param as EditorTransform).view !== null;
