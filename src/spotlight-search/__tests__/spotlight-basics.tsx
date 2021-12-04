@@ -2,7 +2,7 @@ import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 import Fuse from "fuse.js";
 import { Spotlight, SPOTLIGHT_LABEL } from "../Spotlight";
 import { Layout } from "../../ui";
-import { ScriptList } from "../../types";
+import { ScriptList } from "../../scripts";
 
 export const scriptsMock: ScriptList = [
   { key: "one", label: "one", handler: () => "" },

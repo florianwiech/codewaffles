@@ -9,8 +9,9 @@ import {
 import debounce from "lodash.debounce";
 import Fuse from "fuse.js";
 import { useKeyPress } from "../shared/hooks/useKeyPress";
-import { CommandTypes, ScriptExtension, ScriptList } from "../types";
+import { CommandTypes } from "../types";
 import { command$ } from "../streams";
+import { ScriptExtension, ScriptList } from "../scripts";
 import { StyledBackdrop, StyledSpotlight } from "./Spotlight.style";
 import { StyledInput } from "./Input.style";
 import { StyledSearchResults } from "./SearchResults.style";
