@@ -2,7 +2,7 @@ import { BehaviorSubject, merge } from "rxjs";
 import { filter, tap } from "rxjs/operators";
 import { EditorView } from "@codemirror/view";
 import { combineLatestObject } from "rxjs-etc";
-import { isEditorView } from "../types";
+import { isEditorView } from "./types";
 import { closeSearch$, performTransform$ } from "./command";
 import { transformContent, transformRanges } from "./operators";
 

@@ -1,6 +1,6 @@
 import { OperatorFunction, pipe } from "rxjs";
 import { filter, map } from "rxjs/operators";
-import { EditorTransform, EditorTransformResult } from "../../types";
+import { EditorTransform, EditorTransformResult } from "../types";
 import {
   buildTransaction,
   createAppendContentTransaction,
