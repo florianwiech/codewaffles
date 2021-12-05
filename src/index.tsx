@@ -1,8 +1,13 @@
 import React from "react";
 import ReactDOM from "react-dom";
+import { create as createRxSpy } from "rxjs-spy";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { Layout } from "./ui";
+
+if (process.env.NODE_ENV !== "production") {
+  createRxSpy();
+}
 
 ReactDOM.render(
   <React.StrictMode>
