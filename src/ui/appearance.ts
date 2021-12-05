@@ -1,4 +1,5 @@
 import { BehaviorSubject } from "rxjs";
+import { convertAppearanceToTheme } from "./utils/convertAppearanceToTheme";
 
 export enum AppearanceState {
   SYSTEM = "system",
@@ -28,6 +29,8 @@ const getInitialAppearance = (): AppearanceState => {
 export const appearance$ = new BehaviorSubject<AppearanceState>(
   getInitialAppearance(),
 );
+
+export const theme$ = appearance$.pipe(convertAppearanceToTheme());
 
 export const getActiveAppearance = (): AppearanceState => {
   try {
