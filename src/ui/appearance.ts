@@ -1,16 +1,17 @@
-import { BehaviorSubject } from "rxjs";
+import { BehaviorSubject, merge, withLatestFrom } from "rxjs";
+import { filter, map, tap } from "rxjs/operators";
+import { tag } from "rxjs-spy/cjs/operators";
 import { convertAppearanceToTheme } from "./utils/convertAppearanceToTheme";
+import {
+  APPEARANCE_ATTRIBUTE,
+  APPEARANCE_STORAGE,
+} from "./utils/appearance-keys";
 
 export enum AppearanceState {
   SYSTEM = "system",
   DARK = "dark",
   LIGHT = "light",
 }
-
-// FYI: the same attribute values are used in the index.html
-// so if you want to change an attribute value you should also change it there
-const APPEARANCE_ATTRIBUTE = window.appearanceAttributeKey || "data-theme";
-const APPEARANCE_STORAGE = window.appearanceStorageKey || "themeAppearance";
 
 const getInitialAppearance = (): AppearanceState => {
   try {
@@ -29,57 +30,63 @@ const getInitialAppearance = (): AppearanceState => {
 export const appearance$ = new BehaviorSubject<AppearanceState>(
   getInitialAppearance(),
 );
+export const history$ = new BehaviorSubject<AppearanceState>(
+  getInitialAppearance(),
+);
 
 export const theme$ = appearance$.pipe(convertAppearanceToTheme());
 
-export const getActiveAppearance = (): AppearanceState => {
-  try {
-    const themeAppearance = window.localStorage.getItem("themeAppearance");
-    if (themeAppearance === "dark") {
-      return AppearanceState.DARK;
-    } else if (themeAppearance === "light") {
-      return AppearanceState.LIGHT;
-    } else {
-      return AppearanceState.SYSTEM;
-    }
-  } catch (e) {
-    return AppearanceState.SYSTEM;
-  }
-};
+const shouldChange$ = appearance$.pipe(
+  withLatestFrom(history$),
+  map(([next, previous]) => ({ next, previous })),
+  filter(({ next, previous }) => next !== previous),
+  map(({ next }) => next),
+);
 
-export const updateAppearance = (next: AppearanceState) => {
-  const prefersDarkAppearance =
-    typeof window !== undefined &&
-    window.matchMedia("(prefers-color-scheme: dark)").matches;
+const updateDocument$ = shouldChange$.pipe(
+  convertAppearanceToTheme(),
+  tap((theme) =>
+    document.documentElement.setAttribute(
+      APPEARANCE_ATTRIBUTE,
+      theme.toString(),
+    ),
+  ),
+  tag("document-updater"),
+);
 
-  switch (next) {
-    case AppearanceState.SYSTEM:
-      appearance$.next(next);
-      localStorage.removeItem("themeAppearance");
+const updateStorage$ = shouldChange$.pipe(
+  tap((appearance) =>
+    appearance === AppearanceState.SYSTEM
+      ? localStorage.removeItem(APPEARANCE_STORAGE)
+      : localStorage.setItem(APPEARANCE_STORAGE, appearance),
+  ),
+  tag("storage-updater"),
+);
 
-      if (prefersDarkAppearance) {
-        document.documentElement.setAttribute(APPEARANCE_ATTRIBUTE, "dark");
-      } else {
-        document.documentElement.setAttribute(APPEARANCE_ATTRIBUTE, "light");
-      }
-      break;
-    case AppearanceState.LIGHT:
-      appearance$.next(next);
-      localStorage.setItem("themeAppearance", AppearanceState.LIGHT);
-      document.documentElement.setAttribute(APPEARANCE_ATTRIBUTE, "light");
-      break;
-    case AppearanceState.DARK:
-      appearance$.next(next);
-      localStorage.setItem("themeAppearance", next);
-      document.documentElement.setAttribute(APPEARANCE_ATTRIBUTE, "dark");
-      break;
-  }
-};
+const updateOtherTabs$ = shouldChange$.pipe(
+  tap((next) => {
+    if (window.BroadcastChannel === undefined) return;
 
-export const emitAppearance = (next: AppearanceState) => {
-  if (window.BroadcastChannel === undefined) return;
+    const channel = new BroadcastChannel("appearance");
+    channel.postMessage(next);
+    channel.close();
+  }),
+  tag("cross-tab-updater"),
+);
 
-  const channel = new BroadcastChannel("appearance");
-  channel.postMessage(next);
-  channel.close();
+const updateHistory$ = shouldChange$.pipe(
+  tap((next) => history$.next(next)),
+  tag("history-updater"),
+);
+
+export const updateAppearance$ = merge(
+  updateDocument$,
+  updateStorage$,
+  updateOtherTabs$,
+  updateHistory$,
+);
+
+export const changeAppearance = (next: AppearanceState, emit = true) => {
+  if (!emit) history$.next(next);
+  appearance$.next(next);
 };
