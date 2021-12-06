@@ -7,7 +7,8 @@ export const styledStatusbar = css`
       background-color: ${({ theme }) => theme.canvas.default};
     }
 
-    .language-switch {
+    .language-switch,
+    .appearance-switch {
       color: ${({ theme }) => theme.fg.muted};
       background-color: ${({ theme }) => theme.canvas.default};
       outline: none;

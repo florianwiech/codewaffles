@@ -7,6 +7,7 @@ import { CharCounter } from "./CharCounter";
 import { CursorInformation } from "./CursorInformation";
 import { Spacer, StyledStatusbar } from "./Statusbar.style";
 import { LanguageSwitch } from "./LanguageSwitch";
+import { AppearanceSwitch } from "./AppearanceSwitch";
 
 const StatusbarPanel: FC<{ view: EditorView }> = ({ view }) => {
   return (
@@ -15,6 +16,7 @@ const StatusbarPanel: FC<{ view: EditorView }> = ({ view }) => {
       <CursorInformation state={view.state} />
       <WordCounter doc={view.state.doc} />
       <CharCounter doc={view.state.doc} />
+      <AppearanceSwitch />
       <LanguageSwitch view={view} />
     </StyledStatusbar>
   );
