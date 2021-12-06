@@ -35,6 +35,7 @@ export const createReplaceContentTransaction = (
 ): TransactionSpec => ({
   changes: { from: 0, to: documentLength, insert: content },
   selection: EditorSelection.cursor(content.length),
+  scrollIntoView: true,
 });
 
 export const createAppendContentTransaction = (
@@ -46,6 +47,7 @@ export const createAppendContentTransaction = (
     insert: content,
   },
   selection: EditorSelection.cursor(from + content.length),
+  scrollIntoView: true,
 });
 
 export const createSelectionRangesSpec = (view: EditorView, key: string) => {
