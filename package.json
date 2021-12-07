@@ -61,15 +61,23 @@
     "@types/ua-parser-js": "0.7.36",
     "eslint-config-prettier": "8.3.0",
     "eslint-formatter-friendly": "7.0.0",
+    "eslint-plugin-rxjs": "^4.0.3",
     "prettier": "2.5.1",
     "react-scripts": "4.0.3",
     "typescript": "4.5.2"
   },
   "eslintConfig": {
+    "parser": "@typescript-eslint/parser",
+    "parserOptions": {
+      "ecmaVersion": 2019,
+      "project": "./tsconfig.json",
+      "sourceType": "module"
+    },
     "extends": [
       "react-app",
       "react-app/jest",
-      "prettier"
+      "prettier",
+      "plugin:rxjs/recommended"
     ],
     "rules": {
       "import/order": "warn",
