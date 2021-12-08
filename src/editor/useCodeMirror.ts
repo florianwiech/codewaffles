@@ -20,7 +20,10 @@ export const useCodeMirror = (
 
     view.focus();
 
-    return () => view.destroy();
+    return () => {
+      editor$.next(null);
+      view.destroy();
+    };
   }, [ref, options]);
 
   return editorRef;
