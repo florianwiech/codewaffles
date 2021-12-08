@@ -18,6 +18,8 @@ export const useCodeMirror = (
     editorRef.current = view;
     editor$.next(view);
 
+    view.focus();
+
     return () => view.destroy();
   }, [ref, options]);
 

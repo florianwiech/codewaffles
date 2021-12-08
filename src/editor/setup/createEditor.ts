@@ -7,8 +7,5 @@ export const createEditor = (
 ) => {
   const state = EditorState.create(options);
 
-  const view = new EditorView({ state, parent: node });
-  view.focus();
-
-  return view;
+  return new EditorView({ state, parent: node });
 };
