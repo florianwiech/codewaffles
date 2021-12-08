@@ -7954,11 +7954,6 @@ media-typer@0.3.0:
   resolved "https://registry.yarnpkg.com/media-typer/-/media-typer-0.3.0.tgz#8710d7af0aa626f8fffa1ce00168545263255748"
   integrity sha1-hxDXrwqmJvj/+hzgAWhUUmMlV0g=
 
-memoize-resolver@~1.0.0:
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/memoize-resolver/-/memoize-resolver-1.0.0.tgz#93f01b61909008eb9d9b521fc1db152cc1b47f06"
-  integrity sha512-mXfNXte0RSWl0rEIsQhXutfM2R2Oa7UyKDD7XoZMEbKeucTRms04y5y41U8gLqPzRx7ViN/QyYnTR2TX/5tawA==
-
 memory-fs@^0.4.1:
   version "0.4.1"
   resolved "https://registry.yarnpkg.com/memory-fs/-/memory-fs-0.4.1.tgz#3a9a20b8462523e447cfbc7e8bb80ed667bfc552"
@@ -10413,15 +10408,7 @@ run-queue@^1.0.0, run-queue@^1.0.3:
   dependencies:
     aproba "^1.1.1"
 
-rxjs-etc@^10.6.1:
-  version "10.6.1"
-  resolved "https://registry.yarnpkg.com/rxjs-etc/-/rxjs-etc-10.6.1.tgz#79f1e69333e5e565a3140821f660c3d735fbdcc8"
-  integrity sha512-gcSlSQvR6hMlnvi8/z52nnYEHAI7+EuZOha+kSr5WQlU9t7QMQJzhqWb6rtQYN9AG8+WMQla0yGQYKVgpz93gg==
-  dependencies:
-    memoize-resolver "~1.0.0"
-    rxjs-report-usage "~1.0.4"
-
-rxjs-report-usage@^1.0.4, rxjs-report-usage@~1.0.4:
+rxjs-report-usage@^1.0.4:
   version "1.0.6"
   resolved "https://registry.yarnpkg.com/rxjs-report-usage/-/rxjs-report-usage-1.0.6.tgz#6e06034d9e1592e8a45bee877631638e4bac2576"
   integrity sha512-omv1DIv5z1kV+zDAEjaDjWSkx8w5TbFp5NZoPwUipwzYVcor/4So9ZU3bUyQ1c8lxY5Q0Es/ztWW7PGjY7to0Q==
