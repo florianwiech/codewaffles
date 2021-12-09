@@ -30,14 +30,14 @@ const getInitialAppearance = (): AppearanceState => {
 export const appearance$ = new BehaviorSubject<AppearanceState>(
   getInitialAppearance(),
 );
-export const history$ = new BehaviorSubject<AppearanceState>(
+export const previousAppearance$ = new BehaviorSubject<AppearanceState>(
   getInitialAppearance(),
 );
 
 export const theme$ = appearance$.pipe(convertAppearanceToTheme());
 
 const shouldChange$ = appearance$.pipe(
-  withLatestFrom(history$),
+  withLatestFrom(previousAppearance$),
   map(([next, previous]) => ({ next, previous })),
   filter(({ next, previous }) => next !== previous),
   map(({ next }) => next),
@@ -75,7 +75,7 @@ const updateOtherTabs$ = shouldChange$.pipe(
 );
 
 const updateHistory$ = shouldChange$.pipe(
-  tap((next) => history$.next(next)),
+  tap((next) => previousAppearance$.next(next)),
   tag("history-updater"),
 );
 
@@ -87,6 +87,6 @@ export const updateAppearance$ = merge(
 );
 
 export const changeAppearance = (next: AppearanceState, emit = true) => {
-  if (!emit) history$.next(next);
+  if (!emit) previousAppearance$.next(next);
   appearance$.next(next);
 };
