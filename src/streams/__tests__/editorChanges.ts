@@ -1,10 +1,22 @@
 import { createEditor } from "../../editor/setup/createEditor";
 import * as Scripts from "../../scripts";
-import { CommandTypes } from "../types";
-import { editor$, editorChanges$ } from "../editor";
+import { Command, CommandTypes } from "../types";
+import { editor$, editorChanges$, getEditorChanges } from "../editor";
 import { command$ } from "../command";
-import { first, of, tap } from "rxjs";
-import { subscribeSpyTo } from "@hirez_io/observer-spy";
+import { eachValueFrom, latestValueFrom } from "rxjs-for-await";
+import {
+  BehaviorSubject,
+  first,
+  mapTo,
+  merge,
+  of,
+  OperatorFunction,
+  skipWhile,
+  takeUntil,
+  takeWhile,
+  timer,
+} from "rxjs";
+import { map, tap } from "rxjs/operators";
 // import { scriptCollection } from "../../scripts";
 // import { mocked } from "../../shared/testing/mocked";
 //
@@ -49,14 +61,14 @@ describe("editorChanges$", () => {
   let focusSpy = jest.spyOn(view, "focus");
   let dispatchSpy = jest.spyOn(view, "dispatch");
 
-  let execScriptSpy = jest.spyOn(Scripts, "execScript");
+  // let execScriptSpy = jest.spyOn(Scripts, "execScript");
 
   beforeEach(() => {
     view = createEditor(document.body, { doc: "" });
     focusSpy = jest.spyOn(view, "focus");
     dispatchSpy = jest.spyOn(view, "dispatch");
 
-    execScriptSpy = jest.spyOn(Scripts, "execScript");
+    // execScriptSpy = jest.spyOn(Scripts, "execScript");
 
     editor$.next(view);
   });
@@ -72,22 +84,43 @@ describe("editorChanges$", () => {
       key: "create-timestamp-seconds",
     };
 
-    const observerSpy = subscribeSpyTo(editorChanges$);
+    const cmd$ = new BehaviorSubject<Command>(command);
 
-    command$.next(command);
-    command$.complete();
+    const source$ = getEditorChanges(cmd$).pipe(first());
 
-    await observerSpy.onComplete();
+    const result = [];
+    for await (const value of eachValueFrom(source$)) {
+      result.push(value);
+      console.log("value", value);
+    }
+
+    console.log("result", result);
+    console.log("doc", view.state.doc.toString());
+    console.log("view", view);
 
     expect(view.hasFocus).toBeTruthy();
     expect(view.state.doc.toString()).toBe("some content");
 
-    expect(execScriptSpy).toHaveBeenCalled();
+    // expect(execScriptSpy).toHaveBeenCalled();
 
     expect(focusSpy).toHaveBeenCalled();
     expect(dispatchSpy).toHaveBeenCalled();
-
-    observerSpy.unsubscribe();
   });
   // it("should transform ranges", () => {});
+
+  test("rxjs-for-await", async () => {
+    const ALPHABET = "abcdefghijklmnopqrstuvwxyz";
+
+    const toAlphabet = (): OperatorFunction<any, string> => (source) =>
+      source.pipe(map((v) => ALPHABET[v]));
+
+    const source = timer(100, 10).pipe(toAlphabet(), takeWhile(Boolean));
+
+    const result = [];
+    for await (const value of latestValueFrom(source)) {
+      result.push(value);
+    }
+
+    expect(result).toStrictEqual(ALPHABET.split(""));
+  });
 });
