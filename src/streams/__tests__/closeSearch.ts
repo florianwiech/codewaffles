@@ -1,10 +1,12 @@
+import { TestScheduler } from "rxjs/testing";
+import { tap } from "rxjs/operators";
 import { createEditor } from "../../editor/setup/createEditor";
 import { editor$, editorChanges$ } from "../editor";
 import { command$ } from "../command";
 import { CommandTypes } from "../types";
-import { TestScheduler } from "rxjs/testing";
-import { tap } from "rxjs/operators";
 
+// https://stackoverflow.com/questions/61465243/testscheduler-for-subject
+// https://www.youtube.com/watch?v=s9FY-MBW1rc
 describe("close search command", () => {
   let testScheduler: TestScheduler;
 
@@ -14,41 +16,26 @@ describe("close search command", () => {
     );
   });
 
-  it("works", () => {
+  it("should exec close search", () => {
     testScheduler.run((helpers) => {
-      const { cold, hot, expectObservable, expectSubscriptions } = helpers;
-      // GIVEN
+      const { hot, expectObservable } = helpers;
+
       const view = createEditor(document.body);
-      const viewSpy = jest.spyOn(view, "focus");
       editor$.next(view);
 
       const command = { type: CommandTypes.SEARCH_CLOSED };
 
-      // WHEN
-
-      const src = hot("    --c", { c: command });
-      const expectedSrc = "--c";
-
-      const epicObs = editorChanges$; // Subscribe to the subject, before the value is emitted
-      const expectedEpic = "--v";
-      const epicValues = { command, view };
-
-      expectObservable(src.pipe(tap((c) => command$.next(c)))).toBe(
-        expectedSrc,
-        { c: command },
+      const observable = hot("-c", { c: command }).pipe(
+        tap((c) => command$.next(c)),
       );
-      expectObservable(epicObs).toBe(expectedEpic, { v: epicValues });
+      const obsMarble = "       -c";
+      const obsValue = { c: command };
 
-      // todo find an async way for testing
-      // maybe somehow possible with default testscheduler? 🤔
-      // maybe the idea of the following post works:
-      // https://stackoverflow.com/questions/61465243/testscheduler-for-subject
-      // ansonsten nochmal zum video zurück, da hatte ich doch schon einige ideen!
-      // https://www.youtube.com/watch?v=s9FY-MBW1rc
+      const expectedMarble = "-r";
+      const expectedValue = { r: { command, view } };
 
-      // THEN
-      // expect(viewSpy).toHaveBeenCalled();
-      // expect(view.hasFocus).toBeTruthy();
+      expectObservable(observable).toBe(obsMarble, obsValue);
+      expectObservable(editorChanges$).toBe(expectedMarble, expectedValue);
 
       // CLEANUP
       view.destroy();
