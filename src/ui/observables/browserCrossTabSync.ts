@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { AppearanceState, changeAppearance } from "../appearance";
-import { APPEARANCE_CHANNEL } from "./appearance-keys";
+import { APPEARANCE_CHANNEL } from "../utils/appearance-keys";
 
 export const useBrowserCrossTabSync = () => {
   useEffect(() => {

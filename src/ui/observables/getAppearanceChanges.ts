@@ -6,7 +6,7 @@ import {
   AppearanceState,
   previousAppearance$,
 } from "../appearance";
-import { convertAppearanceToTheme } from "../utils/convertAppearanceToTheme";
+import { convertAppearanceToTheme } from "../operators/convertAppearanceToTheme";
 import {
   APPEARANCE_ATTRIBUTE,
   APPEARANCE_STORAGE,

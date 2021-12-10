@@ -1,5 +1,5 @@
 import { BehaviorSubject } from "rxjs";
-import { convertAppearanceToTheme } from "./utils/convertAppearanceToTheme";
+import { convertAppearanceToTheme } from "./operators/convertAppearanceToTheme";
 import { getInitialAppearance } from "./utils/getInitialAppearance";
 
 export enum AppearanceState {
