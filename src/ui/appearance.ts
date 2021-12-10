@@ -13,20 +13,6 @@ export enum AppearanceState {
   LIGHT = "light",
 }
 
-const getInitialAppearance = (): AppearanceState => {
-  try {
-    const themeAppearance = window.localStorage.getItem(APPEARANCE_STORAGE);
-
-    if (
-      themeAppearance === AppearanceState.DARK ||
-      themeAppearance === AppearanceState.LIGHT
-    ) {
-      return themeAppearance;
-    }
-  } catch (e) {}
-  return AppearanceState.SYSTEM;
-};
-
 export const appearance$ = new BehaviorSubject<AppearanceState>(
   getInitialAppearance(),
 );
