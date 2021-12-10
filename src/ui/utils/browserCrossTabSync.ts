@@ -4,7 +4,9 @@ import { APPEARANCE_CHANNEL } from "./appearance-keys";
 
 export const useBrowserCrossTabSync = () => {
   useEffect(() => {
-    if (window?.BroadcastChannel === undefined) return;
+    if (typeof window === undefined || window?.BroadcastChannel === undefined) {
+      return;
+    }
 
     const channel = new BroadcastChannel(APPEARANCE_CHANNEL);
 
