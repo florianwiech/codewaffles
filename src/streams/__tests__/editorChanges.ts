@@ -18,6 +18,8 @@ jest.mock("../../scripts", () => ({
 }));
 
 describe("editorChanges$", () => {
+  const cmd$ = new BehaviorSubject<Command>({} as Command);
+
   let view = createEditor(document.body, { doc: "" });
   let focusSpy = jest.spyOn(view, "focus");
   let dispatchSpy = jest.spyOn(view, "dispatch");
@@ -41,7 +43,26 @@ describe("editorChanges$", () => {
 
   afterEach(() => {
     editor$.next(null);
+    cmd$.next({} as Command);
     view.destroy();
+  });
+
+  it("should focus editor when search closed", async () => {
+    const command = { type: CommandTypes.SEARCH_CLOSED };
+    cmd$.next(command);
+
+    const source$ = getEditorChanges(cmd$).pipe(first());
+
+    const result = [];
+    for await (const value of eachValueFrom(source$)) {
+      result.push(value);
+    }
+
+    // THEN
+    expect(view.hasFocus).toBeTruthy();
+    expect(view.state.doc.toString()).toBe("");
+    expect(focusSpy).toHaveBeenCalled();
+    expect(dispatchSpy).not.toHaveBeenCalled();
   });
 
   it("should transform content", async () => {
@@ -52,19 +73,14 @@ describe("editorChanges$", () => {
       key: "create-timestamp-seconds",
     };
 
-    const cmd$ = new BehaviorSubject<Command>(command);
+    cmd$.next(command);
 
     const source$ = getEditorChanges(cmd$).pipe(first());
 
     const result = [];
     for await (const value of eachValueFrom(source$)) {
       result.push(value);
-      console.log("value", value);
     }
-
-    console.log("result", result);
-    console.log("doc", view.state.doc.toString());
-    console.log("view", view);
 
     expect(view.hasFocus).toBeTruthy();
     expect(view.state.doc.toString()).toBe("content");
