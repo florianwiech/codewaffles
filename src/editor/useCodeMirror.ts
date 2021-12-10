@@ -1,7 +1,7 @@
 import { RefObject, useLayoutEffect, useRef } from "react";
 import { EditorView } from "@codemirror/view";
 import { EditorStateConfig } from "@codemirror/state";
-import { editor$ } from "../streams";
+import { editor$ } from "../store";
 import { createEditor } from "./setup/createEditor";
 
 export const useCodeMirror = (

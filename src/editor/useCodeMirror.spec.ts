@@ -1,6 +1,6 @@
 import { cleanup, renderHook } from "@testing-library/react-hooks";
 import { EditorView } from "@codemirror/view";
-import { editor$ } from "../streams";
+import { editor$ } from "../store";
 import { useCodeMirror } from "./useCodeMirror";
 import * as CreateEditor from "./setup/createEditor";
 

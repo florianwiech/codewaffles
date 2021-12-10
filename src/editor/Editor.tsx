@@ -1,5 +1,5 @@
 import { useEffect, useRef } from "react";
-import { editorChanges$ } from "../streams";
+import { editorChanges$ } from "../store";
 import { StyledEditor } from "./Editor.style";
 import {
   initialThemeSetup,
