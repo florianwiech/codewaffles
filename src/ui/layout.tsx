@@ -4,15 +4,16 @@ import dark from "@primer/primitives/dist/js/colors/dark";
 import light from "@primer/primitives/dist/js/colors/light";
 import { useObservable } from "../shared/hooks/useObservable";
 import { GlobalStyle } from "./styles";
-import { AppearanceState, theme$, updateAppearance$ } from "./appearance";
-import { useBrowserAppearanceListener } from "./utils/browserColorSchemeListener";
-import { useBrowserCrossTabSync } from "./utils/browserCrossTabSync";
+import { AppearanceState, theme$ } from "./appearance";
+import { useBrowserAppearanceListener } from "./observables/browserColorSchemeListener";
+import { useBrowserCrossTabSync } from "./observables/browserCrossTabSync";
+import { getAppearanceChanges } from "./observables/getAppearanceChanges";
 
 export const Layout: React.FC = ({ children }) => {
   const theme = useObservable(theme$);
 
   useEffect(() => {
-    const sub = updateAppearance$.subscribe();
+    const sub = getAppearanceChanges().subscribe();
     return () => sub.unsubscribe();
   }, []);
 
