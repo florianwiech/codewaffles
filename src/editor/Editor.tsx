@@ -1,5 +1,5 @@
 import { useEffect, useRef } from "react";
-import { editorChanges$ } from "../store";
+import { getEditorChanges } from "../store";
 import { StyledEditor } from "./Editor.style";
 import {
   initialThemeSetup,
@@ -20,7 +20,7 @@ export const Editor = () => {
   useCodeMirrorTheme(editor);
 
   useEffect(() => {
-    const sub = editorChanges$.subscribe();
+    const sub = getEditorChanges().subscribe();
     return () => sub.unsubscribe();
   }, []);
 

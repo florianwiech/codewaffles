@@ -1,3 +1,4 @@
-export * from "./command";
-export * from "./editor";
+export * from "./observables";
+export * from "./operators";
+export * from "./subjects";
 export * from "./types";
