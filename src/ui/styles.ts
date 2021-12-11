@@ -15,5 +15,8 @@ export const GlobalStyle = createGlobalStyle`
 
     overflow: hidden;
     box-sizing: border-box;
+
+    // https://stackoverflow.com/questions/30636930/disable-web-page-navigation-on-swipeback-and-forward
+    overscroll-behavior-x: none;
   }
 `;
