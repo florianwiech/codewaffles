@@ -3,18 +3,17 @@ import { EditorView, ViewUpdate } from "@codemirror/view";
 import ReactDOM from "react-dom";
 import { FC } from "react";
 import { CursorInformation } from "./CursorInformation";
-import { Spacer, StyledStatusbar } from "./Statusbar.style";
 import { LanguageSwitch } from "./LanguageSwitch";
 import { AppearanceSwitch } from "./AppearanceSwitch";
 
 const StatusbarPanel: FC<{ view: EditorView }> = ({ view }) => {
   return (
-    <StyledStatusbar>
-      <Spacer />
+    <>
+      <div className="spacer" />
       <CursorInformation state={view.state} />
       <AppearanceSwitch />
       <LanguageSwitch view={view} />
-    </StyledStatusbar>
+    </>
   );
 };
 

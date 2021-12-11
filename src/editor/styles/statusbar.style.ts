@@ -2,9 +2,25 @@ import { css } from "styled-components";
 
 export const styledStatusbar = css`
   .cm-panel.cm-statusbar {
+    display: flex;
+    flex-direction: row;
+
+    padding: 0 7px;
+
+    overflow-x: auto;
+
     & > * {
+      padding: 0 7px;
       color: ${({ theme }) => theme.fg.muted};
       background-color: ${({ theme }) => theme.canvas.default};
+      flex-shrink: 0;
+    }
+
+    .spacer {
+      display: flex;
+      flex-direction: row;
+      -webkit-box-flex: 1;
+      flex: 1;
     }
 
     .language-switch,
