@@ -43,13 +43,16 @@ export const CursorInformation: FC<{ state: EditorState }> = ({ state }) => {
 
   const multiCursor = `${caretCount} carets`;
 
+  const selectionTemplate = (
+    <>
+      {cursorPosition}
+      <div className="single-selection">{singleSelection}</div>
+    </>
+  );
+
   return (
-    <div>
-      {cursor
-        ? cursor.selection
-          ? `${cursorPosition} ${singleSelection}`
-          : cursorPosition
-        : null}
+    <div className="cursor-position">
+      {cursor ? (cursor.selection ? selectionTemplate : cursorPosition) : null}
       {caretCount ? multiCursor : null}
     </div>
   );

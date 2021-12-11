@@ -1,4 +1,5 @@
 import { css } from "styled-components";
+import { device } from "../../ui";
 
 export const styledStatusbar = css`
   .cm-panel.cm-statusbar {
@@ -21,6 +22,19 @@ export const styledStatusbar = css`
       flex-direction: row;
       -webkit-box-flex: 1;
       flex: 1;
+    }
+
+    .cursor-position {
+      display: flex;
+      flex-direction: row;
+
+      .single-selection {
+        display: none;
+        @media screen and ${device.mobileL} {
+          display: block;
+          margin-left: 5px;
+        }
+      }
     }
 
     .language-switch,
