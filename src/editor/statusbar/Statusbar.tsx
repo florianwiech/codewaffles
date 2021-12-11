@@ -2,8 +2,6 @@ import { showPanel } from "@codemirror/panel";
 import { EditorView, ViewUpdate } from "@codemirror/view";
 import ReactDOM from "react-dom";
 import { FC } from "react";
-import { WordCounter } from "./WordCounter";
-import { CharCounter } from "./CharCounter";
 import { CursorInformation } from "./CursorInformation";
 import { Spacer, StyledStatusbar } from "./Statusbar.style";
 import { LanguageSwitch } from "./LanguageSwitch";
@@ -14,8 +12,6 @@ const StatusbarPanel: FC<{ view: EditorView }> = ({ view }) => {
     <StyledStatusbar>
       <Spacer />
       <CursorInformation state={view.state} />
-      <WordCounter doc={view.state.doc} />
-      <CharCounter doc={view.state.doc} />
       <AppearanceSwitch />
       <LanguageSwitch view={view} />
     </StyledStatusbar>
