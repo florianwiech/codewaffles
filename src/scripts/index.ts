@@ -2,6 +2,8 @@ import { Notification } from "../store";
 import { createTimestampSeconds } from "./createTimestampSeconds";
 import { createTimestampMillis } from "./createTimestampMillis";
 import { decodeJwt } from "./decodeJwt";
+import { countChars } from "./countChars";
+import { countWords } from "./countWords";
 
 export type ScriptResult = { content?: string[]; notification?: Notification };
 export type ScriptHandler = (slices: string[]) => ScriptResult;
@@ -18,6 +20,8 @@ export const scriptList: ScriptList = [
   createTimestampSeconds,
   createTimestampMillis,
   decodeJwt,
+  countChars,
+  countWords,
 ];
 
 const reducer = (result: object, item: ScriptExtension) => ({
