@@ -1,6 +1,6 @@
-import { OperatorFunction, pipe } from "rxjs";
+import { MonoTypeOperatorFunction, pipe } from "rxjs";
 import { filter, map } from "rxjs/operators";
-import { EditorTransform, EditorTransformResult } from "../types";
+import { EditorTransform } from "../types";
 import {
   buildTransaction,
   createAppendContentTransaction,
@@ -12,32 +12,36 @@ import {
 } from "../../editor";
 import { execScript, isAppendableScript } from "../../scripts";
 
-export function transformContent(): OperatorFunction<
-  EditorTransform,
-  EditorTransformResult
-> {
+export function transformContent(): MonoTypeOperatorFunction<EditorTransform> {
   return pipe(
     filter(({ view }) => isSingleCursorWithoutSelection(view)),
 
-    map((params) => ({
-      ...params,
-      script: execScript(params.command.key, getEditorDocument(params.view)),
-    })),
+    map((params) => {
+      const result = execScript(params.command.key, [
+        getEditorDocument(params.view),
+      ]);
+      const script = result?.content ? result?.content[0] : undefined;
 
-    map((params) => ({
-      ...params,
-      tr: buildTransaction(
-        params.view,
-        isAppendableScript(params.command.key)
-          ? createAppendContentTransaction(
-              getSingleCursorPosition(params.view),
-              params.script,
-            )
-          : createReplaceContentTransaction(
-              getEditorDocumentLength(params.view),
-              params.script,
-            ),
-      ),
-    })),
+      const tr = script
+        ? buildTransaction(
+            params.view,
+            isAppendableScript(params.command.key)
+              ? createAppendContentTransaction(
+                  getSingleCursorPosition(params.view),
+                  script,
+                )
+              : createReplaceContentTransaction(
+                  getEditorDocumentLength(params.view),
+                  script,
+                ),
+          )
+        : undefined;
+
+      return {
+        ...params,
+        tr,
+        notification: result.notification,
+      };
+    }),
   );
 }

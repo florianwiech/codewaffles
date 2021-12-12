@@ -33,6 +33,8 @@
     "@codemirror/state": "0.19.6",
     "@codemirror/view": "0.19.28",
     "@primer/primitives": "7.2.0",
+    "bootstrap-icons": "^1.7.2",
+    "framer-motion": "^4.1.17",
     "fuse.js": "6.4.6",
     "jwt-decode": "^3.1.2",
     "lodash.debounce": "4.0.8",

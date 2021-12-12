@@ -2,6 +2,7 @@ import styled from "styled-components";
 import typography from "@primer/primitives/dist/js/typography/normal";
 import { styledStatusbar } from "./styles/statusbar.style";
 import { styledSearch } from "./styles/search.style";
+import { styledNotification } from "./styles/notification.style";
 
 export const StyledEditor = styled.div`
   .cm-editor {
@@ -10,6 +11,7 @@ export const StyledEditor = styled.div`
     .cm-panels {
       ${styledSearch}
       ${styledStatusbar}
+      ${styledNotification}
     }
 
     .cm-scroller {

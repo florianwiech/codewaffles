@@ -4,11 +4,11 @@ import { Spotlight, SPOTLIGHT_LABEL } from "../Spotlight";
 import { Layout } from "../../ui";
 import { ScriptList } from "../../scripts";
 
-export const scriptsMock: ScriptList = [
-  { key: "one", label: "one", handler: () => "" },
-  { key: "two", label: "two", handler: () => "" },
-  { key: "three", label: "three", handler: () => "" },
-];
+export const scriptsMock = [
+  { key: "one", label: "one" },
+  { key: "two", label: "two" },
+  { key: "three", label: "three" },
+] as unknown as ScriptList;
 
 export const setupOpenSpotlight = async () => {
   const utils = render(

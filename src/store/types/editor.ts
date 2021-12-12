@@ -1,19 +1,13 @@
 import { EditorView } from "@codemirror/view";
 import { Transaction } from "@codemirror/state";
 import { PerformTransformCommand } from "./command";
+import { Notification } from "./notification";
 
 export type EditorTransform = {
   command: PerformTransformCommand;
   view: EditorView;
-  script?: string | string[];
   tr?: Transaction;
-};
-
-export type EditorTransformResult = {
-  command: PerformTransformCommand;
-  view: EditorView;
-  script: string | string[];
-  tr: Transaction;
+  notification?: Notification;
 };
 
 export function isEditorView(value: EditorView | null): value is EditorView {

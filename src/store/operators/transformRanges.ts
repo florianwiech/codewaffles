@@ -1,28 +1,28 @@
-import { OperatorFunction, pipe } from "rxjs";
+import { MonoTypeOperatorFunction, pipe } from "rxjs";
 import { filter, map } from "rxjs/operators";
-import { EditorTransform, EditorTransformResult } from "../types";
+import { EditorTransform } from "../types";
 import {
   buildTransaction,
   createSelectionRangesSpec,
   isSingleCursorWithoutSelection,
 } from "../../editor";
 
-export function transformRanges(): OperatorFunction<
-  EditorTransform,
-  EditorTransformResult
-> {
+export function transformRanges(): MonoTypeOperatorFunction<EditorTransform> {
   return pipe(
     filter(({ view }) => !isSingleCursorWithoutSelection(view)),
 
     map((params) => {
       const { command, view } = params;
 
-      const { spec, script } = createSelectionRangesSpec(view, command.key);
+      const { spec, notification } = createSelectionRangesSpec(
+        view,
+        command.key,
+      );
 
       return {
         ...params,
-        script,
-        tr: buildTransaction(view, spec),
+        tr: spec ? buildTransaction(view, spec) : undefined,
+        notification,
       };
     }),
   );

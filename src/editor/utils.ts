@@ -4,7 +4,8 @@ import {
   SelectionRange,
   TransactionSpec,
 } from "@codemirror/state";
-import { execScript } from "../scripts";
+import { execScript, ScriptResult } from "../scripts";
+import { NotificationStatus } from "../store";
 
 export const getEditorDocument = (view: EditorView) =>
   view.state.doc.toString();
@@ -23,8 +24,10 @@ export const getSingleCursorPosition = (view: EditorView) =>
 export const isSelectionRange = (range: SelectionRange) =>
   range.from !== range.to;
 
-export const getSelectionRange = (view: EditorView, range: SelectionRange) =>
-  view.state.sliceDoc(range.from, range.to);
+export const getSelectionRangeContent = (
+  view: EditorView,
+  range: SelectionRange,
+) => view.state.sliceDoc(range.from, range.to);
 
 export const buildTransaction = (view: EditorView, spec: TransactionSpec) =>
   view.state.update(spec);
@@ -51,24 +54,46 @@ export const createAppendContentTransaction = (
 });
 
 export const createSelectionRangesSpec = (view: EditorView, key: string) => {
-  let script: string[] = [];
+  let selections: string[] = [];
+  let results: ScriptResult = {};
 
-  const spec = view.state.changeByRange((range) => {
-    const result = execScript(key, getSelectionRange(view, range));
+  view.state.selection.ranges.forEach((range) =>
+    selections.push(getSelectionRangeContent(view, range)),
+  );
 
-    script.push(result);
-
+  try {
+    results = execScript(key, selections);
+  } catch (e) {
     return {
-      changes: {
-        from: range.from,
-        to: isSelectionRange(range) ? range.to : undefined,
-        insert: result,
+      notification: {
+        type: NotificationStatus.DANGER,
+        message: "Oops, something went wrong.",
       },
-      range: isSelectionRange(range)
-        ? EditorSelection.range(range.from, range.from + result.length)
-        : EditorSelection.cursor(range.from + result.length),
     };
-  });
+  }
 
-  return { spec, script };
+  const nextRanges = results?.content?.reverse();
+
+  const spec = nextRanges
+    ? view.state.changeByRange((selectionRange) => {
+        const result = nextRanges.pop();
+
+        const changes = {
+          from: selectionRange.from,
+          to: isSelectionRange(selectionRange) ? selectionRange.to : undefined,
+          insert: result,
+        };
+
+        const range = isSelectionRange(selectionRange)
+          ? EditorSelection.range(
+              selectionRange.from,
+              selectionRange.from + (result?.length ?? 0),
+            )
+          : EditorSelection.cursor(selectionRange.from + (result?.length ?? 0));
+
+        return { changes, range };
+      })
+    : undefined;
+
+  return { spec, notification: results.notification };
 };

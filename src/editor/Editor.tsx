@@ -10,12 +10,19 @@ import { initialLanguageSetup } from "./setup/language";
 import { basics } from "./setup/basics";
 import { statusbar } from "./statusbar";
 import { initialContent } from "./setup/initialContent";
+import { notification } from "./notification";
 
 export const Editor = () => {
   const ref = useRef<HTMLDivElement>(null);
   const editor = useCodeMirror(ref, {
     doc: initialContent,
-    extensions: [basics, initialThemeSetup, initialLanguageSetup, statusbar],
+    extensions: [
+      basics,
+      initialThemeSetup,
+      initialLanguageSetup,
+      notification,
+      statusbar,
+    ],
   });
   useCodeMirrorTheme(editor);
 

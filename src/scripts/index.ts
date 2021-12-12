@@ -1,13 +1,16 @@
+import { Notification } from "../store";
 import { createTimestampSeconds } from "./createTimestampSeconds";
 import { createTimestampMillis } from "./createTimestampMillis";
 import { decodeJwt } from "./decodeJwt";
 
-export type ScriptHandler = (text: string) => string;
+export type ScriptResult = { content?: string[]; notification?: Notification };
+export type ScriptHandler = (slices: string[]) => ScriptResult;
+export type ScriptOptions = { append?: boolean };
 export type ScriptExtension = {
   key: string;
   label: string;
   handler: ScriptHandler;
-  append?: boolean;
+  options?: ScriptOptions;
 };
 
 export type ScriptList = ScriptExtension[];
@@ -28,11 +31,16 @@ export const scriptCollection: ScriptCollection = scriptList.reduce(
   {},
 );
 
-export function execScript(key: string, content: string) {
-  const { handler } = scriptCollection[key];
+export function execScript(key: string, content: string[]) {
+  const script = scriptCollection[key];
+
+  if (!script) throw new Error("script not found");
+
+  const { handler } = script;
+
   return handler(content);
 }
 
 export function isAppendableScript(key: string) {
-  return scriptCollection[key].append;
+  return !!scriptCollection[key]?.options?.append;
 }

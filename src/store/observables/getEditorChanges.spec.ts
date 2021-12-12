@@ -26,6 +26,7 @@ describe("getEditorChanges", () => {
 
     execScriptSpy.mockRestore();
     execScriptSpy = jest.spyOn(Scripts, "execScript");
+    execScriptSpy.mockReturnValue({ content: ["content"] });
 
     isAppendableScriptSpy.mockRestore();
     isAppendableScriptSpy = jest.spyOn(Scripts, "isAppendableScript");
@@ -58,7 +59,6 @@ describe("getEditorChanges", () => {
   });
 
   it("should replace content", async () => {
-    execScriptSpy.mockReturnValue("content");
     isAppendableScriptSpy.mockReturnValue(false);
 
     const command = {
@@ -86,7 +86,6 @@ describe("getEditorChanges", () => {
   });
 
   it("should append content", async () => {
-    execScriptSpy.mockReturnValue("content");
     isAppendableScriptSpy.mockReturnValue(true);
 
     view.dispatch(
@@ -120,7 +119,6 @@ describe("getEditorChanges", () => {
   });
 
   it("should transform ranges", async () => {
-    execScriptSpy.mockReturnValue("content");
     isAppendableScriptSpy.mockReturnValue(true);
 
     view.dispatch(

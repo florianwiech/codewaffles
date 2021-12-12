@@ -1,11 +1,16 @@
-const key = "create-timestamp-millis";
-const label = "Create timestamp - milliseconds (13 digits)";
+import { ScriptHandler, ScriptOptions } from "./index";
 
-const handler = () => Date.now().toString();
+const key = "create-timestamp-millis";
+const label = "Create Timestamp in Milliseconds (13 digits)";
+const options: ScriptOptions = {
+  append: true,
+};
+
+const handler: ScriptHandler = () => ({ content: [Date.now().toString()] });
 
 export const createTimestampMillis = {
   key,
   label,
   handler,
-  append: true,
+  options,
 };
