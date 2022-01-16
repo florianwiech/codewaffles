@@ -1,6 +1,6 @@
 {
-  "name": "codewaffle",
-  "version": "0.0.1",
+  "name": "@codewaffle/web",
+  "version": "0.0.0",
   "private": true,
   "scripts": {
     "start": "react-scripts start",
