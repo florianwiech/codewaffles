@@ -1,6 +1,6 @@
 import { combineLatest, merge } from "rxjs";
 import { filter, tap } from "rxjs/operators";
-import { tag } from "rxjs-spy/cjs/operators";
+import { tag } from "rxjs-spy/operators";
 import { CommandTypes, isPerformTransformCommand } from "../types";
 import { command$, notification$, view$ } from "../subjects";
 import { transformContent, transformRanges } from "../operators";

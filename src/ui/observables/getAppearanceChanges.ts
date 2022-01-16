@@ -1,6 +1,6 @@
 import { merge, withLatestFrom } from "rxjs";
 import { filter, map, tap } from "rxjs/operators";
-import { tag } from "rxjs-spy/cjs/operators";
+import { tag } from "rxjs-spy/operators";
 import {
   appearance$,
   AppearanceState,
