@@ -83,7 +83,6 @@ describe("useKeyPress", () => {
         beforeEach(() => {
           callback = jest.fn();
           mockUserAgent(device.userAgent);
-          renderHook(() => useKeyPress(key, callback));
         });
 
         afterEach(() => {
@@ -91,6 +90,8 @@ describe("useKeyPress", () => {
         });
 
         it("should fire with meta key", () => {
+          renderHook(() => useKeyPress(key, callback));
+
           document.dispatchEvent(
             new KeyboardEvent("keydown", { key, [device.key]: true }),
           );
