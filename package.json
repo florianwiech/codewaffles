@@ -1,6 +1,6 @@
 {
   "private": true,
-  "name": "codewaffle",
+  "name": "@codewaffle/root",
   "version": "0.0.0",
   "repository": "git@github.com:florianwiech/codewaffle.git",
   "author": "Florian Wiech <florian.wiech@gmail.com>",
