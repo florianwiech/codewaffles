@@ -1,0 +1,8 @@
+{
+  "include": [
+    "packages/**/*"
+  ],
+  "references": [
+    { "path": "packages/web" }
+  ]
+}

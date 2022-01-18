@@ -6,9 +6,27 @@
   "author": "Florian Wiech <florian.wiech@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "start:web": "yarn workspace @codewaffle/web start"
+    "start:web": "yarn workspace @codewaffle/web start",
+    "format:check": "prettier 'packages/**/*' --check --ignore-unknown",
+    "format:write": "prettier 'packages/**/*' --write --ignore-unknown",
+    "lint": "eslint packages --ext .js,.jsx,.ts,.tsx --format friendly",
+    "lint:fix": "eslint packages --ext .js,.jsx,.ts,.tsx --format friendly --fix",
+    "check:types": "tsc --noEmit",
+    "check:dep": "npx npm-check-updates"
   },
   "workspaces": [
     "packages/*"
-  ]
+  ],
+  "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^5.10.0",
+    "@typescript-eslint/parser": "^5.10.0",
+    "eslint": "^8.7.0",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-config-react-app": "^7.0.0",
+    "eslint-formatter-friendly": "^7.0.0",
+    "eslint-plugin-import": "^2.25.4",
+    "eslint-plugin-rxjs": "^5.0.1",
+    "prettier": "^2.5.1",
+    "typescript": "^4.5.4"
+  }
 }
