@@ -7,10 +7,12 @@
   "license": "MIT",
   "scripts": {
     "start:web": "yarn workspace @codewaffle/web start",
+    "build:web": "yarn workspace @codewaffle/web build",
+    "test:web": "yarn workspace @codewaffle/web test",
     "format:check": "prettier 'packages/**/*' --check --ignore-unknown",
     "format:write": "prettier 'packages/**/*' --write --ignore-unknown",
-    "lint": "eslint packages --ext .js,.jsx,.ts,.tsx --format friendly",
-    "lint:fix": "eslint packages --ext .js,.jsx,.ts,.tsx --format friendly --fix",
+    "lint": "eslint . --ext .js,.jsx,.ts,.tsx --format friendly",
+    "lint:fix": "eslint . --ext .js,.jsx,.ts,.tsx --format friendly --fix",
     "check:types": "tsc --noEmit",
     "check:dep": "npx npm-check-updates"
   },
