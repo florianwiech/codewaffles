@@ -7,6 +7,7 @@
   "license": "MIT",
   "scripts": {
     "start:web": "yarn workspace @codewaffle/web start",
+    "start:electron": "yarn workspace @codewaffle/electron start",
     "build:web": "yarn workspace @codewaffle/web build",
     "test:web": "yarn workspace @codewaffle/web test",
     "format:check": "prettier 'packages/**/*' --check --ignore-unknown",
