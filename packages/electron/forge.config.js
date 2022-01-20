@@ -30,7 +30,7 @@ const config = {
           entryPoints: [
             {
               html: "./static/index.html",
-              js: "./src/renderer/renderer.ts",
+              js: "./src/renderer/renderer.tsx",
               name: "main_window",
             },
           ],
