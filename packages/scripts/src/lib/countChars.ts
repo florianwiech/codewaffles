@@ -1,5 +1,4 @@
-import { NotificationStatus } from "../store";
-import { ScriptHandler } from "./index";
+import { NotificationStatus, ScriptHandler } from "../types";
 
 const key = "count-chars";
 const label = "Count Characters";

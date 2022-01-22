@@ -1,10 +1,10 @@
 import { BehaviorSubject, first } from "rxjs";
 import { eachValueFrom } from "rxjs-for-await";
 import { EditorSelection } from "@codemirror/state";
+import * as Scripts from "@codewaffle/scripts";
 import { createEditor } from "../../editor/setup/createEditor";
 import { Command, CommandTypes } from "../types";
 import { editor$ } from "../subjects";
-import * as Scripts from "../../scripts";
 import { getEditorChanges } from "./getEditorChanges";
 
 describe("getEditorChanges", () => {

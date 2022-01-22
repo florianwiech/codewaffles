@@ -1,27 +1,17 @@
-import {
-  ChangeEventHandler,
-  FC,
-  KeyboardEventHandler,
-  useLayoutEffect,
-  useRef,
-  useState,
-} from "react";
+import { ChangeEventHandler, FC, KeyboardEventHandler, useLayoutEffect, useRef, useState } from "react";
 import debounce from "lodash.debounce";
 import Fuse from "fuse.js";
+import { ScriptExtension } from "@codewaffle/scripts";
 import { useKeyPress } from "../shared/hooks/useKeyPress";
 import { CommandTypes } from "../store";
 import { command$ } from "../store";
-import { ScriptExtension, ScriptList } from "../scripts";
 import { StyledBackdrop, StyledSpotlight } from "./Spotlight.style";
 import { StyledInput } from "./Input.style";
 import { StyledSearchResults } from "./SearchResults.style";
-import {
-  isElementVisibleInHorizontalList,
-  shouldScrollIntoViewAlignTop,
-} from "./spotlight-utils";
+import { isElementVisibleInHorizontalList, shouldScrollIntoViewAlignTop } from "./spotlight-utils";
 
 export type Props = {
-  scripts: ScriptList;
+  scripts: ScriptExtension[];
 };
 
 export const SPOTLIGHT_LABEL = "Search command...";
@@ -52,18 +42,11 @@ export const Spotlight: FC<Props> = ({ scripts }) => {
     setActiveHit(null);
   };
 
-  const selectUp = () =>
-    activeHit !== null && activeHit > 0
-      ? setActiveHit(activeHit - 1)
-      : undefined;
+  const selectUp = () => (activeHit !== null && activeHit > 0 ? setActiveHit(activeHit - 1) : undefined);
   const selectDown = () =>
-    activeHit !== null && activeHit < hits.length - 1
-      ? setActiveHit(activeHit + 1)
-      : undefined;
+    activeHit !== null && activeHit < hits.length - 1 ? setActiveHit(activeHit + 1) : undefined;
 
-  const handleKeyboardShortcuts: KeyboardEventHandler<HTMLInputElement> = (
-    event,
-  ) => {
+  const handleKeyboardShortcuts: KeyboardEventHandler<HTMLInputElement> = (event) => {
     switch (event.key) {
       case "ArrowUp":
         selectUp();
@@ -178,12 +161,7 @@ export const SearchResult: FC<{
   const ref = useScrollIntoView<HTMLLIElement>(active, holderRect);
 
   return (
-    <li
-      ref={ref}
-      className={active ? "active" : ""}
-      onClick={onClick}
-      onDoubleClick={performOperation}
-    >
+    <li ref={ref} className={active ? "active" : ""} onClick={onClick} onDoubleClick={performOperation}>
       {item.label}
     </li>
   );

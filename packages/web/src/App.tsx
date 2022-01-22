@@ -1,6 +1,6 @@
+import { scriptList } from "@codewaffle/scripts";
 import { Editor } from "./editor";
 import { Spotlight } from "./spotlight-search";
-import { scriptList } from "./scripts";
 
 function App() {
   return (

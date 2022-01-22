@@ -1,4 +1,4 @@
-import { ScriptHandler, ScriptOptions } from "./index";
+import { ScriptHandler, ScriptOptions } from "../types";
 
 const key = "create-timestamp-seconds";
 const label = "Create Timestamp in Seconds (10 digits)";

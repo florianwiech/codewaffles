@@ -1,4 +1,4 @@
-import { ScriptHandler, ScriptOptions } from "./index";
+import { ScriptHandler, ScriptOptions } from "../types";
 
 const key = "create-timestamp-millis";
 const label = "Create Timestamp in Milliseconds (13 digits)";

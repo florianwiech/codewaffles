@@ -1,6 +1,5 @@
 import jwtDecode from "jwt-decode";
-import { NotificationStatus } from "../store";
-import { ScriptHandler } from "./index";
+import { NotificationStatus, ScriptHandler } from "../types";
 
 const key = "decode-jwt";
 const label = "Decode JWT";
