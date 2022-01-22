@@ -1,4 +1,4 @@
-import { ReactComponent as CloseIcon } from "bootstrap-icons/icons/x-circle-fill.svg";
+// import { ReactComponent as CloseIcon } from "bootstrap-icons/icons/x-circle-fill.svg";
 import { FC, useEffect, useRef } from "react";
 import { EditorView, ViewUpdate } from "@codemirror/view";
 import ReactDOM from "react-dom";
@@ -36,7 +36,8 @@ export const Notification: FC<{ view: EditorView }> = () => {
         >
           <span>{state.message}</span>
           <button onClick={() => notification$.next(null)}>
-            <CloseIcon />
+            Close
+            {/*<CloseIcon />*/}
           </button>
         </motion.div>
       ) : null}

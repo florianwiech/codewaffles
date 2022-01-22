@@ -2,6 +2,7 @@
   "include": [
     ".eslintrc.js",
     ".prettierrc.js",
+    "**/*.js"
   ],
   "references": [
     { "path": "packages/electron" },
