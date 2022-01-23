@@ -3,9 +3,9 @@ import { FC } from "react";
 
 export const Dummy: FC = () => {
   return (
-    <h1>
-      This is a icon dummy test
+    <>
+      <h1>Dummy</h1>
       <CloseIcon />
-    </h1>
+    </>
   );
 };

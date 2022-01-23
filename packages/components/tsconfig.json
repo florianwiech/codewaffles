@@ -18,10 +18,11 @@
     "allowSyntheticDefaultImports": true,
     "esModuleInterop": true,
     "jsx": "react-jsx",
-    "typeRoots": ["node_modules/@types", "src/@types"]
   },
   "include": [
-    "src"
+    "src",
+    "__mocks__",
+    "jest.setup.ts"
   ],
   "exclude": [
     "node_modules",
