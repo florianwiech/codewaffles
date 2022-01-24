@@ -4,6 +4,8 @@ import { app, BrowserWindow } from "electron";
 // whether you're running in development or production).
 declare const MAIN_WINDOW_WEBPACK_ENTRY: string;
 
+const isDevelopment = process.env.NODE_ENV !== "production";
+
 // Handle creating/removing shortcuts on Windows when installing/uninstalling.
 if (require("electron-squirrel-startup")) {
   // eslint-disable-line global-require
@@ -14,11 +16,14 @@ const createWindow = (): void => {
   // Create the browser window.
   const mainWindow = new BrowserWindow({
     height: 600,
-    width: 800,
+    width: isDevelopment ? 1355 : 800,
+    titleBarStyle: "hidden",
+    transparent: true,
+    vibrancy: "dark",
   });
 
   // and load the index.html of the app.
-  mainWindow.loadURL(MAIN_WINDOW_WEBPACK_ENTRY);
+  mainWindow.loadURL(MAIN_WINDOW_WEBPACK_ENTRY).then();
 
   if (process.env.NODE_ENV !== "production") {
     // Open the DevTools.
