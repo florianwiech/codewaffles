@@ -20,7 +20,12 @@ const config = {
       sourcemap: true,
     },
   ],
-  plugins: [nodeResolve(), commonjs(), typescript({ tsconfig: "./tsconfig.json" })],
+  plugins: [
+    //
+    commonjs(),
+    nodeResolve(),
+    typescript({ tsconfig: "./tsconfig.json" }),
+  ],
 };
 
 export default config;

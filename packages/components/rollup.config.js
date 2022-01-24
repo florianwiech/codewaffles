@@ -23,7 +23,7 @@ const config = {
     },
   ],
   plugins: [
-    // prevent prettier from single line format
+    //
     peerDepsExternal(),
     commonjs(),
     nodeResolve(),

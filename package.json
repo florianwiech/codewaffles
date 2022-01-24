@@ -5,9 +5,11 @@
   "repository": "git@github.com:florianwiech/codewaffle.git",
   "author": "Florian Wiech <florian.wiech@gmail.com>",
   "license": "MIT",
+  "type": "module",
   "scripts": {
     "start:web": "yarn workspace @codewaffle/web start",
     "start:electron": "yarn workspace @codewaffle/electron start",
+    "start:components": "yarn workspace @codewaffle/components storybook",
     "build:web": "yarn workspace @codewaffle/web build",
     "build:components": "yarn workspace @codewaffle/components build",
     "build:scripts": "yarn workspace @codewaffle/scripts build",

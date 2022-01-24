@@ -1,11 +1,11 @@
 {
   "include": [
-    ".eslintrc.js",
-    ".prettierrc.js",
     "packages/**/*.js"
   ],
   "references": [
+    { "path": "packages/components" },
     { "path": "packages/electron" },
+    { "path": "packages/scripts" },
     { "path": "packages/web" }
   ]
 }
