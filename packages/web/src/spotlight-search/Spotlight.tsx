@@ -1,4 +1,4 @@
-import { ChangeEventHandler, FC, KeyboardEventHandler, useLayoutEffect, useRef, useState } from "react";
+import { ChangeEventHandler, FC, KeyboardEventHandler, useCallback, useLayoutEffect, useRef, useState } from "react";
 import debounce from "lodash.debounce";
 import Fuse from "fuse.js";
 import { ScriptExtension } from "@codewaffle/scripts";
@@ -80,15 +80,19 @@ export const Spotlight: FC<Props> = ({ scripts }) => {
     }
   };
 
-  const performSearch = debounce((term: string) => {
-    const fuzzySearchResults = fuse.search(term);
-    setHits(fuzzySearchResults);
-    if (fuzzySearchResults.length > 0) {
-      setActiveHit(0);
-    } else {
-      setActiveHit(null);
-    }
-  }, 500);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  const performSearch = useCallback(
+    debounce((term: string) => {
+      const fuzzySearchResults = fuse.search(term);
+      setHits(fuzzySearchResults);
+      if (fuzzySearchResults.length > 0) {
+        setActiveHit(0);
+      } else {
+        setActiveHit(null);
+      }
+    }, 500),
+    [],
+  );
 
   const handleSearch: ChangeEventHandler<HTMLInputElement> = (event) => {
     setSearchInput(event.target.value);
