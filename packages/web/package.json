@@ -8,8 +8,8 @@
     "test": "react-scripts test"
   },
   "dependencies": {
-    "@codewaffle/components": "0.0.0",
-    "@codewaffle/scripts": "0.0.0",
+    "@codewaffle/components": "*",
+    "@codewaffle/scripts": "*",
     "@codemirror/autocomplete": "0.19.12",
     "@codemirror/closebrackets": "0.19.0",
     "@codemirror/commands": "0.19.7",
