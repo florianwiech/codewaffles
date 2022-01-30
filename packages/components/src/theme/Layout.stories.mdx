@@ -1,0 +1,19 @@
+import { Meta } from "@storybook/addon-docs";
+
+<Meta title="Components/Layout" />
+
+# Layout
+
+This Components provides a `ThemeProvider` for `styled-components`.
+
+## Usage
+
+```tsx
+import { AppearanceState, Layout } from "./Layout";
+
+export const App = () => (
+  <Layout theme={AppearanceState.DARK}>
+    {/* ... */}
+  </Layout>
+)
+```

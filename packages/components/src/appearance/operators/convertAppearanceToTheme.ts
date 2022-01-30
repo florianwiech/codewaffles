@@ -1,18 +1,13 @@
 import { OperatorFunction } from "rxjs";
 import { map } from "rxjs/operators";
-import { AppearanceState } from "../appearance";
+import { AppearanceState } from "../appearance-types";
 
-export function convertAppearanceToTheme(): OperatorFunction<
-  AppearanceState,
-  Omit<AppearanceState, "system">
-> {
+export function convertAppearanceToTheme(): OperatorFunction<AppearanceState, Omit<AppearanceState, "system">> {
   return map((appearance) => {
     if (appearance !== AppearanceState.SYSTEM) return appearance;
 
     const prefersDarkAppearance =
-      typeof window !== undefined &&
-      window.matchMedia &&
-      window.matchMedia("(prefers-color-scheme: dark)").matches;
+      typeof window !== undefined && window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches;
 
     if (prefersDarkAppearance) {
       return AppearanceState.DARK;

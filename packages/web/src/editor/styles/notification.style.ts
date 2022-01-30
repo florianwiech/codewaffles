@@ -1,5 +1,5 @@
 import { css } from "styled-components";
-import { size } from "../../ui";
+import { size } from "@codewaffle/components";
 
 export const styledNotification = css`
   .cm-panel.cm-notification {

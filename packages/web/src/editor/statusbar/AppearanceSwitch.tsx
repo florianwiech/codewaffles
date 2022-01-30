@@ -1,10 +1,6 @@
 import { ChangeEvent, FC } from "react";
+import { appearance$, AppearanceState, changeAppearance } from "@codewaffle/components";
 import { useObservable } from "../../shared/hooks/useObservable";
-import {
-  appearance$,
-  AppearanceState,
-  changeAppearance,
-} from "../../ui/appearance";
 
 export const AppearanceSwitch: FC = () => {
   const appearance = useObservable(appearance$);
@@ -16,12 +12,7 @@ export const AppearanceSwitch: FC = () => {
   };
 
   return (
-    <select
-      value={appearance}
-      onChange={onChange}
-      className="appearance-switch"
-      aria-label="Select appearance"
-    >
+    <select value={appearance} onChange={onChange} className="appearance-switch" aria-label="Select appearance">
       <option value={AppearanceState.SYSTEM}>system</option>
       <option value={AppearanceState.DARK}>dark</option>
       <option value={AppearanceState.LIGHT}>light</option>

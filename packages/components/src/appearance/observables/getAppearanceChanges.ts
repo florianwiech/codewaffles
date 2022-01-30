@@ -1,16 +1,10 @@
 import { merge, withLatestFrom } from "rxjs";
 import { filter, map, tap } from "rxjs/operators";
 import { tag } from "rxjs-spy/operators";
-import {
-  appearance$,
-  AppearanceState,
-  previousAppearance$,
-} from "../appearance";
+import { appearance$, previousAppearance$ } from "../appearance-subjects";
+import { APPEARANCE_ATTRIBUTE, APPEARANCE_STORAGE } from "../utils/appearance-keys";
 import { convertAppearanceToTheme } from "../operators/convertAppearanceToTheme";
-import {
-  APPEARANCE_ATTRIBUTE,
-  APPEARANCE_STORAGE,
-} from "../utils/appearance-keys";
+import { AppearanceState } from "../appearance-types";
 
 export const getAppearanceChanges = (source$ = appearance$) => {
   const shouldChange$ = source$.pipe(
@@ -22,12 +16,7 @@ export const getAppearanceChanges = (source$ = appearance$) => {
 
   const updateDocument$ = shouldChange$.pipe(
     convertAppearanceToTheme(),
-    tap((theme) =>
-      document.documentElement.setAttribute(
-        APPEARANCE_ATTRIBUTE,
-        theme.toString(),
-      ),
-    ),
+    tap((theme) => document.documentElement.setAttribute(APPEARANCE_ATTRIBUTE, theme.toString())),
     tag("document-updater"),
   );
 
@@ -56,10 +45,5 @@ export const getAppearanceChanges = (source$ = appearance$) => {
     tag("history-updater"),
   );
 
-  return merge(
-    updateDocument$,
-    updateStorage$,
-    updateOtherTabs$,
-    updateHistory$,
-  );
+  return merge(updateDocument$, updateStorage$, updateOtherTabs$, updateHistory$);
 };

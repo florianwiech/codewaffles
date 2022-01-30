@@ -1,4 +1,4 @@
-import { AppearanceState } from "../appearance";
+import { AppearanceState } from "../appearance-types";
 import { APPEARANCE_STORAGE } from "./appearance-keys";
 
 export const getInitialAppearance = (): AppearanceState => {

@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { Compartment } from "@codemirror/state";
-import { AppearanceState, theme$ } from "../../ui/appearance";
+import { AppearanceState, theme$ } from "@codewaffle/components";
 import { CodeMirrorEditor } from "../editor.types";
 import { useObservable } from "../../shared/hooks/useObservable";
 import { primerDark, primerLight } from "./primerTheme";
@@ -16,9 +16,7 @@ export const useCodeMirrorTheme = (editor: CodeMirrorEditor) => {
     if (!editor.current) return;
 
     editor.current.dispatch({
-      effects: themeConf.reconfigure(
-        theme === AppearanceState.DARK ? primerDark : primerLight,
-      ),
+      effects: themeConf.reconfigure(theme === AppearanceState.DARK ? primerDark : primerLight),
     });
   }, [editor, theme]);
 };

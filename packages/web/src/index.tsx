@@ -3,7 +3,6 @@ import ReactDOM from "react-dom";
 import { create as createRxSpy } from "rxjs-spy";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
-import { Layout } from "./ui";
 
 if (process.env.NODE_ENV !== "production") {
   createRxSpy();
@@ -11,9 +10,7 @@ if (process.env.NODE_ENV !== "production") {
 
 ReactDOM.render(
   <React.StrictMode>
-    <Layout>
-      <App />
-    </Layout>
+    <App />
   </React.StrictMode>,
   document.getElementById("root"),
 );
