@@ -1,27 +1,31 @@
 import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 import Fuse from "fuse.js";
-import { Layout } from "@codewaffle/components";
-import { ScriptExtension } from "@codewaffle/scripts";
-import { Spotlight, SPOTLIGHT_LABEL } from "../Spotlight";
+import { SPOTLIGHT_LABEL, SpotlightProps } from "../Spotlight";
+import { AppearanceState } from "../../appearance";
+import { Layout } from "../../theme";
+import { ExampleSpotlight } from "../demo/ExampleSpotlight";
 
 export const scriptsMock = [
   { key: "one", label: "one" },
   { key: "two", label: "two" },
   { key: "three", label: "three" },
-] as unknown as ScriptExtension[];
+];
 
-export const setupOpenSpotlight = async () => {
+export const setupOpenSpotlight = async (props?: Partial<SpotlightProps>) => {
   const utils = render(
-    <Layout>
-      <Spotlight scripts={scriptsMock} />
+    <Layout theme={AppearanceState.DARK}>
+      <ExampleSpotlight
+        commands={props?.commands ?? scriptsMock}
+        keys={props?.keys ?? ["label"]}
+        onSubmit={props?.onSubmit ?? jest.fn()}
+        onClose={props?.onClose ?? jest.fn()}
+      />
     </Layout>,
   );
 
-  fireEvent.keyDown(utils.baseElement, {
-    key: "k",
-    ctrlKey: true,
-    metaKey: true,
-  });
+  const button = await screen.findByText("Open Search");
+
+  fireEvent.click(button);
 
   await waitFor(() => {
     expect(screen.getByPlaceholderText(SPOTLIGHT_LABEL)).toBeInTheDocument();
@@ -39,10 +43,4 @@ const defaultFuseSearchMock = [{ item: scriptsMock[0] }, { item: scriptsMock[1] 
 export const createFuseSearchSpy = (returnValue = defaultFuseSearchMock) =>
   jest.spyOn(Fuse.prototype, "search").mockReturnValue(returnValue);
 
-it("hidden by default", () => {
-  render(<Spotlight scripts={scriptsMock} />);
-
-  expect(screen.queryByPlaceholderText(SPOTLIGHT_LABEL)).not.toBeInTheDocument();
-});
-
-it("open via keyboard shortcut", async () => await setupOpenSpotlight());
+it("should render spotlight", async () => await setupOpenSpotlight());

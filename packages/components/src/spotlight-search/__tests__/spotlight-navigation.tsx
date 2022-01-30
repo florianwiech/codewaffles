@@ -1,9 +1,5 @@
 import { fireEvent, screen, waitFor } from "@testing-library/react";
-import {
-  createFuseSearchSpy,
-  scriptsMock,
-  setupOpenSpotlight,
-} from "./spotlight-basics";
+import { createFuseSearchSpy, scriptsMock, setupOpenSpotlight } from "./spotlight-basics";
 
 describe("search navigation", () => {
   let spotlightInput: HTMLElement;

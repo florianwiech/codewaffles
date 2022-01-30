@@ -1,7 +1,4 @@
-import {
-  isElementVisibleInHorizontalList,
-  shouldScrollIntoViewAlignTop,
-} from "./spotlight-utils";
+import { isElementVisibleInHorizontalList, shouldScrollIntoViewAlignTop } from "./useScrollIntoView";
 
 describe("isElementVisibleInHorizontalList", () => {
   const holder = { bottom: 650, height: 400, top: 250 } as DOMRect;

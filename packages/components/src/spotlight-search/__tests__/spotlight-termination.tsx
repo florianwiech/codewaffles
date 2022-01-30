@@ -1,16 +1,17 @@
 import { fireEvent, screen, waitFor } from "@testing-library/react";
 import Fuse from "fuse.js";
-import { SPOTLIGHT_LABEL } from "../Spotlight";
-import {
-  createFuseSearchSpy,
-  scriptsMock,
-  setupOpenSpotlight,
-} from "./spotlight-basics";
+import { createFuseSearchSpy, scriptsMock, setupOpenSpotlight } from "./spotlight-basics";
 
 describe("cancel search", () => {
   let spotlightInput: HTMLElement;
+  let onSearchCloseMock = jest.fn();
+
   beforeEach(async () => {
-    const { inputElement } = await setupOpenSpotlight();
+    onSearchCloseMock = jest.fn();
+
+    const { inputElement } = await setupOpenSpotlight({
+      onClose: onSearchCloseMock,
+    });
     spotlightInput = inputElement;
   });
 
@@ -18,9 +19,7 @@ describe("cancel search", () => {
     fireEvent.keyDown(spotlightInput, { key: "Escape" });
 
     await waitFor(() => {
-      expect(
-        screen.queryByPlaceholderText(SPOTLIGHT_LABEL),
-      ).not.toBeInTheDocument();
+      expect(onSearchCloseMock).toHaveBeenCalled();
     });
   });
 
