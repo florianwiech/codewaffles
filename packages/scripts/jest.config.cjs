@@ -1,10 +1,10 @@
+const base = require('@codewaffle/config/jest/jest-react.cjs');
+
 /**
  * @type {import('@jest/types').Config.InitialOptions}
  */
 const config = {
-  roots: ["<rootDir>/src"],
-  preset: "ts-jest",
-  testEnvironment: "node",
+  ...base,
 };
 
 module.exports = config;

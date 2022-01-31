@@ -1,31 +1,45 @@
 {
+  "private": true,
   "name": "@codewaffle/scripts",
   "version": "0.0.0",
-  "main": "build/index.js",
-  "module": "build/index.esm.js",
-  "types": "build/types/index.d.ts",
-  "files": [
-    "build"
-  ],
+  "type": "module",
+  "main": "dist/index.cjs",
+  "exports": {
+    "import": "./dist/index.js",
+    "require": "./dist/index.cjs"
+  },
+  "types": "dist/index.d.ts",
+  "module": "dist/index.js",
+  "sideEffects": false,
   "scripts": {
-    "clean": "rimraf build",
+    "clean": "rimraf dist",
     "build": "yarn clean && rollup -c",
     "build:watch": "rollup -c -w",
     "test": "jest",
-    "test:watch": "jest --watch"
+    "test:watch": "jest --watch",
+    "lint": "eslint src --format friendly"
   },
   "dependencies": {
     "decode-jwt": "^1.0.2"
   },
   "devDependencies": {
+    "@babel/core": "^7.16.12",
+    "@babel/preset-react": "^7.16.7",
+    "@babel/preset-typescript": "^7.16.7",
+    "@codewaffle/config": "*",
     "@rollup/plugin-commonjs": "^21.0.1",
     "@rollup/plugin-node-resolve": "^13.1.3",
-    "@rollup/plugin-typescript": "^8.3.0",
     "@types/jest": "^27.4.0",
+    "babel-plugin-inline-react-svg": "^2.0.1",
+    "babel-plugin-styled-components": "^2.0.2",
+    "eslint": "^8.7.0",
     "jest": "^27.4.7",
     "rimraf": "^3.0.2",
     "rollup": "^2.66.0",
+    "rollup-plugin-babel": "^4.4.0",
+    "rollup-plugin-dts": "^4.1.0",
     "rollup-plugin-filesize": "^9.1.2",
+    "rollup-plugin-peer-deps-external": "^2.2.4",
     "ts-jest": "^27.1.3",
     "typescript": "^4.5.5"
   }

@@ -1,4 +1,5 @@
 {
+  "private": true,
   "name": "@codewaffle/components",
   "version": "0.0.0",
   "type": "module",
@@ -12,12 +13,13 @@
   "sideEffects": false,
   "scripts": {
     "clean": "rimraf dist",
+    "storybook": "start-storybook -p 6006",
+    "build-storybook": "build-storybook",
     "build": "yarn clean && rollup -c",
     "build:watch": "rollup -c -w",
     "test": "jest",
     "test:watch": "jest --watch",
-    "storybook": "start-storybook -p 6006",
-    "build-storybook": "build-storybook"
+    "lint": "eslint src --format friendly"
   },
   "dependencies": {
     "@primer/primitives": "^7.4.1",
@@ -34,6 +36,7 @@
     "@babel/core": "^7.16.12",
     "@babel/preset-react": "^7.16.7",
     "@babel/preset-typescript": "^7.16.7",
+    "@codewaffle/config": "*",
     "@rollup/plugin-commonjs": "^21.0.1",
     "@rollup/plugin-node-resolve": "^13.1.3",
     "@storybook/addon-actions": "^6.4.14",
@@ -51,7 +54,7 @@
     "@types/react-dom": "17.0.11",
     "babel-plugin-inline-react-svg": "^2.0.1",
     "babel-plugin-styled-components": "^2.0.2",
-    "identity-obj-proxy": "^3.0.0",
+    "eslint": "^8.7.0",
     "jest": "^27.4.7",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
