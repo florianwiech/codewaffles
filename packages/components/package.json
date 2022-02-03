@@ -17,6 +17,7 @@
     "build-storybook": "build-storybook",
     "build": "yarn clean && rollup -c",
     "build:watch": "rollup -c -w",
+    "build:custom": "yarn clean && codewaffle-scripts build",
     "test": "jest",
     "test:watch": "jest --watch",
     "lint": "eslint src --format friendly"
@@ -36,6 +37,7 @@
     "@babel/core": "^7.16.12",
     "@babel/preset-react": "^7.16.7",
     "@babel/preset-typescript": "^7.16.7",
+    "@codewaffle/buildhelper": "*",
     "@codewaffle/config": "*",
     "@rollup/plugin-commonjs": "^21.0.1",
     "@rollup/plugin-node-resolve": "^13.1.3",
