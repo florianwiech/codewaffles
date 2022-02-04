@@ -1,11 +1,19 @@
-type JestConfig = import("@jest/types").Config.InitialOptions;
+/**
+ * @typedef {import('@jest/types').Config.InitialOptions} JestConfig
+ */
 
-export const nodeConfig: JestConfig = {
+/**
+ * @type {JestConfig}
+ */
+export const nodeConfig = {
   preset: "ts-jest",
   testEnvironment: "node",
 };
 
-export const reactConfig: JestConfig = {
+/**
+ * @type {JestConfig}
+ */
+export const reactConfig = {
   preset: "ts-jest",
   testEnvironment: "jsdom",
   setupFilesAfterEnv: ["@testing-library/jest-dom"],

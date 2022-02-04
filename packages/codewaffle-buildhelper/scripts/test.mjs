@@ -1,11 +1,15 @@
 import jest from "jest";
-import { nodeConfig, reactConfig } from "./jest-config";
+import { nodeConfig, reactConfig } from "./jest-config.mjs";
 
-export type TestOptions = {
-  env: "node" | "react";
-};
+/**
+ * @typedef {Object} TestOptions
+ * @property {"node" | "react"} env
+ */
 
-export async function test(options: TestOptions) {
+/**
+ * @param {TestOptions} options
+ */
+export async function test(options) {
   const argv = [];
 
   if (options.env === "node") argv.push("--config", JSON.stringify(nodeConfig));

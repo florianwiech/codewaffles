@@ -3,14 +3,15 @@ import commonjs from "@rollup/plugin-commonjs";
 import { nodeResolve } from "@rollup/plugin-node-resolve";
 import * as fs from "fs";
 import { dirname, join } from "path";
-import { OutputAsset, OutputChunk, rollup, RollupBuild } from "rollup";
+import { rollup } from "rollup";
 import dts from "rollup-plugin-dts";
 import filesize from "rollup-plugin-filesize";
 import peerDepsExternal from "rollup-plugin-peer-deps-external";
 
-export type BuildOptions = {
-  input: string;
-};
+/**
+ * @typedef {Object} BuildOptions
+ * @property {string} input
+ */
 
 const extensions = [".js", ".jsx", ".ts", ".tsx", ".svg"];
 
@@ -19,7 +20,10 @@ const babelrc = {
   plugins: ["babel-plugin-styled-components", "babel-plugin-inline-react-svg"],
 };
 
-export async function build(options: BuildOptions) {
+/**
+ * @param {BuildOptions} options
+ */
+export async function build(options) {
   const src = dirname(options.input),
     root = dirname(src),
     dist = join(root, "dist");
@@ -34,7 +38,7 @@ export async function build(options: BuildOptions) {
         extensions,
         exclude: "node_modules/**",
         babelHelpers: "bundled",
-        ...babelrc
+        ...babelrc,
       }),
       filesize(),
     ],
@@ -64,14 +68,18 @@ export async function build(options: BuildOptions) {
   });
 }
 
-async function emit(bundle: RollupBuild, conf: any) {
+/**
+ * @param {import("rollup").RollupBuild} bundle
+ * @param {any} conf
+ */
+async function emit(bundle, conf) {
   let result = await bundle.generate(conf);
   let dir = dirname(conf.file);
   await fs.promises.mkdir(dir, { recursive: true }).catch(() => null);
   for (let file of result.output) {
-    let content = isOutputChunk(file) ? file.code : file.source;
+    let content = file.type === "chunk" ? file.code : file.source;
 
-    if (isOutputChunk(file) && file.map) {
+    if (file.type === "chunk" && file.map) {
       content = content + `//# sourceMappingURL=${file.fileName}.map\n`;
       await fs.promises.writeFile(join(dir, file.fileName + ".map"), file.map.toString());
     }
@@ -79,5 +87,3 @@ async function emit(bundle: RollupBuild, conf: any) {
     await fs.promises.writeFile(join(dir, file.fileName), content);
   }
 }
-
-const isOutputChunk = (output: OutputChunk | OutputAsset): output is OutputChunk => output.type === "chunk";
