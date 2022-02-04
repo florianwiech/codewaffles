@@ -20,6 +20,7 @@
     "build:custom": "yarn clean && codewaffle-scripts build",
     "test": "jest",
     "test:watch": "jest --watch",
+    "test:custom": "codewaffle-scripts test",
     "lint": "eslint src --format friendly"
   },
   "dependencies": {
