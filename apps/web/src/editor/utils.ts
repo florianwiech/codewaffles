@@ -1,6 +1,6 @@
 import { EditorView } from "@codemirror/view";
 import { EditorSelection, SelectionRange, TransactionSpec } from "@codemirror/state";
-import { execScript, ScriptResult } from "@codewaffle/scripts";
+import { execScript, ScriptResult } from "@codewaffle/transformers";
 import { NotificationStatus } from "../store";
 
 export const getEditorDocument = (view: EditorView) => view.state.doc.toString();

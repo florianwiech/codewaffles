@@ -1,7 +1,7 @@
 import { BehaviorSubject, first } from "rxjs";
 import { eachValueFrom } from "rxjs-for-await";
 import { EditorSelection } from "@codemirror/state";
-import * as Scripts from "@codewaffle/scripts";
+import * as Scripts from "@codewaffle/transformers";
 import { createEditor } from "../../editor/setup/createEditor";
 import { Command, CommandTypes } from "../types";
 import { editor$ } from "../subjects";

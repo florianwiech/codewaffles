@@ -1,15 +1,15 @@
 import {
-  Command, SpotlightSearchInput,
+  Command,
+  SpotlightSearchInput,
   SpotlightSearchResults,
   SpotlightWrapper,
-  useSpotlightSearch
+  useSpotlightSearch,
 } from "@codewaffle/components";
-import { ScriptExtension, scriptList } from "@codewaffle/scripts";
+import { ScriptExtension, scriptList } from "@codewaffle/transformers";
 import { useKeyPress } from "./shared/hooks/useKeyPress";
 import { command$, CommandTypes } from "./store";
 
 export function Spotlight() {
-
   const handleSubmit = (command: Command<ScriptExtension>) => {
     command$.next({
       type: CommandTypes.PERFORM_TRANSFORM,
@@ -21,11 +21,10 @@ export function Spotlight() {
     command$.next({ type: CommandTypes.SEARCH_CLOSED });
   };
 
-
   const spotlight = useSpotlightSearch<ScriptExtension>({
-    commands:scriptList,
+    commands: scriptList,
     onSubmit: handleSubmit,
-    onClose: handleClose
+    onClose: handleClose,
   });
 
   const handleKeyPress = () => spotlight.openSpotlight();
