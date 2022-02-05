@@ -4,10 +4,8 @@
   "version": "0.0.0",
   "repository": "git@github.com:florianwiech/codewaffle.git",
   "author": "Florian Wiech <florian.wiech@gmail.com>",
-  "license": "MIT",
   "type": "module",
   "scripts": {
-    "start": "turbo run start --parallel",
     "start:web": "yarn workspace @codewaffle/web start",
     "start:electron": "yarn workspace @codewaffle/electron start",
     "start:components": "yarn workspace @codewaffle/components storybook",
@@ -21,9 +19,7 @@
     "test:transformers": "yarn workspace @codewaffle/transformers test",
     "lint": "turbo run lint",
     "format:check": "prettier 'packages/**/*' --check --ignore-unknown",
-    "format:write": "prettier 'packages/**/*' --write --ignore-unknown",
-    "check:types": "tsc --noEmit",
-    "check:dep": "npx npm-check-updates"
+    "format:write": "prettier 'packages/**/*' --write --ignore-unknown"
   },
   "workspaces": [
     "apps/*",
