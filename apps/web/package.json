@@ -5,11 +5,10 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test"
+    "test": "react-scripts test",
+    "lint": "eslint src --format friendly"
   },
   "dependencies": {
-    "@codewaffle/components": "*",
-    "@codewaffle/scripts": "*",
     "@codemirror/autocomplete": "0.19.12",
     "@codemirror/closebrackets": "0.19.0",
     "@codemirror/commands": "0.19.8",
@@ -28,6 +27,8 @@
     "@codemirror/search": "0.19.6",
     "@codemirror/state": "0.19.6",
     "@codemirror/view": "0.19.41",
+    "@codewaffle/components": "*",
+    "@codewaffle/scripts": "*",
     "@primer/primitives": "7.4.1",
     "bootstrap-icons": "^1.8.0",
     "framer-motion": "^6.2.4",
@@ -44,6 +45,7 @@
     "web-vitals": "2.1.4"
   },
   "devDependencies": {
+    "@codewaffle/buildhelper": "*",
     "@testing-library/dom": "8.11.3",
     "@testing-library/jest-dom": "5.16.2",
     "@testing-library/react": "12.1.2",
@@ -56,6 +58,7 @@
     "@types/react-dom": "17.0.11",
     "@types/styled-components": "5.1.21",
     "@types/ua-parser-js": "0.7.36",
+    "eslint": "^8.8.0",
     "react-scripts": "5.0.0",
     "rxjs-for-await": "^1.0.0",
     "typescript": "4.5.5"
