@@ -1,5 +1,5 @@
 {
-  "extends": "@codewaffle/config/typescript/cra.json",
+  "extends": "@codewaffle/buildhelper/tsconfig/cra.json",
   "compilerOptions": {
     "baseUrl": "./src"
   },
