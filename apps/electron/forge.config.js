@@ -1,3 +1,20 @@
+/**
+ * @type {import("@electron-forge/plugin-webpack").WebpackPluginConfig}
+ */
+const webpackConfig = {
+  mainConfig: "./webpack.main.config.js",
+  renderer: {
+    config: "./webpack.renderer.config.js",
+    entryPoints: [
+      {
+        html: "./static/index.html",
+        js: "./src/renderer/renderer.tsx",
+        name: "main_window",
+      },
+    ],
+  },
+};
+
 const config = {
   packagerConfig: {},
   makers: [
@@ -21,22 +38,8 @@ const config = {
     },
   ],
   plugins: [
-    [
-      "@electron-forge/plugin-webpack",
-      {
-        mainConfig: "./webpack.main.config.js",
-        renderer: {
-          config: "./webpack.renderer.config.js",
-          entryPoints: [
-            {
-              html: "./static/index.html",
-              js: "./src/renderer/renderer.tsx",
-              name: "main_window",
-            },
-          ],
-        },
-      },
-    ],
+    //
+    ["@electron-forge/plugin-webpack", webpackConfig],
   ],
 };
 
