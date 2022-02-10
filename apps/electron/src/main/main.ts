@@ -1,6 +1,7 @@
 import { app } from "electron";
 import { getOrCreateMainWindow } from "./windows/main-window";
 import { setupDevTools } from "./devtools";
+import { setupMenu } from "./menu/setup-menu";
 
 let argv: string[] = [];
 
@@ -18,7 +19,7 @@ export async function onReady() {
 
   // todo
   // setupAboutPanel();
-  // setupMenu();
+  setupMenu();
   // setupMenuHandler();
   // setupDialogs();
   setupDevTools().then();
