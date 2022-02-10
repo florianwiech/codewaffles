@@ -8,7 +8,7 @@ const webpackConfig = {
     entryPoints: [
       {
         html: "./static/index.html",
-        js: "./src/renderer/renderer.tsx",
+        js: "./src/renderer/app.tsx",
         name: "main_window",
       },
     ],
