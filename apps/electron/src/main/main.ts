@@ -1,5 +1,6 @@
 import { app } from "electron";
 import { getOrCreateMainWindow } from "./windows/main-window";
+import { setupDevTools } from "./devtools";
 
 let argv: string[] = [];
 
@@ -20,7 +21,7 @@ export async function onReady() {
   // setupMenu();
   // setupMenuHandler();
   // setupDialogs();
-  // setupDevTools();
+  setupDevTools().then();
   // setupTitleBarClickMac();
 
   // processCommandLine(argv);
