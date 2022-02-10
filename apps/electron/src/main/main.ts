@@ -17,9 +17,6 @@ const createWindow = (): void => {
   const mainWindow = new BrowserWindow({
     height: 600,
     width: isDevelopment ? 1355 : 800,
-    titleBarStyle: "hidden",
-    transparent: true,
-    vibrancy: "dark",
   });
 
   // and load the index.html of the app.
