@@ -13,8 +13,10 @@ export async function setupDevTools(): Promise<void> {
 
   try {
     const react = await installExtension(REACT_DEVELOPER_TOOLS);
+    // eslint-disable-next-line no-console
     console.log(`installDevTools: Installed ${react}`);
   } catch (error) {
+    // eslint-disable-next-line no-console
     console.warn(`installDevTools: Error occurred:`, error);
   }
 }
