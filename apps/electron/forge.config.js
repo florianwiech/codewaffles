@@ -17,6 +17,9 @@ const webpackConfig = {
       {
         html: "./static/index.html",
         js: "./src/renderer/settings.tsx",
+        preload: {
+          js: "./src/preload/settings-preload.ts",
+        },
         name: "settings_window",
       },
     ],
