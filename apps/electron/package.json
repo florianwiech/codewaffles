@@ -28,6 +28,7 @@
     "react-dom": "^17.0.2"
   },
   "devDependencies": {
+    "@codewaffle/buildhelper": "*",
     "@electron-forge/cli": "^6.0.0-beta.61",
     "@electron-forge/maker-deb": "^6.0.0-beta.61",
     "@electron-forge/maker-rpm": "^6.0.0-beta.61",
@@ -37,12 +38,10 @@
     "@svgr/webpack": "^6.2.0",
     "@types/react": "^17.0.38",
     "@types/react-dom": "^17.0.11",
-    "@typescript-eslint/eslint-plugin": "^4.33.0",
-    "@typescript-eslint/parser": "^4.33.0",
     "@vercel/webpack-asset-relocator-loader": "^1.7.0",
     "css-loader": "^6.5.1",
     "electron": "16.0.7",
-    "eslint": "^7.32.0",
+    "eslint": "^8.8.0",
     "eslint-plugin-import": "^2.25.4",
     "fork-ts-checker-webpack-plugin": "^6.5.0",
     "node-loader": "^2.0.0",
