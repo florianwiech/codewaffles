@@ -20,7 +20,7 @@ export function getMainWindowOptions(): Electron.BrowserWindowConstructorOptions
     height: 900,
     minHeight: 600,
     minWidth: 320,
-    // titleBarStyle: process.platform === "darwin" ? "hidden" : undefined, // todo yeah, seems like a good idea
+    titleBarStyle: process.platform === "darwin" ? "hidden" : undefined,
     // acceptFirstMouse: true, // todo do we need this?
     // backgroundColor: "#1d2427", // todo insert correct color based on appearance
     show: false,

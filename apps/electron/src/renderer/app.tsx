@@ -27,5 +27,13 @@
  */
 import * as React from "react";
 import * as ReactDOM from "react-dom";
+import { MacOsTitleBar } from "./components/header";
+import "./app.css";
 
-ReactDOM.render(<h2>Hello from React!</h2>, document.getElementById("root"));
+ReactDOM.render(
+  <>
+    <MacOsTitleBar title="CodeWaffle" />
+    <h2>Hello from React!</h2>
+  </>,
+  document.getElementById("root"),
+);
