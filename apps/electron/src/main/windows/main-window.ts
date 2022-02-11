@@ -5,6 +5,7 @@ import { isDevMode } from "../utils/devmode";
 // plugin that tells the Electron app where to look for the Webpack-bundled app code (depending on
 // whether you're running in development or production).
 declare const MAIN_WINDOW_WEBPACK_ENTRY: string;
+declare const MAIN_WINDOW_PRELOAD_WEBPACK_ENTRY: string;
 
 // Keep a global reference of the window objects, if we don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
@@ -23,6 +24,9 @@ export function getMainWindowOptions(): Electron.BrowserWindowConstructorOptions
     // acceptFirstMouse: true, // todo do we need this?
     // backgroundColor: "#1d2427", // todo insert correct color based on appearance
     show: false,
+    webPreferences: {
+      preload: MAIN_WINDOW_PRELOAD_WEBPACK_ENTRY,
+    },
   };
 }
 

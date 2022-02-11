@@ -9,6 +9,9 @@ const webpackConfig = {
       {
         html: "./static/index.html",
         js: "./src/renderer/app.tsx",
+        preload: {
+          js: "./src/preload/app-preload.ts",
+        },
         name: "main_window",
       },
       {
