@@ -12,13 +12,13 @@ export let settingsWindow: BrowserWindow | null = null;
  */
 export function getSettingsWindowOptions(): Electron.BrowserWindowConstructorOptions {
   return {
-    width: isDevMode() ? 1355 : 800,
-    height: 900,
-    minHeight: 600,
-    minWidth: 320,
-    // titleBarStyle: process.platform === "darwin" ? "hidden" : undefined, // todo yeah, seems like a good idea
-    // acceptFirstMouse: true, // todo do we need this?
+    width: isDevMode() ? 1357 : 570,
+    height: 600,
+    titleBarStyle: process.platform === "darwin" ? "hidden" : undefined,
+    acceptFirstMouse: true,
     // backgroundColor: "#1d2427", // todo insert correct color based on appearance
+    fullscreenable: false,
+    resizable: false,
     show: false,
     webPreferences: {
       preload: SETTINGS_WINDOW_PRELOAD_WEBPACK_ENTRY,
