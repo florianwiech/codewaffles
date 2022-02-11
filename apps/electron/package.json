@@ -19,6 +19,14 @@
   "config": {
     "forge": "./forge.config.js"
   },
+  "dependencies": {
+    "@codewaffle/components": "0.0.0",
+    "bootstrap-icons": "^1.7.2",
+    "electron-devtools-installer": "^3.2.0",
+    "electron-squirrel-startup": "^1.0.0",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2"
+  },
   "devDependencies": {
     "@electron-forge/cli": "^6.0.0-beta.61",
     "@electron-forge/maker-deb": "^6.0.0-beta.61",
@@ -41,13 +49,5 @@
     "style-loader": "^3.3.1",
     "ts-loader": "^9.2.6",
     "typescript": "^4.5.4"
-  },
-  "dependencies": {
-    "@codewaffle/components": "0.0.0",
-    "bootstrap-icons": "^1.7.2",
-    "electron-devtools-installer": "^3.2.0",
-    "electron-squirrel-startup": "^1.0.0",
-    "react": "^17.0.2",
-    "react-dom": "^17.0.2"
   }
 }
