@@ -1,4 +1,5 @@
 import { MenuItemConstructorOptions } from "electron";
+import { getOrCreateSettingsWindow } from "../windows/settings-window";
 
 /**
  * Depending on the OS, the `Preferences` either go into the `CodeWaffle`
@@ -13,7 +14,7 @@ export function getPreferencesItems(): Array<MenuItemConstructorOptions> {
       label: "Preferences",
       accelerator: "CmdOrCtrl+,",
       click() {
-        // todo
+        getOrCreateSettingsWindow().focus();
       },
     },
     {

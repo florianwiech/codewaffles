@@ -11,6 +11,11 @@ const webpackConfig = {
         js: "./src/renderer/app.tsx",
         name: "main_window",
       },
+      {
+        html: "./static/index.html",
+        js: "./src/renderer/settings.tsx",
+        name: "settings_window",
+      },
     ],
   },
 };
