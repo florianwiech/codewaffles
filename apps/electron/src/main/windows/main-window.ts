@@ -22,7 +22,6 @@ export function getMainWindowOptions(): Electron.BrowserWindowConstructorOptions
     minWidth: 320,
     titleBarStyle: process.platform === "darwin" ? "hidden" : undefined,
     acceptFirstMouse: true,
-    // backgroundColor: "#1d2427", // todo insert correct color based on appearance
     show: false,
     webPreferences: {
       preload: MAIN_WINDOW_PRELOAD_WEBPACK_ENTRY,

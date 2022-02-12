@@ -16,7 +16,6 @@ export function getSettingsWindowOptions(): Electron.BrowserWindowConstructorOpt
     height: 600,
     titleBarStyle: process.platform === "darwin" ? "hidden" : undefined,
     acceptFirstMouse: true,
-    // backgroundColor: "#1d2427", // todo insert correct color based on appearance
     fullscreenable: false,
     resizable: false,
     show: false,
