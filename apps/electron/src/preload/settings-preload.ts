@@ -1,10 +1,12 @@
 import { contextBridge, ipcRenderer } from "electron";
+import { AppearanceState } from "@codewaffle/components";
 import { IpcEvents } from "../ipc-events";
-import type { IApi } from "../window";
+import type { ISettings } from "../window";
 import { apiBasics } from "./api-basics";
 
-const api: IApi = {
+const api: ISettings = {
   ...apiBasics,
+  changeAppearance: (next: AppearanceState) => ipcRenderer.invoke(IpcEvents.CHANGE_APPEARANCE, next),
 };
 
-contextBridge.exposeInMainWorld("api", api);
+contextBridge.exposeInMainWorld("settings", api);

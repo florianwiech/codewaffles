@@ -20,7 +20,7 @@
     "forge": "./forge.config.js"
   },
   "dependencies": {
-    "@codewaffle/components": "0.0.0",
+    "@codewaffle/components": "*",
     "bootstrap-icons": "^1.7.2",
     "electron-devtools-installer": "^3.2.0",
     "electron-squirrel-startup": "^1.0.0",

@@ -32,7 +32,7 @@ import "./styles.css";
 
 ReactDOM.render(
   <>
-    <MacOsTitleBar title="CodeWaffle" />
+    <MacOsTitleBar title="CodeWaffle" platform={window.api.platform} onTitleBarClick={window.api.onTitleBarClick} />
     <h2>Hello from React!</h2>
   </>,
   document.getElementById("root"),

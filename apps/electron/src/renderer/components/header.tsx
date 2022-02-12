@@ -1,15 +1,13 @@
 import { FC } from "react";
 import "./header.css";
 
-export const MacOsTitleBar: FC<{ title: string }> = ({ title }) => {
-  const { platform, onTitleBarClick } = window.api;
+type Props = { title: string; platform: string; onTitleBarClick: () => void };
 
+export const MacOsTitleBar: FC<Props> = ({ title, platform, onTitleBarClick }) => {
   if (platform !== "darwin") return null;
 
-  let className = "chrome drag";
-
   return (
-    <div className={className} onDoubleClick={() => onTitleBarClick()}>
+    <div className="chrome drag" onDoubleClick={() => onTitleBarClick()}>
       <small>{title}</small>
     </div>
   );
