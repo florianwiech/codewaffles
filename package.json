@@ -18,8 +18,8 @@
     "test:components": "yarn workspace @codewaffle/components test",
     "test:transformers": "yarn workspace @codewaffle/transformers test",
     "lint": "turbo run lint",
-    "format:check": "prettier 'packages/**/*' --check --ignore-unknown",
-    "format:write": "prettier 'packages/**/*' --write --ignore-unknown"
+    "format:check": "prettier . --check --ignore-unknown",
+    "format:write": "prettier . --write --ignore-unknown"
   },
   "workspaces": [
     "apps/*",
