@@ -1,10 +1,5 @@
 import { renderHook } from "@testing-library/react-hooks";
-import {
-  clear,
-  mockUserAgent,
-  userAgentMacOSMock,
-  userAgentWindowsMock,
-} from "../testing/mockUserAgent";
+import { clear, mockUserAgent, userAgentMacOSMock, userAgentWindowsMock } from "../testing/mockUserAgent";
 import { useKeyPress } from "./useKeyPress";
 
 describe("useKeyPress", () => {
@@ -92,9 +87,7 @@ describe("useKeyPress", () => {
         it("should fire with meta key", () => {
           renderHook(() => useKeyPress(key, callback));
 
-          document.dispatchEvent(
-            new KeyboardEvent("keydown", { key, [device.key]: true }),
-          );
+          document.dispatchEvent(new KeyboardEvent("keydown", { key, [device.key]: true }));
 
           expect(callback).toHaveBeenCalled();
         });

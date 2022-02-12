@@ -17,8 +17,7 @@ export const StyledEditor = styled.div`
     .cm-scroller {
       height: 100%;
       font-size: ${typography.fontSize[1]};
-      font-family: "SFMono Regular", Menlo, Monaco, Consolas, "Liberation Mono",
-        "Courier New", monospace;
+      font-family: "SFMono Regular", Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
       line-height: ${typography.lineHeight.default};
     }
 

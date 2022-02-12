@@ -6,9 +6,7 @@ import { convertAppearanceToTheme } from "./convertAppearanceToTheme";
 describe("convertAppearanceToTheme", () => {
   let testScheduler: TestScheduler = new TestScheduler(() => {});
   beforeEach(() => {
-    testScheduler = new TestScheduler((actual, expected) =>
-      expect(actual).toEqual(expected),
-    );
+    testScheduler = new TestScheduler((actual, expected) => expect(actual).toEqual(expected));
   });
 
   it("should set light & dark theme", () => {

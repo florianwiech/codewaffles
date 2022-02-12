@@ -14,10 +14,7 @@ export type PrimerThemeSpecParams = {
   theme: typeof light;
 };
 
-const getPrimerThemeSpec = ({
-  name,
-  theme,
-}: PrimerThemeSpecParams): ThemeSpec => {
+const getPrimerThemeSpec = ({ name, theme }: PrimerThemeSpecParams): ThemeSpec => {
   const themes = (options: StyleSpec) => options[name];
 
   return {
@@ -33,8 +30,9 @@ const getPrimerThemeSpec = ({
     "&.cm-focused .cm-cursor": {
       borderLeftColor: theme.accent.fg,
     },
-    "&.cm-focused .cm-selectionBackground, .cm-selectionBackground, .cm-content ::selection":
-      { backgroundColor: theme.codemirror.selectionBg },
+    "&.cm-focused .cm-selectionBackground, .cm-selectionBackground, .cm-content ::selection": {
+      backgroundColor: theme.codemirror.selectionBg,
+    },
 
     ".cm-panels": {
       backgroundColor: theme.codemirror.bg,
@@ -128,10 +126,7 @@ const getPrimerThemeSpec = ({
   };
 };
 
-const getPrimerHighlightSpecs = ({
-  name,
-  theme,
-}: PrimerThemeSpecParams): TagStyle[] => {
+const getPrimerHighlightSpecs = ({ name, theme }: PrimerThemeSpecParams): TagStyle[] => {
   const themes = (options: StyleSpec) => options[name];
   const { scale } = theme;
 
@@ -157,15 +152,7 @@ const getPrimerHighlightSpecs = ({
       color: themes({ light: scale.blue[6], dark: scale.blue[2] }),
     },
     {
-      tag: [
-        t.operator,
-        t.operatorKeyword,
-        t.url,
-        t.escape,
-        t.regexp,
-        t.link,
-        t.special(t.string),
-      ],
+      tag: [t.operator, t.operatorKeyword, t.url, t.escape, t.regexp, t.link, t.special(t.string)],
       color: themes({ light: scale.blue[8], dark: scale.blue[1] }),
     },
     {
@@ -173,16 +160,7 @@ const getPrimerHighlightSpecs = ({
       color: themes({ light: scale.gray[5], dark: scale.gray[3] }),
     },
     {
-      tag: [
-        t.typeName,
-        t.className,
-        t.number,
-        t.changed,
-        t.annotation,
-        t.modifier,
-        t.self,
-        t.namespace,
-      ],
+      tag: [t.typeName, t.className, t.number, t.changed, t.annotation, t.modifier, t.self, t.namespace],
       color: themes({ light: scale.red[5], dark: scale.red[3] }),
     },
     {
@@ -213,27 +191,11 @@ const getPrimerHighlightSpecs = ({
   ];
 };
 
-const primerLightHighlightStyle = HighlightStyle.define(
-  getPrimerHighlightSpecs({ name: "light", theme: light }),
-);
-const primerDarkHighlightStyle = HighlightStyle.define(
-  getPrimerHighlightSpecs({ name: "dark", theme: dark }),
-);
+const primerLightHighlightStyle = HighlightStyle.define(getPrimerHighlightSpecs({ name: "light", theme: light }));
+const primerDarkHighlightStyle = HighlightStyle.define(getPrimerHighlightSpecs({ name: "dark", theme: dark }));
 
-const primerLightTheme = EditorView.theme(
-  getPrimerThemeSpec({ name: "light", theme: light }),
-  { dark: false },
-);
-const primerDarkTheme = EditorView.theme(
-  getPrimerThemeSpec({ name: "dark", theme: dark }),
-  { dark: true },
-);
+const primerLightTheme = EditorView.theme(getPrimerThemeSpec({ name: "light", theme: light }), { dark: false });
+const primerDarkTheme = EditorView.theme(getPrimerThemeSpec({ name: "dark", theme: dark }), { dark: true });
 
-export const primerLight: Extension = [
-  primerLightTheme,
-  primerLightHighlightStyle,
-];
-export const primerDark: Extension = [
-  primerDarkTheme,
-  primerDarkHighlightStyle,
-];
+export const primerLight: Extension = [primerLightTheme, primerLightHighlightStyle];
+export const primerDark: Extension = [primerDarkTheme, primerDarkHighlightStyle];

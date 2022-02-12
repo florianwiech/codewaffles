@@ -34,10 +34,9 @@ export const styledSearch = css`
     }
 
     button.cm-button {
-      font-family: "SF Pro Display", -apple-system, BlinkMacSystemFont,
-        "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans",
-        "Open Sans", "Helvetica Neue", sans-serif, "Apple Color Emoji",
-        "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+      font-family: "SF Pro Display", -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu",
+        "Cantarell", "Fira Sans", "Open Sans", "Helvetica Neue", sans-serif, "Apple Color Emoji", "Segoe UI Emoji",
+        "Segoe UI Symbol", "Noto Color Emoji";
       font-size: ${typography.fontSize[0]};
       padding: 3px 12px;
 

@@ -1,10 +1,7 @@
 import { useEffect, useRef } from "react";
 import { getEditorChanges } from "../store";
 import { StyledEditor } from "./Editor.style";
-import {
-  initialThemeSetup,
-  useCodeMirrorTheme,
-} from "./theme/useCodeMirrorTheme";
+import { initialThemeSetup, useCodeMirrorTheme } from "./theme/useCodeMirrorTheme";
 import { useCodeMirror } from "./useCodeMirror";
 import { initialLanguageSetup } from "./setup/language";
 import { basics } from "./setup/basics";
@@ -16,13 +13,7 @@ export const Editor = () => {
   const ref = useRef<HTMLDivElement>(null);
   const editor = useCodeMirror(ref, {
     doc: initialContent,
-    extensions: [
-      basics,
-      initialThemeSetup,
-      initialLanguageSetup,
-      notification,
-      statusbar,
-    ],
+    extensions: [basics, initialThemeSetup, initialLanguageSetup, notification, statusbar],
   });
   useCodeMirrorTheme(editor);
 

@@ -4,10 +4,7 @@ import { EditorStateConfig } from "@codemirror/state";
 import { editor$ } from "../store";
 import { createEditor } from "./setup/createEditor";
 
-export const useCodeMirror = (
-  ref: RefObject<HTMLElement>,
-  options?: EditorStateConfig,
-) => {
+export const useCodeMirror = (ref: RefObject<HTMLElement>, options?: EditorStateConfig) => {
   const editorRef = useRef<EditorView>();
 
   useLayoutEffect(() => {

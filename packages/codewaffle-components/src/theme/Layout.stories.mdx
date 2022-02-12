@@ -11,9 +11,5 @@ This Components provides a `ThemeProvider` for `styled-components`.
 ```tsx
 import { AppearanceState, Layout } from "./Layout";
 
-export const App = () => (
-  <Layout theme={AppearanceState.DARK}>
-    {/* ... */}
-  </Layout>
-)
+export const App = () => <Layout theme={AppearanceState.DARK}>{/* ... */}</Layout>;
 ```

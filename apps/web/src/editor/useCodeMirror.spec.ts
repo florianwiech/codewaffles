@@ -21,9 +21,7 @@ describe("useCodeMirror", () => {
   it("should focus editor", () => {
     const view = new EditorView();
     const focusSpy = jest.spyOn(view, "focus");
-    const createEditorSpy = jest
-      .spyOn(CreateEditor, "createEditor")
-      .mockReturnValue(view);
+    const createEditorSpy = jest.spyOn(CreateEditor, "createEditor").mockReturnValue(view);
 
     const element = document.createElement("div");
 

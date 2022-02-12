@@ -1,10 +1,5 @@
 import { highlightActiveLineGutter, lineNumbers } from "@codemirror/gutter";
-import {
-  drawSelection,
-  highlightActiveLine,
-  highlightSpecialChars,
-  keymap,
-} from "@codemirror/view";
+import { drawSelection, highlightActiveLine, highlightSpecialChars, keymap } from "@codemirror/view";
 import { history, historyKeymap } from "@codemirror/history";
 import { foldGutter, foldKeymap } from "@codemirror/fold";
 import { EditorState } from "@codemirror/state";
@@ -14,11 +9,7 @@ import { bracketMatching } from "@codemirror/matchbrackets";
 import { closeBrackets, closeBracketsKeymap } from "@codemirror/closebrackets";
 import { autocompletion, completionKeymap } from "@codemirror/autocomplete";
 import { rectangularSelection } from "@codemirror/rectangular-selection";
-import {
-  highlightSelectionMatches,
-  searchConfig,
-  searchKeymap,
-} from "@codemirror/search";
+import { highlightSelectionMatches, searchConfig, searchKeymap } from "@codemirror/search";
 import { defaultKeymap, indentWithTab } from "@codemirror/commands";
 import { commentKeymap } from "@codemirror/comment";
 import { lintKeymap } from "@codemirror/lint";

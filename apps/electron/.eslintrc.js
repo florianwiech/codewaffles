@@ -1,4 +1,4 @@
-const base = require('@codewaffle/buildhelper/eslint/electron.cjs');
+const base = require("@codewaffle/buildhelper/eslint/electron.cjs");
 
 module.exports = {
   ...base,

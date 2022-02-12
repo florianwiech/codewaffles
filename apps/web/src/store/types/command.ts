@@ -10,7 +10,5 @@ export type Command = {
 
 export type PerformTransformCommand = Command & { key: string };
 
-export const isPerformTransformCommand = (
-  command: Command,
-): command is PerformTransformCommand =>
+export const isPerformTransformCommand = (command: Command): command is PerformTransformCommand =>
   command.type === CommandTypes.PERFORM_TRANSFORM;
