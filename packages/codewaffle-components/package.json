@@ -18,7 +18,9 @@
     "build:storybook": "build-storybook",
     "test": "codewaffle-scripts test",
     "lint": "eslint src --format friendly",
-    "lint:fix": "eslint src --format friendly --fix"
+    "lint:stage": "eslint src --format friendly --max-warnings=0",
+    "lint:fix": "eslint src --format friendly --fix",
+    "check:types": "tsc --noEmit"
   },
   "dependencies": {
     "@primer/primitives": "^7.4.1",

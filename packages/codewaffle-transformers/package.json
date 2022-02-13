@@ -16,7 +16,9 @@
     "build": "yarn clean && codewaffle-scripts build",
     "test": "codewaffle-scripts test",
     "lint": "eslint src --format friendly",
-    "lint:fix": "eslint src --format friendly --fix"
+    "lint:stage": "eslint src --format friendly --max-warnings=0",
+    "lint:fix": "eslint src --format friendly --fix",
+    "check:types": "tsc --noEmit"
   },
   "dependencies": {
     "decode-jwt": "^1.0.2"
