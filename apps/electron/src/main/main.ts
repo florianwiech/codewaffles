@@ -48,6 +48,7 @@ export function onWindowsAllClosed() {
  * when app is launched.
  */
 export function main(argv_in: string[]) {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   argv = argv_in;
 
   // Handle creating/removing shortcuts on Windows when installing/uninstalling.

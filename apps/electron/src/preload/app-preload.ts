@@ -1,5 +1,4 @@
-import { contextBridge, ipcRenderer } from "electron";
-import { IpcEvents } from "../ipc-events";
+import { contextBridge } from "electron";
 import type { IApi } from "../window";
 import { apiBasics } from "./api-basics";
 
