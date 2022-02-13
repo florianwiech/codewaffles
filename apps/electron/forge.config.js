@@ -51,6 +51,7 @@ const config = {
   plugins: [
     //
     ["@electron-forge/plugin-webpack", webpackConfig],
+    ["@electron-forge/plugin-electronegativity", { isSarif: true }],
   ],
 };
 
