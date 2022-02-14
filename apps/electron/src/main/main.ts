@@ -4,6 +4,7 @@ import { setupDevTools } from "./devtools";
 import { setupMenu } from "./menu/setup-menu";
 import { setupTitleBarClickMac } from "./title-bar";
 import { setupAppearanceHandler } from "./appearance";
+import { setupSecurityHandlers } from "./setup-security-handlers";
 
 let argv: string[] = [];
 
@@ -59,6 +60,7 @@ export function main(argv_in: string[]) {
 
   // https://www.electronjs.org/docs/latest/api/app#appenablesandbox
   app.enableSandbox();
+  setupSecurityHandlers();
 
   app.name = "CodeWaffle";
 
