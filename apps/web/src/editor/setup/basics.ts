@@ -13,6 +13,7 @@ import { highlightSelectionMatches, searchConfig, searchKeymap } from "@codemirr
 import { defaultKeymap, indentWithTab } from "@codemirror/commands";
 import { commentKeymap } from "@codemirror/comment";
 import { lintKeymap } from "@codemirror/lint";
+import { indentationGuides } from "../extensions/indentation-guides";
 
 export const basics = [
   lineNumbers(),
@@ -31,6 +32,7 @@ export const basics = [
   highlightActiveLine(),
   highlightSelectionMatches(),
   searchConfig({ top: true }),
+  indentationGuides(),
   keymap.of([
     ...closeBracketsKeymap,
     ...defaultKeymap,
