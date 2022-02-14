@@ -24,6 +24,7 @@ export const basics = [
   drawSelection(),
   EditorState.allowMultipleSelections.of(true),
   indentOnInput(),
+  EditorState.tabSize.of(4),
   defaultHighlightStyle.fallback,
   bracketMatching(),
   closeBrackets(),

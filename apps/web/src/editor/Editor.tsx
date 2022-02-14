@@ -8,12 +8,21 @@ import { basics } from "./setup/basics";
 import { statusbar } from "./statusbar";
 import { initialContent } from "./setup/initialContent";
 import { notification } from "./notification";
+import { showWhitespace } from "./extensions/whitespace";
 
 export const Editor = () => {
   const ref = useRef<HTMLDivElement>(null);
   const editor = useCodeMirror(ref, {
     doc: initialContent,
-    extensions: [basics, initialThemeSetup, initialLanguageSetup, notification, statusbar],
+    extensions: [
+      //
+      basics,
+      initialThemeSetup,
+      initialLanguageSetup,
+      notification,
+      statusbar,
+      showWhitespace.instance(),
+    ],
   });
   useCodeMirrorTheme(editor);
 

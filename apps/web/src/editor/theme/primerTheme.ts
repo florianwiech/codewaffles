@@ -27,6 +27,27 @@ const getPrimerThemeSpec = ({ name, theme }: PrimerThemeSpecParams): ThemeSpec =
       caretColor: theme.codemirror.cursor,
     },
 
+    ".cm-highlightedTab": {
+      display: "inline-block",
+      position: "relative",
+      "&:before": {
+        content: '""',
+        borderBottom: `1px solid ${theme.codemirror.linenumberText}`,
+        position: "absolute",
+        left: "5%",
+        bottom: "50%",
+        width: "90%",
+        pointerEvents: "none",
+      },
+    },
+
+    ".cm-highlightedSpaces:before": {
+      color: theme.codemirror.linenumberText,
+      content: "attr(data-display)",
+      position: "absolute",
+      pointerEvents: "none",
+    },
+
     "&.cm-focused .cm-cursor": {
       borderLeftColor: theme.accent.fg,
     },
