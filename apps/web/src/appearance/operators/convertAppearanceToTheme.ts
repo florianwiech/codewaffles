@@ -1,6 +1,6 @@
 import { OperatorFunction } from "rxjs";
 import { map } from "rxjs/operators";
-import { AppearanceState } from "../appearance-types";
+import { AppearanceState } from "@codewaffle/components";
 
 export function convertAppearanceToTheme(): OperatorFunction<AppearanceState, Omit<AppearanceState, "system">> {
   return map((appearance) => {

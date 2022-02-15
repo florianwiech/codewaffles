@@ -1,5 +1,5 @@
 import { TestScheduler } from "rxjs/testing";
-import { AppearanceState } from "../appearance-types";
+import { AppearanceState } from "@codewaffle/components";
 import { mockMatchMediaScoped } from "../../shared/testing/mockMatchMedia";
 import { convertAppearanceToTheme } from "./convertAppearanceToTheme";
 

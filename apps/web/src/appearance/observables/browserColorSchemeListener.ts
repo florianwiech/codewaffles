@@ -1,8 +1,8 @@
+import { useEffect } from "react";
 import { EMPTY, fromEvent, mapTo, withLatestFrom } from "rxjs";
 import { filter, map } from "rxjs/operators";
-import { useEffect } from "react";
+import { AppearanceState } from "@codewaffle/components";
 import { appearance$, changeAppearance, theme$ } from "../appearance-subjects";
-import { AppearanceState } from "../appearance-types";
 
 export const shouldUpdateTheme = ([prefersDarkMode, appearance, theme]: [
   boolean,

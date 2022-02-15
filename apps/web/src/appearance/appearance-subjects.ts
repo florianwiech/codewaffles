@@ -1,7 +1,7 @@
 import { BehaviorSubject } from "rxjs";
+import { AppearanceState } from "@codewaffle/components";
 import { convertAppearanceToTheme } from "./operators/convertAppearanceToTheme";
 import { getInitialAppearance } from "./utils/getInitialAppearance";
-import { AppearanceState } from "./appearance-types";
 
 export const appearance$ = new BehaviorSubject<AppearanceState>(getInitialAppearance());
 export const previousAppearance$ = new BehaviorSubject<AppearanceState>(getInitialAppearance());

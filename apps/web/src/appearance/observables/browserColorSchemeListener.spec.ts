@@ -1,4 +1,4 @@
-import { AppearanceState } from "../appearance-types";
+import { AppearanceState } from "@codewaffle/components";
 import { shouldUpdateTheme } from "./browserColorSchemeListener";
 
 describe("shouldUpdateTheme", () => {

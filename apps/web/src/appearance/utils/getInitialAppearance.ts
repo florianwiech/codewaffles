@@ -1,4 +1,4 @@
-import { AppearanceState } from "../appearance-types";
+import { AppearanceState } from "@codewaffle/components";
 import { APPEARANCE_STORAGE } from "./appearance-keys";
 
 export const getInitialAppearance = (): AppearanceState => {

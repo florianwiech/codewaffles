@@ -1,10 +1,10 @@
 import { merge, withLatestFrom } from "rxjs";
 import { filter, map, tap } from "rxjs/operators";
 import { tag } from "rxjs-spy/operators";
+import { AppearanceState } from "@codewaffle/components";
 import { appearance$, previousAppearance$ } from "../appearance-subjects";
 import { APPEARANCE_ATTRIBUTE, APPEARANCE_STORAGE } from "../utils/appearance-keys";
 import { convertAppearanceToTheme } from "../operators/convertAppearanceToTheme";
-import { AppearanceState } from "../appearance-types";
 
 export const getAppearanceChanges = (source$ = appearance$) => {
   const shouldChange$ = source$.pipe(
