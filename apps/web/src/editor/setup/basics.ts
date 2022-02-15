@@ -9,7 +9,7 @@ import { bracketMatching } from "@codemirror/matchbrackets";
 import { closeBrackets, closeBracketsKeymap } from "@codemirror/closebrackets";
 import { autocompletion, completionKeymap } from "@codemirror/autocomplete";
 import { rectangularSelection } from "@codemirror/rectangular-selection";
-import { highlightSelectionMatches, searchConfig, searchKeymap } from "@codemirror/search";
+import { highlightSelectionMatches, search, searchKeymap } from "@codemirror/search";
 import { defaultKeymap, indentWithTab } from "@codemirror/commands";
 import { commentKeymap } from "@codemirror/comment";
 import { lintKeymap } from "@codemirror/lint";
@@ -30,7 +30,7 @@ export const basics = [
   rectangularSelection(),
   highlightActiveLine(),
   highlightSelectionMatches(),
-  searchConfig({ top: true }),
+  search({ top: true }),
   keymap.of([
     ...closeBracketsKeymap,
     ...defaultKeymap,
