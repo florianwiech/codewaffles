@@ -1,7 +1,6 @@
 import { ComponentMeta, ComponentStory } from "@storybook/react";
 import { useDarkMode } from "storybook-dark-mode";
-import { AppearanceState } from "../appearance";
-import { Layout } from "../theme";
+import { AppearanceState, Layout } from "../theme";
 import { ExampleSpotlight } from "./demo/ExampleSpotlight";
 
 const scriptsMock = [

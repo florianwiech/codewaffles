@@ -2,8 +2,13 @@ import React from "react";
 import { ThemeProvider } from "styled-components";
 import dark from "@primer/primitives/dist/js/colors/dark";
 import light from "@primer/primitives/dist/js/colors/light";
-import { AppearanceState } from "../appearance";
 import { GlobalStyle } from "./styles";
+
+export enum AppearanceState {
+  SYSTEM = "system",
+  DARK = "dark",
+  LIGHT = "light",
+}
 
 export const Layout: React.FC<{ theme?: Omit<AppearanceState, "system"> }> = ({ theme, children }) => {
   return (

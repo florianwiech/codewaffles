@@ -1,8 +1,7 @@
 import React, { FC, useEffect } from "react";
-import { useObservable } from "../shared/hooks/useObservable";
-import { theme$ } from "../appearance";
-import { getAppearanceChanges, useBrowserAppearanceListener, useBrowserCrossTabSync } from "../appearance";
-import { Layout } from "./Layout";
+import { Layout } from "@codewaffle/components";
+import { useObservable } from "./shared/hooks/useObservable";
+import { getAppearanceChanges, theme$, useBrowserAppearanceListener, useBrowserCrossTabSync } from "./appearance";
 
 export const BrowserAppearance: FC = ({ children }) => {
   const theme = useObservable(theme$);

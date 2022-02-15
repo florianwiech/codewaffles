@@ -1,8 +1,9 @@
 import { useEffect } from "react";
 import { Compartment } from "@codemirror/state";
-import { AppearanceState, theme$ } from "@codewaffle/components";
+import { AppearanceState } from "@codewaffle/components";
 import { CodeMirrorEditor } from "../editor.types";
 import { useObservable } from "../../shared/hooks/useObservable";
+import { theme$ } from "../../appearance";
 import { primerDark, primerLight } from "./primerTheme";
 
 export const themeConf = new Compartment();

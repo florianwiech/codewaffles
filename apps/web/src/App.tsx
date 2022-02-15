@@ -1,4 +1,4 @@
-import { BrowserAppearance } from "@codewaffle/components";
+import { BrowserAppearance } from "./BrowserAppearance";
 import { Editor } from "./editor";
 import { Spotlight } from "./Spotlight";
 

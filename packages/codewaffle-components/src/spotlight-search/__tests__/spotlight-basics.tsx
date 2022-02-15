@@ -1,8 +1,7 @@
 import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 import Fuse from "fuse.js";
 import { SPOTLIGHT_LABEL, SpotlightProps } from "../Spotlight";
-import { AppearanceState } from "../../appearance";
-import { Layout } from "../../theme";
+import { AppearanceState, Layout } from "../../theme";
 import { ExampleSpotlight } from "../demo/ExampleSpotlight";
 
 export const scriptsMock = [

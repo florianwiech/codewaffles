@@ -1,6 +1,7 @@
 import { ChangeEvent, FC } from "react";
-import { appearance$, AppearanceState, changeAppearance } from "@codewaffle/components";
+import { AppearanceState } from "@codewaffle/components";
 import { useObservable } from "../../shared/hooks/useObservable";
+import { appearance$, changeAppearance } from "../../appearance";
 
 export const AppearanceSwitch: FC = () => {
   const appearance = useObservable(appearance$);
