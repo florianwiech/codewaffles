@@ -1,5 +1,5 @@
 import { Platform } from "process";
-import { AppearanceState } from "./types";
+import { AppearanceState } from "@codewaffle/components";
 
 export interface IApi {
   platform: Platform;

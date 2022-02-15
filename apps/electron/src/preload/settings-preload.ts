@@ -1,6 +1,6 @@
 import { contextBridge, ipcRenderer } from "electron";
+import { AppearanceState } from "@codewaffle/components";
 import { IpcEvents } from "../ipc-events";
-import { AppearanceState } from "../types";
 import type { ISettings } from "../window";
 import { apiBasics } from "./api-basics";
 

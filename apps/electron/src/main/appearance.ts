@@ -1,6 +1,6 @@
 import { ipcMain, nativeTheme } from "electron";
+import { AppearanceState } from "@codewaffle/components";
 import { IpcEvents } from "../ipc-events";
-import { AppearanceState } from "../types";
 
 export function setupAppearanceHandler() {
   ipcMain.handle(IpcEvents.CHANGE_APPEARANCE, (event, next: AppearanceState) => {

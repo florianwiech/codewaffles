@@ -1,7 +1,6 @@
 import { FC, useEffect, useState } from "react";
 import { EMPTY, fromEvent, map } from "rxjs";
-import { Layout } from "@codewaffle/components";
-import { AppearanceState } from "../../types";
+import { AppearanceState, Layout } from "@codewaffle/components";
 
 export const getInitialTheme = () =>
   typeof window !== undefined && window.matchMedia && !window.matchMedia("(prefers-color-scheme: dark)").matches
