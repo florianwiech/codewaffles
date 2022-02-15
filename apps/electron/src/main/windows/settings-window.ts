@@ -1,4 +1,5 @@
-import { BrowserWindow } from "electron";
+import { BrowserWindow, nativeTheme } from "electron";
+import { getBackgroundColor } from "@codewaffle/components";
 
 declare const SETTINGS_WINDOW_WEBPACK_ENTRY: string;
 declare const SETTINGS_WINDOW_PRELOAD_WEBPACK_ENTRY: string;
@@ -19,6 +20,7 @@ export function getSettingsWindowOptions(): Electron.BrowserWindowConstructorOpt
     fullscreenable: false,
     resizable: false,
     show: false,
+    backgroundColor: getBackgroundColor(nativeTheme.shouldUseDarkColors),
     webPreferences: {
       preload: SETTINGS_WINDOW_PRELOAD_WEBPACK_ENTRY,
     },

@@ -10,6 +10,9 @@ export enum AppearanceState {
   LIGHT = "light",
 }
 
+export const getBackgroundColor = (shouldUseDarkColors: boolean) =>
+  shouldUseDarkColors ? dark.canvas.default : light.canvas.default;
+
 export const Layout: React.FC<{ theme?: Omit<AppearanceState, "system"> }> = ({ theme, children }) => {
   return (
     <ThemeProvider theme={theme === AppearanceState.DARK ? dark : light}>
