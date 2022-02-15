@@ -17,6 +17,7 @@ const shouldQuit = () => require("electron-squirrel-startup");
 export async function onReady() {
   // todo
   // await onFirstRunMaybe();
+  setupSecurityHandlers();
 
   getOrCreateMainWindow();
 
@@ -60,7 +61,6 @@ export function main(argv_in: string[]) {
 
   // https://www.electronjs.org/docs/latest/api/app#appenablesandbox
   app.enableSandbox();
-  setupSecurityHandlers();
 
   app.name = "CodeWaffle";
 
