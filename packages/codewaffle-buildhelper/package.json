@@ -18,7 +18,8 @@
     "try": "node ./bin/cli.mjs"
   },
   "peerDependencies": {
-    "eslint": ">= 8"
+    "eslint": ">= 8",
+    "ts-jest": ">= 27"
   },
   "devDependencies": {
     "@babel/core": "^7.17.3",

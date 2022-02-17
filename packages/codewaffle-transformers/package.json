@@ -27,6 +27,7 @@
     "@codewaffle/buildhelper": "*",
     "eslint": "^8.9.0",
     "rimraf": "^3.0.2",
+    "ts-jest": "^27.1.3",
     "typescript": "^4.5.5"
   }
 }
