@@ -12,9 +12,8 @@
   "module": "dist/index.js",
   "sideEffects": false,
   "scripts": {
-    "clean": "rimraf dist",
     "storybook": "start-storybook -p 6006",
-    "build": "yarn clean && codewaffle-scripts build",
+    "build": "codewaffle-scripts build",
     "build:storybook": "build-storybook",
     "test": "codewaffle-scripts test",
     "lint": "eslint src --format friendly",
@@ -73,7 +72,6 @@
     "eslint": "^8.9.0",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
-    "rimraf": "^3.0.2",
     "rxjs": "^7.5.2",
     "rxjs-spy": "^8.0.2",
     "storybook-dark-mode": "^1.0.8",
