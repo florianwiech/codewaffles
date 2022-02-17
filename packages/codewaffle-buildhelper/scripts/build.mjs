@@ -70,20 +70,12 @@ export async function build(options) {
 
 /**
  * @param {import("rollup").RollupBuild} bundle
- * @param {any} conf
+ * @param {import("rollup").OutputOptions} conf
  */
 async function emit(bundle, conf) {
-  let result = await bundle.generate(conf);
   let dir = dirname(conf.file);
+
   await fs.promises.mkdir(dir, { recursive: true }).catch(() => null);
-  for (let file of result.output) {
-    let content = file.type === "chunk" ? file.code : file.source;
 
-    if (file.type === "chunk" && file.map) {
-      content = content + `//# sourceMappingURL=${file.fileName}.map\n`;
-      await fs.promises.writeFile(join(dir, file.fileName + ".map"), file.map.toString());
-    }
-
-    await fs.promises.writeFile(join(dir, file.fileName), content);
-  }
+  await bundle.write(conf);
 }
