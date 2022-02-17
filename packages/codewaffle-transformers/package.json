@@ -21,7 +21,7 @@
     "check:types": "tsc --noEmit"
   },
   "dependencies": {
-    "decode-jwt": "^1.0.2"
+    "jwt-decode": "^3.1.2"
   },
   "devDependencies": {
     "@codewaffle/buildhelper": "*",
