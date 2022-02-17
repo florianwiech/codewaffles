@@ -1,4 +1,4 @@
-import { FC } from "react";
+import React, { FC } from "react";
 import { EditorState } from "@codemirror/state";
 
 function getCursorPosition(state: EditorState) {

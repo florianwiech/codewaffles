@@ -1,9 +1,9 @@
 import { EditorView } from "@codemirror/view";
+import { StyleSpec } from "style-mod";
 import { Extension } from "@codemirror/state";
 import { HighlightStyle, tags as t, TagStyle } from "@codemirror/highlight";
 import dark from "@primer/primitives/dist/js/colors/dark";
 import light from "@primer/primitives/dist/js/colors/light";
-import { StyleSpec } from "style-mod";
 
 export type ThemeSpec = {
   [selector: string]: StyleSpec;

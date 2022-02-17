@@ -1,18 +1,19 @@
 import { useEffect } from "react";
 import { Compartment } from "@codemirror/state";
-import { AppearanceState } from "@codewaffle/components";
 import { CodeMirrorEditor } from "../editor.types";
-import { useObservable } from "../../shared/hooks/useObservable";
-import { theme$ } from "../../appearance";
+import { AppearanceState } from "../../theme";
 import { primerDark, primerLight } from "./primerTheme";
+
+export type useCodeMirrorThemeParams = {
+  editor: CodeMirrorEditor;
+  theme?: Omit<AppearanceState, "system">;
+};
 
 export const themeConf = new Compartment();
 
 export const initialThemeSetup = themeConf.of([]);
 
-export const useCodeMirrorTheme = (editor: CodeMirrorEditor) => {
-  const theme = useObservable(theme$);
-
+export const useCodeMirrorTheme = ({ editor, theme }: useCodeMirrorThemeParams) => {
   useEffect(() => {
     if (!editor.current) return;
 

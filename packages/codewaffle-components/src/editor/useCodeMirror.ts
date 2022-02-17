@@ -1,10 +1,16 @@
 import { RefObject, useLayoutEffect, useRef } from "react";
+import { Subject } from "rxjs";
 import { EditorView } from "@codemirror/view";
 import { EditorStateConfig } from "@codemirror/state";
-import { editor$ } from "../store";
 import { createEditor } from "./setup/createEditor";
 
-export const useCodeMirror = (ref: RefObject<HTMLElement>, options?: EditorStateConfig) => {
+export type useCodeMirrorParams = {
+  editor$: Subject<EditorView | null>;
+  ref: RefObject<HTMLElement>;
+  options?: EditorStateConfig;
+};
+
+export const useCodeMirror = ({ ref, options, editor$ }: useCodeMirrorParams) => {
   const editorRef = useRef<EditorView>();
 
   useLayoutEffect(() => {
@@ -21,7 +27,7 @@ export const useCodeMirror = (ref: RefObject<HTMLElement>, options?: EditorState
       editor$.next(null);
       view.destroy();
     };
-  }, [ref, options]);
+  }, [ref, options, editor$]);
 
   return editorRef;
 };

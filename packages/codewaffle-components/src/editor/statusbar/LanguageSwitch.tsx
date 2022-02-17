@@ -1,4 +1,4 @@
-import { ChangeEvent, FC, useState } from "react";
+import React, { ChangeEvent, FC, useState } from "react";
 import { EditorView } from "@codemirror/view";
 import { languageConf, languageExtensions, supportedLanguages } from "../setup/language";
 

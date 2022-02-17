@@ -1,13 +1,24 @@
+import React, { FC, useEffect, useRef } from "react";
 import { ReactComponent as CloseIcon } from "bootstrap-icons/icons/x-circle-fill.svg";
-import { FC, useEffect, useRef } from "react";
-import { EditorView, ViewUpdate } from "@codemirror/view";
-import ReactDOM from "react-dom";
-import { showPanel } from "@codemirror/panel";
+import { EditorView } from "@codemirror/view";
+import { Subject } from "rxjs";
 import { AnimatePresence, motion } from "framer-motion";
-import { useObservable } from "../../shared/hooks/useObservable";
-import { notification$ } from "../../store";
+import { useObservable } from "../shared/hooks/useObservable";
 
-export const Notification: FC<{ view: EditorView }> = () => {
+export enum NotificationStatus {
+  INFO = "info",
+  WARNING = "warning",
+  DANGER = "danger",
+}
+
+export type Notification = {
+  type: NotificationStatus;
+  message: string;
+};
+
+export const NotificationComponent: FC<{ view: EditorView; notification$: Subject<Notification | null> }> = ({
+  notification$,
+}) => {
   const timeoutRef = useRef<any>();
   const state = useObservable(notification$);
 
@@ -22,7 +33,7 @@ export const Notification: FC<{ view: EditorView }> = () => {
     timeoutRef.current = setTimeout(() => {
       notification$.next(null);
     }, 8000);
-  }, [state]);
+  }, [notification$, state]);
 
   return (
     <AnimatePresence exitBeforeEnter>
@@ -43,21 +54,3 @@ export const Notification: FC<{ view: EditorView }> = () => {
     </AnimatePresence>
   );
 };
-
-const renderElement = (dom: HTMLElement, view: EditorView) => {
-  ReactDOM.render(<Notification view={view} />, dom);
-};
-
-export const notification = showPanel.of((view: EditorView) => {
-  const element = document.createElement("div");
-  element.className = "cm-notification";
-
-  const update = (update: ViewUpdate) => renderElement(element, update.view);
-
-  renderElement(element, view);
-
-  return {
-    dom: element,
-    update,
-  };
-});

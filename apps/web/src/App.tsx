@@ -1,11 +1,11 @@
 import { BrowserAppearance } from "./BrowserAppearance";
-import { Editor } from "./editor";
+import { CodeMirror } from "./CodeMirror";
 import { Spotlight } from "./Spotlight";
 
 function App() {
   return (
     <BrowserAppearance>
-      <Editor />
+      <CodeMirror />
       <Spotlight />
     </BrowserAppearance>
   );
