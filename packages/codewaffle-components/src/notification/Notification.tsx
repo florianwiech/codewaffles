@@ -1,9 +1,9 @@
 import React, { FC, useEffect, useRef } from "react";
 import { ReactComponent as CloseIcon } from "bootstrap-icons/icons/x-circle-fill.svg";
 import { EditorView } from "@codemirror/view";
+import { useObservable } from "@codewaffle/utils";
 import { Subject } from "rxjs";
 import { AnimatePresence, motion } from "framer-motion";
-import { useObservable } from "../shared/hooks/useObservable";
 
 export enum NotificationStatus {
   INFO = "info",

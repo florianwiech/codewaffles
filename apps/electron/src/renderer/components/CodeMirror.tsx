@@ -1,5 +1,6 @@
 import { FC, useRef } from "react";
 import { BehaviorSubject } from "rxjs";
+import styled, { css } from "styled-components";
 import { EditorView } from "@codemirror/view";
 import {
   basics,
@@ -12,9 +13,8 @@ import {
   useCodeMirror,
   useCodeMirrorTheme,
 } from "@codewaffle/components";
-import styled, { css } from "styled-components";
+import { useObservable } from "@codewaffle/utils";
 import { theme$ } from "../appearance";
-import { useObservable } from "./useObservable";
 import { MAC_OS_TITLE_BAR_HEIGHT } from "./MacTitleBar";
 
 export const editor$ = new BehaviorSubject<EditorView | null>(null);

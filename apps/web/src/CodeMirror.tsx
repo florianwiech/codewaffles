@@ -12,8 +12,8 @@ import {
   useCodeMirror,
   useCodeMirrorTheme,
 } from "@codewaffle/components";
+import { useObservable } from "@codewaffle/utils";
 import { editor$, getEditorChanges, notification$ } from "./store";
-import { useObservable } from "./shared/hooks/useObservable";
 import { appearance$, changeAppearance, theme$ } from "./appearance";
 
 const StatusbarPanel: FC<{ view: EditorView }> = ({ view }) => {

@@ -6,7 +6,7 @@ import {
   useSpotlightSearch,
 } from "@codewaffle/components";
 import { ScriptExtension, scriptList } from "@codewaffle/transformers";
-import { useKeyPress } from "./shared/hooks/useKeyPress";
+import { useKeyPress } from "@codewaffle/utils";
 import { command$, CommandTypes } from "./store";
 
 export function Spotlight() {

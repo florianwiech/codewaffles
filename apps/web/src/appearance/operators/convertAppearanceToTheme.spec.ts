@@ -1,7 +1,25 @@
 import { TestScheduler } from "rxjs/testing";
 import { AppearanceState } from "@codewaffle/components";
-import { mockMatchMediaScoped } from "../../shared/testing/mockMatchMedia";
 import { convertAppearanceToTheme } from "./convertAppearanceToTheme";
+
+const mockMatchMediaScoped = (attributes: Partial<MediaQueryList>) => {
+  Object.defineProperty(window, "matchMedia", {
+    writable: true,
+    value: jest.fn().mockImplementation((query) => {
+      return {
+        matches: false,
+        media: query,
+        onchange: null,
+        addListener: jest.fn(), // deprecated
+        removeListener: jest.fn(), // deprecated
+        addEventListener: jest.fn(),
+        removeEventListener: jest.fn(),
+        dispatchEvent: jest.fn(),
+        ...attributes,
+      };
+    }),
+  });
+};
 
 describe("convertAppearanceToTheme", () => {
   let testScheduler: TestScheduler = new TestScheduler(() => {});

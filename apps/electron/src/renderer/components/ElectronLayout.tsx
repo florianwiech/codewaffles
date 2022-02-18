@@ -1,7 +1,7 @@
 import { FC, useEffect } from "react";
 import { Layout } from "@codewaffle/components";
+import { useObservable } from "@codewaffle/utils";
 import { getColorSchemeChange, theme$ } from "../appearance";
-import { useObservable } from "./useObservable";
 
 export const ElectronLayout: FC = ({ children }) => {
   const theme = useObservable(theme$);

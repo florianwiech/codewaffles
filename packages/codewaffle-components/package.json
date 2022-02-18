@@ -47,6 +47,7 @@
   },
   "peerDependencies": {
     "@codemirror/language-data": ">= 0.19",
+    "@codewaffle/utils": "*",
     "react": ">= 17",
     "react-dom": ">= 17",
     "rxjs": ">= 7",
@@ -56,6 +57,7 @@
   "devDependencies": {
     "@codemirror/language-data": "0.19.1",
     "@codewaffle/buildhelper": "*",
+    "@codewaffle/utils": "*",
     "@storybook/addon-actions": "^6.4.19",
     "@storybook/addon-essentials": "^6.4.19",
     "@storybook/addon-links": "^6.4.19",
