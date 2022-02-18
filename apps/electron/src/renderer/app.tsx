@@ -29,10 +29,12 @@ import * as React from "react";
 import * as ReactDOM from "react-dom";
 import { ElectronLayout } from "./components/ElectronLayout";
 import { MacTitleBar } from "./components/MacTitleBar";
+import { CodeMirror } from "./components/CodeMirror";
 
 ReactDOM.render(
   <ElectronLayout>
     <MacTitleBar title="CodeWaffle" platform={window.api.platform} onTitleBarClick={window.api.onTitleBarClick} />
+    <CodeMirror />
   </ElectronLayout>,
   document.getElementById("root"),
 );
