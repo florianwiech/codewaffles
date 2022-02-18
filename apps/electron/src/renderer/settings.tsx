@@ -2,11 +2,11 @@ import * as React from "react";
 import * as ReactDOM from "react-dom";
 import { AppearanceState } from "@codewaffle/components";
 import { ElectronLayout } from "./components/ElectronLayout";
-import { MacOsTitleBar } from "./components/header";
+import { MacTitleBar } from "./components/MacTitleBar";
 
 ReactDOM.render(
   <ElectronLayout>
-    <MacOsTitleBar
+    <MacTitleBar
       title="CodeWaffle"
       platform={window.settings.platform}
       onTitleBarClick={window.settings.onTitleBarClick}

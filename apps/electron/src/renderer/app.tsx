@@ -28,12 +28,11 @@
 import * as React from "react";
 import * as ReactDOM from "react-dom";
 import { ElectronLayout } from "./components/ElectronLayout";
-import { MacOsTitleBar } from "./components/header";
+import { MacTitleBar } from "./components/MacTitleBar";
 
 ReactDOM.render(
   <ElectronLayout>
-    <MacOsTitleBar title="CodeWaffle" platform={window.api.platform} onTitleBarClick={window.api.onTitleBarClick} />
-    <h2>Hello from React!</h2>
+    <MacTitleBar title="CodeWaffle" platform={window.api.platform} onTitleBarClick={window.api.onTitleBarClick} />
   </ElectronLayout>,
   document.getElementById("root"),
 );
