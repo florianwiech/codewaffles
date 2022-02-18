@@ -7,7 +7,7 @@ export const ElectronLayout: FC = ({ children }) => {
   const theme = useObservable(theme$);
 
   useEffect(() => {
-    const subscription = getColorSchemeChange().subscribe(theme$.next);
+    const subscription = getColorSchemeChange().subscribe((next) => theme$.next(next));
     return () => subscription.unsubscribe();
   }, []);
 
