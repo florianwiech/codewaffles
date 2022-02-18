@@ -27,6 +27,7 @@ export const styledStatusbar = css`
     .cursor-position {
       display: flex;
       flex-direction: row;
+      user-select: none;
 
       .single-selection {
         display: none;
