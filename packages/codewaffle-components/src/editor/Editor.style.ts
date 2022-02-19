@@ -5,8 +5,10 @@ import { styledSearch } from "./styles/search.style";
 import { styledNotificationPanel } from "./styles/notification.style";
 
 export const StyledEditor = styled.div`
+  height: 100%;
+
   .cm-editor {
-    height: 100vh;
+    height: 100%;
 
     .cm-panels {
       ${styledSearch}
