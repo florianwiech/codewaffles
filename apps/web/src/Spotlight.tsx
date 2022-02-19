@@ -5,9 +5,10 @@ import {
   SpotlightWrapper,
   useSpotlightSearch,
 } from "@codewaffle/components";
+import { CommandTypes } from "@codewaffle/domain";
 import { ScriptExtension, scriptList } from "@codewaffle/transformers";
 import { useKeyPress } from "@codewaffle/utils";
-import { command$, CommandTypes } from "./store";
+import { command$ } from "./store";
 
 export function Spotlight() {
   const handleSubmit = (command: Command<ScriptExtension>) => {

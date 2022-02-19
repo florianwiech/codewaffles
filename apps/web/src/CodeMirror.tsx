@@ -12,8 +12,9 @@ import {
   useCodeMirror,
   useCodeMirrorTheme,
 } from "@codewaffle/components";
+import { getEditorChanges } from "@codewaffle/domain";
 import { useObservable } from "@codewaffle/utils";
-import { editor$, getEditorChanges, notification$ } from "./store";
+import { command$, editor$, notification$, view$ } from "./store";
 import { appearance$, changeAppearance, theme$ } from "./appearance";
 
 const StatusbarPanel: FC<{ view: EditorView }> = ({ view }) => {
@@ -44,7 +45,7 @@ export const CodeMirror: FC = () => {
   useCodeMirrorTheme({ editor, theme });
 
   useEffect(() => {
-    const sub = getEditorChanges().subscribe();
+    const sub = getEditorChanges({ notification$, command$, view$ }).subscribe();
     return () => sub.unsubscribe();
   }, []);
 

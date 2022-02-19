@@ -1,14 +1,20 @@
-import { combineLatest, merge } from "rxjs";
+import { combineLatest, merge, Observable, Subject } from "rxjs";
+import { EditorView } from "@codemirror/view";
 import { filter, tap } from "rxjs/operators";
 import { tag } from "rxjs-spy/operators";
-import { CommandTypes, isPerformTransformCommand } from "../types";
-import { command$, notification$, view$ } from "../subjects";
+import { Command, CommandTypes, isPerformTransformCommand, Notification } from "../types";
 import { transformContent, transformRanges } from "../operators";
 
-export const getEditorChanges = (source$ = command$) => {
-  const closeSearch$ = source$.pipe(filter(({ type }) => type === CommandTypes.SEARCH_CLOSED));
+export type GetEditorChangesParams = {
+  command$: Observable<Command>;
+  notification$: Subject<Notification | null>;
+  view$: Observable<EditorView>;
+};
 
-  const performTransform$ = source$.pipe(filter(isPerformTransformCommand));
+export const getEditorChanges = ({ command$, notification$, view$ }: GetEditorChangesParams) => {
+  const closeSearch$ = command$.pipe(filter(({ type }) => type === CommandTypes.SEARCH_CLOSED));
+
+  const performTransform$ = command$.pipe(filter(isPerformTransformCommand));
 
   const editorTransform$ = combineLatest([performTransform$, view$], (command, view) => ({ command, view }));
 

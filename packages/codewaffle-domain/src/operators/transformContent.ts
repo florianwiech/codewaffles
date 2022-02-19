@@ -10,7 +10,7 @@ import {
   getEditorDocumentLength,
   getSingleCursorPosition,
   isSingleCursorWithoutSelection,
-} from "../../editor";
+} from "../utils";
 
 export function transformContent(): MonoTypeOperatorFunction<EditorTransform> {
   return pipe(

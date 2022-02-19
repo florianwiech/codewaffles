@@ -13,6 +13,7 @@
   },
   "dependencies": {
     "@codewaffle/components": "*",
+    "@codewaffle/domain": "*",
     "@codewaffle/utils": "*",
     "@codewaffle/transformers": "*",
     "@codemirror/language-data": "0.19.1",

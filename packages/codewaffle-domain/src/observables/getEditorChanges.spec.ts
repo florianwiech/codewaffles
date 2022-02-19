@@ -1,15 +1,25 @@
-import { BehaviorSubject, first } from "rxjs";
+import { BehaviorSubject, first, Subject } from "rxjs";
+import { filter } from "rxjs/operators";
 import { eachValueFrom } from "rxjs-for-await";
-import { EditorSelection } from "@codemirror/state";
-import { createEditor } from "@codewaffle/components";
+import { EditorState, EditorSelection, EditorStateConfig } from "@codemirror/state";
+import { EditorView } from "@codemirror/view";
 import * as Scripts from "@codewaffle/transformers";
-import { Command, CommandTypes } from "../types";
-import { editor$ } from "../subjects";
+import { Command, CommandTypes, isEditorView, Notification } from "../types";
 import { getEditorChanges } from "./getEditorChanges";
 
-describe("getEditorChanges", () => {
-  const cmd$ = new BehaviorSubject<Command>({} as Command);
+const command$ = new BehaviorSubject<Command>({} as Command);
+export const editor$ = new BehaviorSubject<EditorView | null>(null);
+export const view$ = editor$.pipe(filter(isEditorView));
 
+export const notification$ = new Subject<Notification | null>();
+
+export const createEditor = (node: HTMLElement, options: EditorStateConfig = {}) => {
+  const state = EditorState.create(options);
+
+  return new EditorView({ state, parent: node });
+};
+
+describe("getEditorChanges", () => {
   const initialContent = `Hello World.`;
 
   let view = createEditor(document.body, { doc: initialContent });
@@ -36,15 +46,15 @@ describe("getEditorChanges", () => {
 
   afterEach(() => {
     editor$.next(null);
-    cmd$.next({} as Command);
+    command$.next({} as Command);
     view.destroy();
   });
 
   it("should focus editor when search closed", async () => {
     const command = { type: CommandTypes.SEARCH_CLOSED };
-    cmd$.next(command);
+    command$.next(command);
 
-    const source$ = getEditorChanges(cmd$).pipe(first());
+    const source$ = getEditorChanges({ command$, view$, notification$ }).pipe(first());
 
     const result = [];
     for await (const value of eachValueFrom(source$)) {
@@ -66,9 +76,9 @@ describe("getEditorChanges", () => {
       key: "create-timestamp-seconds",
     };
 
-    cmd$.next(command);
+    command$.next(command);
 
-    const source$ = getEditorChanges(cmd$).pipe(first());
+    const source$ = getEditorChanges({ command$, view$, notification$ }).pipe(first());
 
     const result = [];
     for await (const value of eachValueFrom(source$)) {
@@ -99,9 +109,9 @@ describe("getEditorChanges", () => {
       key: "create-timestamp-seconds",
     };
 
-    cmd$.next(command);
+    command$.next(command);
 
-    const source$ = getEditorChanges(cmd$).pipe(first());
+    const source$ = getEditorChanges({ command$, view$, notification$ }).pipe(first());
 
     const result = [];
     for await (const value of eachValueFrom(source$)) {
@@ -132,9 +142,9 @@ describe("getEditorChanges", () => {
       key: "create-timestamp-seconds",
     };
 
-    cmd$.next(command);
+    command$.next(command);
 
-    const source$ = getEditorChanges(cmd$).pipe(first());
+    const source$ = getEditorChanges({ command$, view$, notification$ }).pipe(first());
 
     const result = [];
     for await (const value of eachValueFrom(source$)) {
