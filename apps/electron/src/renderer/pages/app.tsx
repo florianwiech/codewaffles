@@ -27,9 +27,9 @@
  */
 import * as React from "react";
 import * as ReactDOM from "react-dom";
-import { ElectronLayout } from "./components/ElectronLayout";
-import { MacTitleBar } from "./components/MacTitleBar";
-import { CodeMirror } from "./components/CodeMirror";
+import { ElectronLayout } from "../components/ElectronLayout";
+import { MacTitleBar } from "../components/MacTitleBar";
+import { CodeMirror } from "../components/CodeMirror";
 
 ReactDOM.render(
   <ElectronLayout>

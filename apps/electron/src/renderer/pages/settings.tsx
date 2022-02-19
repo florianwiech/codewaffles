@@ -1,8 +1,8 @@
 import * as React from "react";
 import * as ReactDOM from "react-dom";
 import { AppearanceState } from "@codewaffle/components";
-import { ElectronLayout } from "./components/ElectronLayout";
-import { MacTitleBar } from "./components/MacTitleBar";
+import { ElectronLayout } from "../components/ElectronLayout";
+import { MacTitleBar } from "../components/MacTitleBar";
 
 ReactDOM.render(
   <ElectronLayout>

@@ -9,7 +9,7 @@ const webpackConfig = {
     entryPoints: [
       {
         html: "./static/index.html",
-        js: "./src/renderer/app.tsx",
+        js: "./src/renderer/pages/app.tsx",
         preload: {
           js: "./src/preload/app-preload.ts",
         },
@@ -17,7 +17,7 @@ const webpackConfig = {
       },
       {
         html: "./static/index.html",
-        js: "./src/renderer/settings.tsx",
+        js: "./src/renderer/pages/settings.tsx",
         preload: {
           js: "./src/preload/settings-preload.ts",
         },
