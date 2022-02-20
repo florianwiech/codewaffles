@@ -10,6 +10,16 @@ export const StyledEditor = styled.div`
   .cm-editor {
     height: 100%;
 
+    &.cm-focused {
+      outline: none;
+    }
+
+    .cm-lineNumbers {
+      .cm-gutterElement {
+        min-width: 33px;
+      }
+    }
+
     .cm-panels {
       ${styledSearch}
       ${styledStatusbar}
