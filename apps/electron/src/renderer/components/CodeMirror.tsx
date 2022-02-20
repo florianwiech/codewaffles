@@ -1,6 +1,7 @@
 import { FC, useEffect, useRef } from "react";
 import styled, { css } from "styled-components";
 import { EditorView } from "@codemirror/view";
+import { StateEffect } from "@codemirror/state";
 import {
   basics,
   CursorInformation,
@@ -15,7 +16,7 @@ import {
 import { getEditorChanges } from "@codewaffle/domain";
 import { useObservable } from "@codewaffle/utils";
 import { theme$ } from "../appearance";
-import { command$, notification$, view$, editor$ } from "../store";
+import { command$, editor$, notification$, view$ } from "../store";
 import { MAC_OS_TITLE_BAR_HEIGHT } from "./MacTitleBar";
 
 const macEditorHeight = css`
@@ -36,6 +37,15 @@ const StatusbarPanel: FC<{ view: EditorView }> = ({ view }) => {
   );
 };
 
+const options = {
+  extensions: [
+    //
+    basics,
+    initialThemeSetup,
+    initialLanguageSetup,
+  ],
+};
+
 export const CodeMirror: FC = () => {
   const ref = useRef<HTMLDivElement>(null);
   const theme = useObservable(theme$);
@@ -43,18 +53,16 @@ export const CodeMirror: FC = () => {
   const editor = useCodeMirror({
     ref,
     editor$,
-    options: {
-      extensions: [
-        //
-        basics,
-        initialThemeSetup,
-        initialLanguageSetup,
-        statusbar(StatusbarPanel),
-      ],
-    },
+    options,
   });
 
   useCodeMirrorTheme({ editor, theme });
+
+  useEffect(() => {
+    editor.current.dispatch({
+      effects: StateEffect.appendConfig.of(statusbar(StatusbarPanel)),
+    });
+  }, [editor]);
 
   useEffect(() => {
     const sub = getEditorChanges({ notification$, command$, view$ }).subscribe();
