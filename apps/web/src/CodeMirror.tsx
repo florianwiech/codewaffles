@@ -4,6 +4,7 @@ import {
   AppearanceSwitch,
   basics,
   CursorInformation,
+  initialLanguageSetup,
   initialThemeSetup,
   LanguageSwitch,
   notification,
@@ -38,7 +39,13 @@ export const CodeMirror: FC = () => {
     ref,
     editor$,
     options: {
-      extensions: [basics, initialThemeSetup, statusbar(StatusbarPanel), notification(notification$)],
+      extensions: [
+        basics,
+        initialThemeSetup,
+        initialLanguageSetup,
+        statusbar(StatusbarPanel),
+        notification(notification$),
+      ],
     },
   });
 
