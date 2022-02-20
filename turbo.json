@@ -11,7 +11,9 @@
     },
     "lint": {},
     "lint:ci": {},
-    "check:types": {},
+    "check:types": {
+      "dependsOn": ["^build"]
+    },
     "dev": {
       "cache": false
     }
