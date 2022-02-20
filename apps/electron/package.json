@@ -25,7 +25,7 @@
   "dependencies": {
     "@codewaffle/components": "*",
     "@codewaffle/utils": "*",
-    "@codemirror/language-data": "0.19.1",
+    "@codemirror/language-data": "0.19.2",
     "bootstrap-icons": "^1.8.1",
     "electron-devtools-installer": "^3.2.0",
     "electron-squirrel-startup": "^1.0.0",
