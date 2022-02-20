@@ -5,6 +5,7 @@ import { setupMenu } from "./menu/setup-menu";
 import { setupTitleBarClickMac } from "./title-bar";
 import { setupAppearanceHandler } from "./appearance";
 import { setupSecurityHandlers } from "./setup-security-handlers";
+import { setupWindowNotifications } from "./notification";
 
 let argv: string[] = [];
 
@@ -29,6 +30,8 @@ export async function onReady() {
   // setupDialogs();
   setupDevTools().then();
   setupTitleBarClickMac();
+
+  setupWindowNotifications();
 
   // processCommandLine(argv);
 }
