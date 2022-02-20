@@ -15,7 +15,7 @@
     "build": "codewaffle-scripts build",
     "test": "codewaffle-scripts test",
     "lint": "eslint src --format friendly",
-    "lint:stage": "eslint src --format friendly --max-warnings=0",
+    "lint:ci": "eslint src --format friendly --max-warnings=0",
     "lint:fix": "eslint src --format friendly --fix",
     "check:types": "tsc --noEmit"
   },

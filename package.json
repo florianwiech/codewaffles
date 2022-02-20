@@ -19,7 +19,7 @@
     "test:components": "yarn workspace @codewaffle/components test",
     "test:transformers": "yarn workspace @codewaffle/transformers test",
     "lint": "turbo run lint",
-    "lint:stage": "turbo run lint:stage",
+    "lint:ci": "turbo run lint:ci",
     "format:check": "prettier . --check --ignore-unknown",
     "format:write": "prettier . --write --ignore-unknown",
     "check:types": "turbo run check:types"
