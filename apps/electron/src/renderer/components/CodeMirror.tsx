@@ -1,4 +1,5 @@
 import { FC, useEffect, useRef } from "react";
+import styled, { css } from "styled-components";
 import { EditorView } from "@codemirror/view";
 import {
   basics,
@@ -14,7 +15,16 @@ import {
 import { getEditorChanges } from "@codewaffle/domain";
 import { useObservable } from "@codewaffle/utils";
 import { theme$ } from "../appearance";
-import { command$, editor$, notification$, view$ } from "../store";
+import { command$, notification$, view$, editor$ } from "../store";
+import { MAC_OS_TITLE_BAR_HEIGHT } from "./MacTitleBar";
+
+const macEditorHeight = css`
+  height: calc(100% - ${MAC_OS_TITLE_BAR_HEIGHT});
+`;
+
+const StyledElectronEditor = styled(StyledEditor)`
+  ${window.api.platform === "darwin" ? macEditorHeight : ""}
+`;
 
 const StatusbarPanel: FC<{ view: EditorView }> = ({ view }) => {
   return (
@@ -51,5 +61,5 @@ export const CodeMirror: FC = () => {
     return () => sub.unsubscribe();
   }, []);
 
-  return <StyledEditor ref={ref} />;
+  return <StyledElectronEditor ref={ref} />;
 };
