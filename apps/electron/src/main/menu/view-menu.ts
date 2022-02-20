@@ -12,6 +12,13 @@ export function getViewMenu(): MenuItemConstructorOptions {
         },
       },
       {
+        label: "Force Reload",
+        accelerator: "Shift+CmdOrCtrl+R",
+        click: function (item, focusedWindow) {
+          if (focusedWindow) focusedWindow.webContents.reloadIgnoringCache();
+        },
+      },
+      {
         label: "Toggle Full Screen",
         accelerator: process.platform === "darwin" ? "Ctrl+Command+F" : "F11",
         click: function (item, focusedWindow) {
