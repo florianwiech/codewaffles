@@ -1,5 +1,6 @@
-import { FC, useEffect, useRef } from "react";
+import { FC, useEffect, useMemo, useRef } from "react";
 import { EditorView } from "@codemirror/view";
+import { EditorStateConfig } from "@codemirror/state";
 import {
   AppearanceSwitch,
   basics,
@@ -35,18 +36,24 @@ export const CodeMirror: FC = () => {
   const ref = useRef<HTMLDivElement>(null);
   const theme = useObservable(theme$);
 
-  const editor = useCodeMirror({
-    ref,
-    editor$,
-    options: {
+  const options = useMemo<EditorStateConfig>(
+    () => ({
       extensions: [
+        //
         basics,
         initialThemeSetup,
         initialLanguageSetup,
         statusbar(StatusbarPanel),
         notification(notification$),
       ],
-    },
+    }),
+    [],
+  );
+
+  const editor = useCodeMirror({
+    ref,
+    editor$,
+    options,
   });
 
   useCodeMirrorTheme({ editor, theme });
