@@ -7,6 +7,7 @@ export const styledStatusbar = css`
     flex-direction: row;
 
     padding: 0 7px;
+    height: 23px;
 
     overflow-x: auto;
 
