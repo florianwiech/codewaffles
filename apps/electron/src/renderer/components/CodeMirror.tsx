@@ -1,5 +1,4 @@
-import { FC, useRef } from "react";
-import { BehaviorSubject } from "rxjs";
+import { FC, useEffect, useRef } from "react";
 import { EditorView } from "@codemirror/view";
 import {
   basics,
@@ -12,10 +11,10 @@ import {
   useCodeMirror,
   useCodeMirrorTheme,
 } from "@codewaffle/components";
+import { getEditorChanges } from "@codewaffle/domain";
 import { useObservable } from "@codewaffle/utils";
 import { theme$ } from "../appearance";
-
-export const editor$ = new BehaviorSubject<EditorView | null>(null);
+import { command$, editor$, notification$, view$ } from "../store";
 
 const StatusbarPanel: FC<{ view: EditorView }> = ({ view }) => {
   return (
@@ -35,11 +34,22 @@ export const CodeMirror: FC = () => {
     ref,
     editor$,
     options: {
-      extensions: [basics, initialThemeSetup, initialLanguageSetup, statusbar(StatusbarPanel)],
+      extensions: [
+        //
+        basics,
+        initialThemeSetup,
+        initialLanguageSetup,
+        statusbar(StatusbarPanel),
+      ],
     },
   });
 
   useCodeMirrorTheme({ editor, theme });
+
+  useEffect(() => {
+    const sub = getEditorChanges({ notification$, command$, view$ }).subscribe();
+    return () => sub.unsubscribe();
+  }, []);
 
   return <StyledEditor ref={ref} />;
 };
