@@ -11,24 +11,33 @@ on:
   workflow_call:
 
 jobs:
-  install:
+  build:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
-        uses: actions/checkout@v2
-      - name: Setup node
-        uses: actions/setup-node@v2
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2
         with:
           node-version: "16"
           cache: "yarn"
       - run: yarn install --frozen-lockfile
+      - run: yarn build
+      - run: yarn workspace @codewaffle/electron package
+      - uses: actions/upload-artifact@v2
+        with:
+          name: build
+          path: |
+            ./apps/**/.webpack
+            ./apps/**/build
+            ./packages/**/dist
 
   lint:
     runs-on: ubuntu-latest
-    needs: [install]
+    needs: [build]
     steps:
-      - name: Checkout
-        uses: actions/checkout@v2
+      - uses: actions/checkout@v2
+      - uses: actions/download-artifact@v2
+        with:
+          name: build
       - name: Setup node
         uses: actions/setup-node@v2
         with:
@@ -40,49 +49,37 @@ jobs:
 
   test:
     runs-on: ubuntu-latest
-    needs: [install]
+    needs: [build]
     steps:
-      - name: Checkout
-        uses: actions/checkout@v2
-      - name: Setup node
-        uses: actions/setup-node@v2
+      - uses: actions/checkout@v2
+      - uses: actions/download-artifact@v2
+        with:
+          name: build
+      - uses: actions/setup-node@v2
         with:
           node-version: "16"
           cache: "yarn"
       - run: yarn install --frozen-lockfile
       - run: yarn test
 
-  build:
-    runs-on: ubuntu-latest
-    needs: [install]
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v2
-      - name: Setup node
-        uses: actions/setup-node@v2
-        with:
-          node-version: "16"
-          cache: "yarn"
-      - run: yarn install --frozen-lockfile
-      - run: yarn build
-      - run: yarn workspace @codewaffle/electron package
-
   e2e-web:
     timeout-minutes: 60
     runs-on: ubuntu-latest
-    needs: [install]
+    needs: [build]
     steps:
       - uses: actions/checkout@v2
+      - uses: actions/download-artifact@v2
+        with:
+          name: build
       - uses: actions/setup-node@v2
         with:
           node-version: "16"
           cache: "yarn"
       - run: yarn install --frozen-lockfile
-      - run: cd apps/web
-      - run: yarn e2e
+      - run: yarn e2e:web
       - uses: actions/upload-artifact@v2
         if: always()
         with:
-          name: playwright-report
+          name: e2e-web-report
           path: playwright-report/
           retention-days: 30
