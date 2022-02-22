@@ -1,10 +1,4 @@
 import { useCallback, useEffect, useLayoutEffect, useRef } from "react";
-import UAParser from "ua-parser-js";
-
-const isAppleDevice = () => {
-  const osName = new UAParser().getOS().name;
-  return osName && ["Mac OS", "iOS"].includes(osName);
-};
 
 // https://devtrium.com/posts/how-keyboard-shortcut
 export const useKeyPress = (
@@ -21,7 +15,7 @@ export const useKeyPress = (
 
   const handleKeyPress = useCallback(
     (event: KeyboardEvent) => {
-      const optionKey = metaKey ? (isAppleDevice() ? event.metaKey : event.ctrlKey) : true;
+      const optionKey = metaKey ? event.metaKey || event.ctrlKey : true;
 
       if (optionKey && event.key === key) {
         callbackRef.current(event);
