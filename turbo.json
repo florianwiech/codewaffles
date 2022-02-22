@@ -3,19 +3,20 @@
   "pipeline": {
     "build": {
       "dependsOn": ["^build"],
-      "outputs": [".dist/**", "./build/**", ".webpack/**"]
+      "outputs": ["dist/**", "build/**", ".webpack/**", "out/**"]
     },
     "test": {
       "dependsOn": ["^build"],
       "outputs": ["coverage/**"]
     },
-    "lint": {},
-    "lint:ci": {},
-    "check:types": {
+    "lint": {
       "dependsOn": ["^build"]
     },
-    "dev": {
-      "cache": false
+    "lint:ci": {
+      "dependsOn": ["^build"]
+    },
+    "check:types": {
+      "dependsOn": ["^build"]
     }
   }
 }
