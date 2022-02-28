@@ -25,7 +25,7 @@
     "@codemirror/history": "0.19.2",
     "@codemirror/language": "0.19.7",
     "@codemirror/language-data": "0.19.2",
-    "@codemirror/lint": "0.19.3",
+    "@codemirror/lint": "0.19.5",
     "@codemirror/matchbrackets": "0.19.4",
     "@codemirror/panel": "^0.19.1",
     "@codemirror/rectangular-selection": "0.19.1",
