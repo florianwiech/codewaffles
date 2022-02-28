@@ -47,7 +47,7 @@
   },
   "devDependencies": {
     "@codewaffle/buildhelper": "*",
-    "@playwright/test": "^1.19.1",
+    "@playwright/test": "^1.19.2",
     "@testing-library/dom": "8.11.3",
     "@testing-library/jest-dom": "5.16.2",
     "@testing-library/react": "12.1.3",
