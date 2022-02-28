@@ -34,7 +34,7 @@
     "@codewaffle/buildhelper": "*",
     "@codewaffle/transformers": "*",
     "@types/react": "17.0.39",
-    "eslint": "^8.9.0",
+    "eslint": "^8.10.0",
     "react": "^17.0.2",
     "rxjs": "^7.5.2",
     "rxjs-spy": "^8.0.2",
