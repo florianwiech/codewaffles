@@ -32,17 +32,18 @@ jobs:
           cache: "yarn"
       - run: yarn install --frozen-lockfile
       - run: yarn package
-      - uses: actions/upload-artifact@v2
+      - uses: actions/upload-artifact@v3
         with:
           name: package
           path: ./packages/**/dist
+          retention-days: 5
 
   lint:
     runs-on: ubuntu-latest
     needs: [package]
     steps:
       - uses: actions/checkout@v3
-      - uses: actions/download-artifact@v2
+      - uses: actions/download-artifact@v3
         with:
           name: package
       - name: Setup node
@@ -59,7 +60,7 @@ jobs:
     needs: [package]
     steps:
       - uses: actions/checkout@v3
-      - uses: actions/download-artifact@v2
+      - uses: actions/download-artifact@v3
         with:
           name: package
       - uses: actions/setup-node@v3
@@ -74,7 +75,7 @@ jobs:
     needs: [package]
     steps:
       - uses: actions/checkout@v3
-      - uses: actions/download-artifact@v2
+      - uses: actions/download-artifact@v3
         with:
           name: package
       - uses: actions/setup-node@v3
@@ -91,7 +92,7 @@ jobs:
     needs: [package]
     steps:
       - uses: actions/checkout@v3
-      - uses: actions/download-artifact@v2
+      - uses: actions/download-artifact@v3
         with:
           name: package
       - uses: actions/setup-node@v3
@@ -101,9 +102,8 @@ jobs:
       - run: yarn install --frozen-lockfile
       - run: npx playwright install --with-deps
       - run: yarn e2e:web
-      - uses: actions/upload-artifact@v2
-        if: always()
+      - uses: actions/upload-artifact@v3
         with:
           name: e2e-web-report
           path: playwright-report/
-          retention-days: 30
+          retention-days: 5
