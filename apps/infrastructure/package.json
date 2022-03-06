@@ -6,10 +6,14 @@
     "infrastructure": "bin/infrastructure.js"
   },
   "scripts": {
+    "prepare": "mkdir -p artifacts",
     "build": "tsc",
     "watch": "tsc -w",
     "test": "jest",
-    "cdk": "cdk"
+    "cdk": "cdk",
+    "synth": "cdk synth '*'",
+    "synth:web": "cdk synth 'codewaffle-web' > ./artifacts/web.yaml",
+    "deploy": "cdk deploy"
   },
   "dependencies": {
     "aws-cdk-lib": "2.14.0",
