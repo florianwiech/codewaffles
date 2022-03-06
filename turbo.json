@@ -12,8 +12,13 @@
     "lint": {
       "dependsOn": ["^build"]
     },
-    "lint:ci": {},
+    "lint:ci": {
+      "dependsOn": ["^build"]
+    },
     "check:types": {
+      "dependsOn": ["^build"]
+    },
+    "e2e": {
       "dependsOn": ["^build"]
     }
   }
