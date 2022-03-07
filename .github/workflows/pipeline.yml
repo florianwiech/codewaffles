@@ -1,14 +1,10 @@
-name: pipeline
+name: deploy
 
 on:
   push:
     branches:
       - main
-  pull_request:
-    branches:
-      - main
   workflow_dispatch:
-  workflow_call:
 
 jobs:
   install:
@@ -80,3 +76,27 @@ jobs:
             apps/**/playwright-report
             packages/**/playwright-report
           retention-days: 5
+
+  deploy-infrastructure:
+    timeout-minutes: 60
+    runs-on: ubuntu-latest
+    needs: [install]
+    permissions:
+      id-token: write
+      contents: read
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: "16"
+          cache: "yarn"
+      - run: yarn install --frozen-lockfile
+
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-region: eu-central-1
+          role-to-assume: arn:aws:iam::${{ secrets.AWS_ACCOUNT_ID }}:role/codewaffle-deploy
+
+      - run: yarn workspace @codewaffle/infrastructure cdk diff
+      - run: yarn workspace @codewaffle/infrastructure deploy
