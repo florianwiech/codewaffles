@@ -1,21 +1,25 @@
 import { Stack, StackProps, Tags } from "aws-cdk-lib";
 import { Construct } from "constructs";
-import { Certificate, CertificateValidation } from "aws-cdk-lib/aws-certificatemanager";
 import { CachePolicy, Distribution } from "aws-cdk-lib/aws-cloudfront";
 import { Bucket } from "aws-cdk-lib/aws-s3";
 import { S3Origin } from "aws-cdk-lib/aws-cloudfront-origins";
 import { ParameterTier, StringParameter } from "aws-cdk-lib/aws-ssm";
+import { ICertificate } from "aws-cdk-lib/aws-certificatemanager/lib/certificate";
+import { IPublicHostedZone } from "aws-cdk-lib/aws-route53/lib/hosted-zone";
+import { AaaaRecord, RecordTarget } from "aws-cdk-lib/aws-route53";
+import { CloudFrontTarget } from "aws-cdk-lib/aws-route53-targets";
+
+export type WebStackProps = StackProps & {
+  domain: string;
+  hostedZone: IPublicHostedZone;
+  certificate: ICertificate;
+};
 
 export class WebStack extends Stack {
-  constructor(scope: Construct, id: string, props?: StackProps) {
+  constructor(scope: Construct, id: string, props: WebStackProps) {
     super(scope, id, props);
 
-    const domain = "codewaffle.app";
-
-    const certificate = new Certificate(this, "Certificate", {
-      domainName: domain,
-      validation: CertificateValidation.fromDns(),
-    });
+    const { domain, hostedZone, certificate } = props;
 
     const bucket = new Bucket(this, "Bucket");
 
@@ -29,7 +33,11 @@ export class WebStack extends Stack {
       domainNames: [domain],
     });
 
-    Tags.of(certificate).add("project", "codewaffle");
+    new AaaaRecord(this, "Alias", {
+      zone: hostedZone,
+      target: RecordTarget.fromAlias(new CloudFrontTarget(distribution)),
+    });
+
     Tags.of(distribution).add("project", "codewaffle");
 
     new StringParameter(this, "BucketArnParameter", {

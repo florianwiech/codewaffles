@@ -101,7 +101,7 @@ jobs:
         uses: aws-actions/configure-aws-credentials@v1
         with:
           aws-region: eu-central-1
-          role-to-assume: arn:aws:iam::${{ secrets.AWS_ACCOUNT_ID }}:role/codewaffle-deploy
+          role-to-assume: arn:aws:iam::${{ secrets.AWS_ACCOUNT_ID }}:role/deploy-codewaffle
 
       - run: yarn workspace @codewaffle/infrastructure cdk diff
       - run: yarn workspace @codewaffle/infrastructure deploy
@@ -124,7 +124,7 @@ jobs:
         uses: aws-actions/configure-aws-credentials@v1
         with:
           aws-region: eu-central-1
-          role-to-assume: arn:aws:iam::${{ secrets.AWS_ACCOUNT_ID }}:role/codewaffle-deploy
+          role-to-assume: arn:aws:iam::${{ secrets.AWS_ACCOUNT_ID }}:role/deploy-codewaffle
 
       - run: |
           cd ./apps/web/

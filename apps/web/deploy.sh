@@ -3,7 +3,7 @@
 # exit when any command fails
 set -e
 
-REGION='us-east-1'
+REGION='eu-central-1'
 
 BUCKET=$(aws ssm get-parameter --name "/codewaffle/web/bucket/name" --query Parameter.Value --output text --region $REGION)
 
