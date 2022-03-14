@@ -29,7 +29,11 @@ const webpackConfig = {
 };
 
 const config = {
-  packagerConfig: {},
+  packagerConfig: {
+    name: "CodeWaffle",
+    executableName: "codewaffle",
+    appBundleId: "app.codewaffle",
+  },
   makers: [
     {
       name: "@electron-forge/maker-squirrel",
