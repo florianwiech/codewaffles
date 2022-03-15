@@ -14,9 +14,9 @@ import {
   useCodeMirrorTheme,
 } from "@codewaffle/components";
 import { getEditorChanges } from "@codewaffle/domain";
-import { useObservable } from "@codewaffle/utils";
 import { theme$ } from "../appearance";
 import { command$, editor$, notification$, view$ } from "../store";
+import { useBehaviorSubject } from "../shared/useBehaviorSubject";
 import { MAC_OS_TITLE_BAR_HEIGHT } from "./MacTitleBar";
 
 const macEditorHeight = css`
@@ -48,7 +48,7 @@ const options = {
 
 export const CodeMirror: FC = () => {
   const ref = useRef<HTMLDivElement>(null);
-  const theme = useObservable(theme$);
+  const theme = useBehaviorSubject(theme$);
 
   const editor = useCodeMirror({
     ref,
