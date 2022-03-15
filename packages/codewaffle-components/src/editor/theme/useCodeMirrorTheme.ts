@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useLayoutEffect } from "react";
 import { Compartment } from "@codemirror/state";
 import { CodeMirrorEditor } from "../editor.types";
 import { AppearanceState } from "../../theme";
@@ -14,7 +14,7 @@ export const themeConf = new Compartment();
 export const initialThemeSetup = themeConf.of([]);
 
 export const useCodeMirrorTheme = ({ editor, theme }: useCodeMirrorThemeParams) => {
-  useEffect(() => {
+  useLayoutEffect(() => {
     if (!editor.current) return;
 
     editor.current.dispatch({
