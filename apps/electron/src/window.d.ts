@@ -17,7 +17,7 @@ export interface ISettings extends IApi {
 
 declare global {
   interface Window {
-    api: IApp;
+    api?: IApp;
     settings: ISettings;
   }
 }

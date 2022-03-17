@@ -24,7 +24,7 @@ const macEditorHeight = css`
 `;
 
 const StyledElectronEditor = styled(StyledEditor)`
-  ${window.api.platform === "darwin" ? macEditorHeight : ""}
+  ${window.api?.platform === "darwin" ? macEditorHeight : ""}
 `;
 
 const StatusbarPanel: FC<{ view: EditorView }> = ({ view }) => {
