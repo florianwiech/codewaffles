@@ -7,7 +7,7 @@ export interface IApi {
   onTitleBarClick: () => void;
 }
 
-export interface IApp extends IApi {
+export interface IMain extends IApi {
   openNotification: (notification: Notification) => void;
 }
 
@@ -17,7 +17,7 @@ export interface ISettings extends IApi {
 
 declare global {
   interface Window {
-    api?: IApp;
-    settings: ISettings;
+    main?: IMain;
+    settings?: ISettings;
   }
 }
