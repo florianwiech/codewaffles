@@ -13,7 +13,8 @@
     "lint": "eslint src --format friendly",
     "lint:ci": "eslint src --format friendly --max-warnings=0",
     "lint:fix": "eslint src --format friendly --fix",
-    "check:types": "tsc --noEmit"
+    "check:types": "tsc --noEmit",
+    "check:updates": "npx npm-check-updates"
   },
   "keywords": [],
   "author": {
