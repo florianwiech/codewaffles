@@ -16,7 +16,7 @@ import {
 import { getEditorChanges } from "@codewaffle/domain";
 import { theme$ } from "../appearance";
 import { command$, editor$, notification$, view$ } from "../store";
-import { useBehaviorSubject } from "../shared/useBehaviorSubject";
+import { useBehaviorSubject } from "../shared/hooks/useBehaviorSubject";
 import { MAC_OS_TITLE_BAR_HEIGHT } from "./MacTitleBar";
 
 const macEditorHeight = css`
