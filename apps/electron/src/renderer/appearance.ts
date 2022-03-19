@@ -1,5 +1,5 @@
 import { BehaviorSubject, EMPTY, fromEvent, map } from "rxjs";
-import { AppearanceState } from "@codewaffle/components";
+import { AppearanceState } from "./components/theme";
 
 export const getInitialTheme = () =>
   typeof window !== undefined && window.matchMedia && !window.matchMedia("(prefers-color-scheme: dark)").matches

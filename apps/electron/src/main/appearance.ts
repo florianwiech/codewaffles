@@ -1,5 +1,5 @@
 import { ipcMain, nativeTheme } from "electron";
-import { AppearanceState } from "@codewaffle/components";
+import { AppearanceState } from "../renderer/components/theme";
 import { IpcEvents } from "../ipc-events";
 
 export function setupAppearanceHandler() {

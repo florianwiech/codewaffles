@@ -1,6 +1,6 @@
 import React, { FC } from "react";
 import * as ReactDOM from "react-dom";
-import { AppearanceState } from "@codewaffle/components";
+import { AppearanceState } from "../components/theme";
 import { ElectronLayout } from "../components/ElectronLayout";
 import { MacTitleBar } from "../components/MacTitleBar";
 

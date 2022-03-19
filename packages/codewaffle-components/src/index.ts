@@ -1,1 +1,1 @@
-export * from "./theme";
+export const Empty = "empty";

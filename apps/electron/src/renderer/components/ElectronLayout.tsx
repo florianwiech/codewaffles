@@ -1,7 +1,7 @@
 import { FC, useEffect } from "react";
-import { Layout } from "@codewaffle/components";
 import { getColorSchemeChange, theme$ } from "../appearance";
 import { useBehaviorSubject } from "../shared/hooks/useBehaviorSubject";
+import { Layout } from "./theme";
 
 export const ElectronLayout: FC = ({ children }) => {
   const theme = useBehaviorSubject(theme$);

@@ -1,6 +1,6 @@
 import { fireEvent, render, screen, waitFor } from "@testing-library/react";
-import { AppearanceState, Layout } from "@codewaffle/components";
 import Fuse from "fuse.js";
+import { AppearanceState, Layout } from "../../theme";
 import { SPOTLIGHT_LABEL, SpotlightProps } from "../Spotlight";
 import { ExampleSpotlight } from "../demo/ExampleSpotlight";
 

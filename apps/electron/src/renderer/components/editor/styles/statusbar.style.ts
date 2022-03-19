@@ -1,5 +1,5 @@
 import { css } from "styled-components";
-import { device } from "../../../../../../../packages/codewaffle-components/src/theme";
+import { device } from "../../theme";
 
 export const styledStatusbar = css`
   .cm-panel.cm-statusbar {
