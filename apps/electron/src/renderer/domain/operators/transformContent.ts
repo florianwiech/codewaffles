@@ -1,6 +1,6 @@
 import { MonoTypeOperatorFunction, pipe } from "rxjs";
 import { filter, map } from "rxjs/operators";
-import { execScript, isAppendableScript } from "@codewaffle/transformers";
+import { execScript, isAppendableScript } from "../../transformers";
 import { EditorTransform } from "../types";
 import {
   buildTransaction,

@@ -3,7 +3,7 @@ import { filter } from "rxjs/operators";
 import { eachValueFrom } from "rxjs-for-await";
 import { EditorState, EditorSelection, EditorStateConfig } from "@codemirror/state";
 import { EditorView } from "@codemirror/view";
-import * as Scripts from "@codewaffle/transformers";
+import * as Scripts from "../../transformers";
 import { Command, CommandTypes, isEditorView, Notification } from "../types";
 import { getEditorChanges } from "./getEditorChanges";
 

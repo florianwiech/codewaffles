@@ -1,7 +1,7 @@
-import { ScriptExtension, scriptList } from "@codewaffle/transformers";
 import { useKeyPress } from "@codewaffle/utils";
 import { CommandTypes } from "../domain";
 import { command$ } from "../store";
+import { ScriptExtension, scriptList } from "../transformers";
 import {
   Command,
   SpotlightSearchInput,
