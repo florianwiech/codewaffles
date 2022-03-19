@@ -1,20 +1,13 @@
 import React, { FC } from "react";
 import ReactDOM from "react-dom";
-import { tap } from "rxjs/operators";
-import { useObservable } from "@codewaffle/utils";
 import { isElectron } from "../../isElectron";
 import { ElectronLayout } from "../components/theme/native/ElectronLayout";
 import { BrowserLayout } from "../components/theme/web/BrowserLayout";
 import { MacTitleBar } from "../components/MacTitleBar";
 import { Spotlight } from "../components/Spotlight";
 import { CodeMirror } from "../components/CodeMirror";
-import { notification$ } from "../store";
-
-const showNotifications = () => notification$.pipe(tap(window.main?.openNotification));
 
 const App: FC = () => {
-  useObservable(showNotifications());
-
   const Layout = isElectron() ? ElectronLayout : BrowserLayout;
 
   return (
