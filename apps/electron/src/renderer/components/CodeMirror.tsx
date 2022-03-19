@@ -3,7 +3,7 @@ import styled, { css } from "styled-components";
 import { EditorView } from "@codemirror/view";
 import { StateEffect } from "@codemirror/state";
 import { getEditorChanges } from "../domain";
-import { theme$ } from "../appearance";
+import { nativeTheme$ } from "./theme/native/appearance";
 import { command$, editor$, notification$, view$ } from "../store";
 import { useBehaviorSubject } from "../shared/hooks/useBehaviorSubject";
 import {
@@ -48,7 +48,7 @@ const options = {
 
 export const CodeMirror: FC = () => {
   const ref = useRef<HTMLDivElement>(null);
-  const theme = useBehaviorSubject(theme$);
+  const theme = useBehaviorSubject(nativeTheme$);
 
   const editor = useCodeMirror({
     ref,

@@ -2,7 +2,7 @@ import React, { FC } from "react";
 import ReactDOM from "react-dom";
 import { tap } from "rxjs/operators";
 import { useObservable } from "@codewaffle/utils";
-import { ElectronLayout } from "../components/ElectronLayout";
+import { ElectronLayout } from "../components/theme/native/ElectronLayout";
 import { MacTitleBar } from "../components/MacTitleBar";
 import { Spotlight } from "../components/Spotlight";
 import { CodeMirror } from "../components/CodeMirror";

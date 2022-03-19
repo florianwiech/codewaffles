@@ -1,5 +1,5 @@
 import { BehaviorSubject, EMPTY, fromEvent, map } from "rxjs";
-import { AppearanceState } from "./components/theme";
+import { AppearanceState } from "../";
 
 export const getInitialTheme = () =>
   typeof window !== undefined && window.matchMedia && !window.matchMedia("(prefers-color-scheme: dark)").matches
@@ -15,4 +15,4 @@ export const getColorSchemeChange = () => {
   );
 };
 
-export const theme$ = new BehaviorSubject<Omit<AppearanceState, "system">>(getInitialTheme());
+export const nativeTheme$ = new BehaviorSubject<Omit<AppearanceState, "system">>(getInitialTheme());
