@@ -1,7 +1,7 @@
-import { FC, useEffect, useRef } from "react";
+import { FC, useEffect, useMemo, useRef } from "react";
 import styled, { css } from "styled-components";
 import { EditorView } from "@codemirror/view";
-import { StateEffect } from "@codemirror/state";
+import { EditorStateConfig } from "@codemirror/state";
 import { getEditorChanges } from "../domain";
 import { command$, editor$, notification$, view$ } from "../store";
 import { useBehaviorSubject } from "../shared/hooks/useBehaviorSubject";
@@ -14,6 +14,7 @@ import {
   initialLanguageSetup,
   initialThemeSetup,
   LanguageSwitch,
+  notification,
   statusbar,
   StyledEditor,
   useCodeMirror,
@@ -53,18 +54,23 @@ const NativeStatusbarPanel: FC<{ view: EditorView }> = ({ view }) => {
   );
 };
 
-const options = {
-  extensions: [
-    //
-    basics,
-    initialThemeSetup,
-    initialLanguageSetup,
-  ],
-};
-
 export const CodeMirror: FC = () => {
   const ref = useRef<HTMLDivElement>(null);
   const theme = useBehaviorSubject(isElectron() ? nativeTheme$ : webTheme$);
+
+  const options = useMemo<EditorStateConfig>(
+    () => ({
+      extensions: [
+        //
+        basics,
+        initialThemeSetup,
+        initialLanguageSetup,
+        statusbar(isElectron() ? NativeStatusbarPanel : WebStatusbarPanel),
+        notification(notification$),
+      ],
+    }),
+    [],
+  );
 
   const editor = useCodeMirror({
     ref,
@@ -73,12 +79,6 @@ export const CodeMirror: FC = () => {
   });
 
   useCodeMirrorTheme({ editor, theme });
-
-  useEffect(() => {
-    editor.current.dispatch({
-      effects: StateEffect.appendConfig.of(statusbar(isElectron() ? NativeStatusbarPanel : WebStatusbarPanel)),
-    });
-  }, [editor]);
 
   useEffect(() => {
     const sub = getEditorChanges({ notification$, command$, view$ }).subscribe();
