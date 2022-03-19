@@ -1,5 +1,5 @@
 import { css } from "styled-components";
-import { size } from "../../theme";
+import { size } from "../../../../../../../packages/codewaffle-components/src/theme";
 
 export const styledNotification = css`
   position: absolute;

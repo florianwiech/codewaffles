@@ -1,7 +1,7 @@
 import { useLayoutEffect } from "react";
 import { Compartment } from "@codemirror/state";
 import { CodeMirrorEditor } from "../editor.types";
-import { AppearanceState } from "../../theme";
+import { AppearanceState } from "../../../../../../../packages/codewaffle-components/src/theme";
 import { primerDark, primerLight } from "./primerTheme";
 
 export type useCodeMirrorThemeParams = {

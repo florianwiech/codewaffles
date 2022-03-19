@@ -1,2 +1,2 @@
-export * from "./editor";
 export * from "./theme";
+export * from "./notification/Notification";

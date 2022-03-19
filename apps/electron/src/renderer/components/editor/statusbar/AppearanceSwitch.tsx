@@ -1,5 +1,5 @@
 import React, { ChangeEvent, FC } from "react";
-import { AppearanceState } from "../../theme";
+import { AppearanceState } from "@codewaffle/components";
 
 export type AppearanceSwitchProps = {
   appearance: AppearanceState;

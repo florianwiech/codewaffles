@@ -2,6 +2,10 @@ import { FC, useEffect, useRef } from "react";
 import styled, { css } from "styled-components";
 import { EditorView } from "@codemirror/view";
 import { StateEffect } from "@codemirror/state";
+import { getEditorChanges } from "@codewaffle/domain";
+import { theme$ } from "../appearance";
+import { command$, editor$, notification$, view$ } from "../store";
+import { useBehaviorSubject } from "../shared/hooks/useBehaviorSubject";
 import {
   basics,
   CursorInformation,
@@ -12,11 +16,7 @@ import {
   StyledEditor,
   useCodeMirror,
   useCodeMirrorTheme,
-} from "@codewaffle/components";
-import { getEditorChanges } from "@codewaffle/domain";
-import { theme$ } from "../appearance";
-import { command$, editor$, notification$, view$ } from "../store";
-import { useBehaviorSubject } from "../shared/hooks/useBehaviorSubject";
+} from "./editor";
 import { MAC_OS_TITLE_BAR_HEIGHT } from "./MacTitleBar";
 
 const macEditorHeight = css`
