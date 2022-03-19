@@ -1,14 +1,14 @@
+import { CommandTypes } from "@codewaffle/domain";
+import { ScriptExtension, scriptList } from "@codewaffle/transformers";
+import { useKeyPress } from "@codewaffle/utils";
+import { command$ } from "../store";
 import {
   Command,
   SpotlightSearchInput,
   SpotlightSearchResults,
   SpotlightWrapper,
   useSpotlightSearch,
-} from "@codewaffle/components";
-import { CommandTypes } from "@codewaffle/domain";
-import { ScriptExtension, scriptList } from "@codewaffle/transformers";
-import { useKeyPress } from "@codewaffle/utils";
-import { command$ } from "../store";
+} from "./spotlight-search";
 
 export function Spotlight() {
   const handleSubmit = (command: Command<ScriptExtension>) => {
