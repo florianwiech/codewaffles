@@ -3,10 +3,12 @@ import styled, { css } from "styled-components";
 import { EditorView } from "@codemirror/view";
 import { StateEffect } from "@codemirror/state";
 import { getEditorChanges } from "../domain";
-import { nativeTheme$ } from "./theme/native/appearance";
 import { command$, editor$, notification$, view$ } from "../store";
 import { useBehaviorSubject } from "../shared/hooks/useBehaviorSubject";
+import { isElectron } from "../../isElectron";
+import { nativeTheme$ } from "./theme/native/appearance";
 import {
+  AppearanceSwitch,
   basics,
   CursorInformation,
   initialLanguageSetup,
@@ -18,6 +20,7 @@ import {
   useCodeMirrorTheme,
 } from "./editor";
 import { MAC_OS_TITLE_BAR_HEIGHT } from "./MacTitleBar";
+import { changeAppearance, webAppearance$, webTheme$ } from "./theme/web/appearance";
 
 const macEditorHeight = css`
   height: calc(100% - ${MAC_OS_TITLE_BAR_HEIGHT});
@@ -27,7 +30,20 @@ const StyledElectronEditor = styled(StyledEditor)`
   ${window.main?.platform === "darwin" ? macEditorHeight : ""}
 `;
 
-const StatusbarPanel: FC<{ view: EditorView }> = ({ view }) => {
+const WebStatusbarPanel: FC<{ view: EditorView }> = ({ view }) => {
+  const appearance = useBehaviorSubject(webAppearance$)!;
+
+  return (
+    <>
+      <div className="spacer" />
+      <CursorInformation state={view.state} />
+      <AppearanceSwitch appearance={appearance} onAppearanceChange={changeAppearance} />
+      <LanguageSwitch view={view} />
+    </>
+  );
+};
+
+const NativeStatusbarPanel: FC<{ view: EditorView }> = ({ view }) => {
   return (
     <>
       <div className="spacer" />
@@ -48,7 +64,7 @@ const options = {
 
 export const CodeMirror: FC = () => {
   const ref = useRef<HTMLDivElement>(null);
-  const theme = useBehaviorSubject(nativeTheme$);
+  const theme = useBehaviorSubject(isElectron() ? nativeTheme$ : webTheme$);
 
   const editor = useCodeMirror({
     ref,
@@ -60,7 +76,7 @@ export const CodeMirror: FC = () => {
 
   useEffect(() => {
     editor.current.dispatch({
-      effects: StateEffect.appendConfig.of(statusbar(StatusbarPanel)),
+      effects: StateEffect.appendConfig.of(statusbar(isElectron() ? NativeStatusbarPanel : WebStatusbarPanel)),
     });
   }, [editor]);
 
