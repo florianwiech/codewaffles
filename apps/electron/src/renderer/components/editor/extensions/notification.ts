@@ -3,7 +3,7 @@ import ReactDOM from "react-dom";
 import { EditorView, ViewUpdate } from "@codemirror/view";
 import { showPanel } from "@codemirror/panel";
 import { Subject } from "rxjs";
-import { NotificationComponent, Notification } from "@codewaffle/components";
+import { NotificationComponent, Notification } from "../../notification/Notification";
 
 type Params = {
   view: EditorView;
