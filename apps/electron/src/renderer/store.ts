@@ -1,7 +1,7 @@
 import { BehaviorSubject, Subject } from "rxjs";
 import { filter } from "rxjs/operators";
 import { EditorView } from "@codemirror/view";
-import { Command, Notification, isEditorView } from "@codewaffle/domain";
+import { Command, Notification, isEditorView } from "./domain";
 
 export const command$ = new Subject<Command>();
 

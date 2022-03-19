@@ -1,5 +1,5 @@
 import { BrowserWindow, dialog, ipcMain } from "electron";
-import { Notification, NotificationStatus } from "@codewaffle/domain";
+import { Notification, NotificationStatus } from "../renderer/domain";
 import { IpcEvents } from "../ipc-events";
 
 export function setupWindowNotifications() {

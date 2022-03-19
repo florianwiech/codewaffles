@@ -2,7 +2,7 @@ import { FC, useEffect, useRef } from "react";
 import styled, { css } from "styled-components";
 import { EditorView } from "@codemirror/view";
 import { StateEffect } from "@codemirror/state";
-import { getEditorChanges } from "@codewaffle/domain";
+import { getEditorChanges } from "../domain";
 import { theme$ } from "../appearance";
 import { command$, editor$, notification$, view$ } from "../store";
 import { useBehaviorSubject } from "../shared/hooks/useBehaviorSubject";
