@@ -1,7 +1,8 @@
 /**
- * @type {import('@jest/types').Config.InitialOptions}
+ * @type {import("@jest/types").Config.InitialOptions}
  */
 export const config = {
+  roots: ["<rootDir>/src/"],
   preset: "ts-jest",
   testEnvironment: "jsdom",
   setupFilesAfterEnv: ["@testing-library/jest-dom"],
