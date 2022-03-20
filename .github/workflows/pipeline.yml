@@ -53,16 +53,14 @@ jobs:
           node-version: "16"
           cache: "yarn"
       - run: yarn install --frozen-lockfile
-      - run: yarn build:web
+      - run: yarn build
       - uses: actions/upload-artifact@v3
         with:
-          name: web-build
-          path: apps/web/build
+          name: build-web
+          path: build
           retention-days: 5
 
-  # https://playwright.dev/docs/ci#github-actions
-  e2e:
-    timeout-minutes: 60
+  build-native:
     runs-on: ubuntu-latest
     needs: [install]
     steps:
@@ -72,23 +70,71 @@ jobs:
           node-version: "16"
           cache: "yarn"
       - run: yarn install --frozen-lockfile
+      - run: yarn package
+      - uses: actions/upload-artifact@v3
+        with:
+          name: build-native
+          path: |
+            .webpack
+            out
+          retention-days: 5
+
+  # https://playwright.dev/docs/ci#github-actions
+  e2e-web:
+    timeout-minutes: 60
+    runs-on: ubuntu-latest
+    needs: [build-web]
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: "16"
+          cache: "yarn"
+      - uses: actions/download-artifact@v3
+        with:
+          name: build-web
+          path: build
+      - run: yarn install --frozen-lockfile
       - run: npx playwright install --with-deps
-      - run: yarn e2e
+      - run: yarn e2e:web
       - uses: actions/upload-artifact@v3
         with:
           name: e2e-web-report
-          path: |
-            apps/**/playwright-report
-            packages/**/playwright-report
+          path: playwright-report
+          retention-days: 5
+
+  e2e-native:
+    timeout-minutes: 60
+    runs-on: macos-latest
+    needs: [build-native]
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: "16"
+          cache: "yarn"
+      - uses: actions/download-artifact@v3
+        with:
+          name: build-native
+          path: ./
+      - run: yarn install --frozen-lockfile
+      - run: npx playwright install --with-deps
+      - run: yarn e2e:native
+      - uses: actions/upload-artifact@v3
+        with:
+          name: e2e-native-report
+          path: playwright-report
           retention-days: 5
 
   deploy-infrastructure:
     timeout-minutes: 60
     runs-on: ubuntu-latest
-    needs: [install]
     permissions:
       id-token: write
       contents: read
+    defaults:
+      run:
+        working-directory: infrastructure
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
@@ -103,13 +149,13 @@ jobs:
           aws-region: eu-central-1
           role-to-assume: arn:aws:iam::${{ secrets.AWS_ACCOUNT_ID }}:role/deploy-codewaffle
 
-      - run: yarn workspace @codewaffle/infrastructure cdk diff
-      - run: yarn workspace @codewaffle/infrastructure deploy
+      - run: yarn cdk diff
+      - run: yarn deploy
 
   deploy-web:
     timeout-minutes: 60
     runs-on: ubuntu-latest
-    needs: [build-web, deploy-infrastructure]
+    needs: [lint, test, build-web, e2e-web, deploy-infrastructure]
     permissions:
       id-token: write
       contents: read
@@ -117,8 +163,8 @@ jobs:
       - uses: actions/checkout@v3
       - uses: actions/download-artifact@v3
         with:
-          name: web-build
-          path: apps/web/build
+          name: build-web
+          path: build
 
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v1
@@ -126,6 +172,4 @@ jobs:
           aws-region: eu-central-1
           role-to-assume: arn:aws:iam::${{ secrets.AWS_ACCOUNT_ID }}:role/deploy-codewaffle
 
-      - run: |
-          cd ./apps/web/
-          sh ./deploy.sh
+      - run: sh ./deploy.sh
