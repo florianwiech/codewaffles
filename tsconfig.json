@@ -6,7 +6,7 @@
     "esModuleInterop": true,
     "noImplicitAny": true,
     "sourceMap": true,
-    "baseUrl": ".",
+    "baseUrl": "./apps/electron",
     "outDir": "dist",
     "moduleResolution": "node",
     "resolveJsonModule": true,

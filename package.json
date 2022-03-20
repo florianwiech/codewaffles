@@ -1,9 +1,13 @@
 {
   "private": true,
-  "name": "@codewaffle/electron",
+  "name": "codewaffle",
   "version": "0.0.0",
-  "main": ".webpack/main",
+  "repository": "git@github.com:florianwiech/codewaffle.git",
+  "author": "Florian Wiech <florian.wiech@gmail.com>",
+  "keywords": [],
+  "license": "MIT",
   "scripts": {
+    "prepare": "husky install",
     "start": "electron-forge start",
     "build": "webpack --config webpack.web.config.js",
     "package": "electron-forge package",
@@ -21,12 +25,7 @@
     "check:types": "tsc --noEmit",
     "check:updates": "npx npm-check-updates"
   },
-  "keywords": [],
-  "author": {
-    "name": "Florian Wiech",
-    "email": "florian.wiech@gmail.com"
-  },
-  "license": "MIT",
+  "main": ".webpack/main",
   "config": {
     "forge": "./forge.config.js"
   },
@@ -61,6 +60,8 @@
     "styled-components": "^5.3.3"
   },
   "devDependencies": {
+    "@commitlint/cli": "^16.1.0",
+    "@commitlint/config-conventional": "^16.0.0",
     "@electron-forge/cli": "^6.0.0-beta.63",
     "@electron-forge/maker-deb": "^6.0.0-beta.63",
     "@electron-forge/maker-rpm": "^6.0.0-beta.63",
@@ -93,11 +94,14 @@
     "eslint-plugin-rxjs": "^5.0.2",
     "fork-ts-checker-webpack-plugin": "^7.2.1",
     "html-webpack-plugin": "^5.5.0",
+    "husky": "^7.0.0",
     "identity-obj-proxy": "^3.0.0",
     "jest": "^27.5.1",
     "node-loader": "^2.0.0",
     "playwright": "^1.20.0",
     "playwright-core": "^1.20.0",
+    "prettier": "^2.5.1",
+    "pretty-quick": "^3.1.3",
     "rxjs-for-await": "^1.0.0",
     "serve": "^13.0.2",
     "style-loader": "^3.3.1",
