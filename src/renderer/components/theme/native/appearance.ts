@@ -2,12 +2,12 @@ import { BehaviorSubject, EMPTY, fromEvent, map } from "rxjs";
 import { AppearanceState } from "../index";
 
 export const getInitialTheme = () =>
-  typeof window !== undefined && window.matchMedia && !window.matchMedia("(prefers-color-scheme: dark)").matches
+  typeof window !== "undefined" && window.matchMedia && !window.matchMedia("(prefers-color-scheme: dark)").matches
     ? AppearanceState.LIGHT
     : AppearanceState.DARK;
 
 export const getColorSchemeChange = () => {
-  if (typeof window === undefined || window?.matchMedia === undefined) return EMPTY;
+  if (typeof window === "undefined" || window?.matchMedia === undefined) return EMPTY;
 
   return fromEvent<MediaQueryListEvent>(window.matchMedia("(prefers-color-scheme: dark)"), "change").pipe(
     map(({ matches }) => matches),

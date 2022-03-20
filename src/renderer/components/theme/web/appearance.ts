@@ -5,7 +5,7 @@ import { AppearanceState } from "../index";
 export const APPEARANCE_STORAGE = "themeAppearance";
 
 export const getNativeTheme = () =>
-  typeof window !== undefined && window.matchMedia && !window.matchMedia("(prefers-color-scheme: dark)").matches
+  typeof window !== "undefined" && window.matchMedia && !window.matchMedia("(prefers-color-scheme: dark)").matches
     ? AppearanceState.LIGHT
     : AppearanceState.DARK;
 
@@ -39,7 +39,7 @@ export const changeAppearance = (nextAppearance: AppearanceState) => {
 };
 
 export const getColorSchemeChange = () => {
-  if (typeof window === undefined || window?.matchMedia === undefined) return EMPTY;
+  if (typeof window === "undefined" || window?.matchMedia === undefined) return EMPTY;
 
   return fromEvent<MediaQueryListEvent>(window.matchMedia("(prefers-color-scheme: dark)"), "change").pipe(
     map(({ matches }) => matches),
