@@ -1,8 +1,0 @@
-{
-  "extends": "@codewaffle/buildhelper/tsconfig/cra.json",
-  "compilerOptions": {
-    "baseUrl": "./src"
-  },
-  "include": ["src"],
-  "exclude": ["dist", "build", "node_modules"]
-}
