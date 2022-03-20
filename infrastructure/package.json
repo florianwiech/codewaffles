@@ -1,0 +1,34 @@
+{
+  "private": true,
+  "name": "@codewaffle/infrastructure",
+  "version": "0.0.0",
+  "bin": {
+    "infrastructure": "bin/infrastructure.js"
+  },
+  "scripts": {
+    "prepare": "mkdir -p artifacts",
+    "build": "node_modules/.bin/tsc",
+    "watch": "node_modules/.bin/tsc -w",
+    "test": "node_modules/.bin/jest",
+    "cdk": "node_modules/.bin/cdk",
+    "synth": "node_modules/.bin/cdk synth '*'",
+    "synth:network": "node_modules/.bin/cdk synth 'codewaffle-network' > ./artifacts/network.yaml",
+    "synth:web": "node_modules/.bin/cdk synth 'codewaffle-web' > ./artifacts/web.yaml",
+    "deploy": "node_modules/.bin/cdk deploy --all --toolkit-stack-name CDKToolkit-codewaffle",
+    "deploy:network": "node_modules/.bin/cdk deploy 'codewaffle-network' --toolkit-stack-name CDKToolkit-codewaffle"
+  },
+  "dependencies": {
+    "aws-cdk-lib": "2.14.0",
+    "constructs": "^10.0.0",
+    "source-map-support": "^0.5.16"
+  },
+  "devDependencies": {
+    "@types/jest": "^26.0.10",
+    "@types/node": "10.17.27",
+    "jest": "^26.4.2",
+    "ts-jest": "^26.2.0",
+    "aws-cdk": "2.14.0",
+    "ts-node": "^9.0.0",
+    "typescript": "~3.9.7"
+  }
+}
