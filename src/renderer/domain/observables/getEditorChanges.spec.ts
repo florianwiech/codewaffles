@@ -3,7 +3,8 @@ import { filter } from "rxjs/operators";
 import { eachValueFrom } from "rxjs-for-await";
 import { EditorState, EditorSelection, EditorStateConfig } from "@codemirror/state";
 import { EditorView } from "@codemirror/view";
-import * as Scripts from "../../transformers";
+import * as execScriptModule from "../../transformers/execScript";
+import * as isAppendableScriptModule from "../../transformers/isAppendableScript";
 import { Command, CommandTypes, isEditorView, Notification } from "../types";
 import { getEditorChanges } from "./getEditorChanges";
 
@@ -26,8 +27,8 @@ describe("getEditorChanges", () => {
   let focusSpy = jest.spyOn(view, "focus");
   let dispatchSpy = jest.spyOn(view, "dispatch");
 
-  let execScriptSpy = jest.spyOn(Scripts, "execScript");
-  let isAppendableScriptSpy = jest.spyOn(Scripts, "isAppendableScript");
+  let execScriptSpy = jest.spyOn(execScriptModule, "execScript");
+  let isAppendableScriptSpy = jest.spyOn(isAppendableScriptModule, "isAppendableScript");
 
   beforeEach(() => {
     view = createEditor(document.body, { doc: initialContent });
@@ -35,11 +36,11 @@ describe("getEditorChanges", () => {
     dispatchSpy = jest.spyOn(view, "dispatch");
 
     execScriptSpy.mockRestore();
-    execScriptSpy = jest.spyOn(Scripts, "execScript");
+    execScriptSpy = jest.spyOn(execScriptModule, "execScript");
     execScriptSpy.mockReturnValue({ content: ["content"] });
 
     isAppendableScriptSpy.mockRestore();
-    isAppendableScriptSpy = jest.spyOn(Scripts, "isAppendableScript");
+    isAppendableScriptSpy = jest.spyOn(isAppendableScriptModule, "isAppendableScript");
 
     editor$.next(view);
   });
