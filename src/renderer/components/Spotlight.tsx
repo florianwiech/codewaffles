@@ -1,4 +1,4 @@
-import { useKeyPress } from "@codewaffle/utils";
+import { useKeyPress } from "../shared/hooks/useKeyPress";
 import { CommandTypes } from "../domain";
 import { command$ } from "../store";
 import { ScriptExtension, scriptList } from "../transformers";
