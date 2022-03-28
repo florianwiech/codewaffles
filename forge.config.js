@@ -59,6 +59,17 @@ const config = {
     ["@electron-forge/plugin-webpack", webpackConfig],
     ["@electron-forge/plugin-electronegativity", { isSarif: true }],
   ],
+  publishers: [
+    {
+      name: "@electron-forge/publisher-github",
+      config: {
+        repository: {
+          owner: "florianwiech",
+          name: "codewaffle",
+        },
+      },
+    },
+  ],
 };
 
 module.exports = config;
