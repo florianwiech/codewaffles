@@ -180,8 +180,22 @@ jobs:
     strategy:
       fail-fast: true
       matrix:
+        # Build for supported platforms
+        # https://github.com/electron/electron-packager/blob/ebcbd439ff3e0f6f92fa880ff28a8670a9bcf2ab/src/targets.js#L9
+        # 32-bit Linux unsupported as of 2019: https://www.electronjs.org/blog/linux-32bit-support
         os:
-          - macos-latest
+          - macOS-latest
+          - ubuntu-latest
+        #          exclude windows for now (I don't have a certificate yet)
+        #          - windows-latest
+        arch:
+          - x64
+          - arm64
+        include:
+          #          - os: windows-latest
+          #            arch: ia32
+          - os: ubuntu-latest
+            arch: armv7l
     steps:
       - uses: actions/checkout@v3
       - name: Adapt new release version
