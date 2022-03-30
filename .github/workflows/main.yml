@@ -203,6 +203,12 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "<>"
           yarn version --new-version ${{ needs.release.outputs.version }}
+      - name: Set macOS signing certs
+        if: matrix.os == 'macos-latest'
+        run: chmod +x tools/add-macos-cert.sh && ./tools/add-macos-cert.sh
+        env:
+          MACOS_CERT_P12: ${{ secrets.MACOS_CERT_P12 }}
+          MACOS_CERT_PASSWORD: ${{ secrets.MACOS_CERT_PASSWORD }}
       - uses: actions/setup-node@v3
         with:
           node-version: "16"
