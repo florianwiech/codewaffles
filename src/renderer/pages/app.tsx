@@ -1,7 +1,7 @@
 import React, { FC } from "react";
 import ReactDOM from "react-dom";
 import { isElectron } from "../../isElectron";
-import { ElectronLayout } from "../components/theme/native/ElectronLayout";
+import { ElectronLayout } from "../components/theme/electron/ElectronLayout";
 import { BrowserLayout } from "../components/theme/web/BrowserLayout";
 import { MacTitleBar } from "../components/MacTitleBar";
 import { Spotlight } from "../components/Spotlight";

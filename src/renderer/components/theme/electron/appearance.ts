@@ -15,4 +15,4 @@ export const getColorSchemeChange = () => {
   );
 };
 
-export const nativeTheme$ = new BehaviorSubject<Omit<AppearanceState, "system">>(getInitialTheme());
+export const electronTheme$ = new BehaviorSubject<Omit<AppearanceState, "system">>(getInitialTheme());
