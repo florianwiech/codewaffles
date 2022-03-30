@@ -33,6 +33,22 @@ const config = {
     name: "CodeWaffle",
     executableName: "codewaffle",
     appBundleId: "app.codewaffle",
+    asar: true,
+    appCategoryType: "public.app-category.developer-tools",
+    protocols: [
+      {
+        name: "CodeWaffle Launch Protocol",
+        schemes: ["codewaffle", "cw"],
+      },
+    ],
+    osxSign: {
+      identity: "Developer ID Application: Florian Wiech (28563WWU78)",
+      hardenedRuntime: true,
+      "gatekeeper-assess": false,
+      entitlements: "static/entitlements.plist",
+      "entitlements-inherit": "static/entitlements.plist",
+      "signature-flags": "library",
+    },
   },
   makers: [
     {
@@ -77,5 +93,30 @@ const config = {
     },
   ],
 };
+
+function notarizeMaybe() {
+  if (process.platform !== "darwin") {
+    return;
+  }
+
+  if (!process.env.CI) {
+    console.log(`Not in CI, skipping notarization`);
+    return;
+  }
+
+  if (!process.env.APPLE_ID || !process.env.APPLE_ID_PASSWORD) {
+    console.warn("Should be notarizing, but environment variables APPLE_ID or APPLE_ID_PASSWORD are missing!");
+    return;
+  }
+
+  config.packagerConfig.osxNotarize = {
+    appBundleId: "app.codewaffle",
+    appleId: process.env.APPLE_ID,
+    appleIdPassword: process.env.APPLE_ID_PASSWORD,
+    ascProvider: "28563WWU78",
+  };
+}
+
+notarizeMaybe();
 
 module.exports = config;
