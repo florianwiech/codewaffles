@@ -63,7 +63,7 @@ jobs:
           path: build
           retention-days: 5
 
-  build-native:
+  build-electron:
     runs-on: ubuntu-latest
     needs: [install]
     steps:
@@ -76,7 +76,7 @@ jobs:
       - run: yarn package
       - uses: actions/upload-artifact@v3
         with:
-          name: build-native
+          name: build-electron
           path: |
             .webpack
             out
@@ -106,10 +106,10 @@ jobs:
           path: playwright-report
           retention-days: 5
 
-  e2e-native:
+  e2e-electron:
     timeout-minutes: 60
     runs-on: macos-latest
-    needs: [build-native]
+    needs: [build-electron]
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
@@ -118,14 +118,14 @@ jobs:
           cache: "yarn"
       - uses: actions/download-artifact@v3
         with:
-          name: build-native
+          name: build-electron
           path: ./
       - run: yarn install --frozen-lockfile
       - run: npx playwright install --with-deps
-      - run: yarn e2e:native
+      - run: yarn e2e:electron
       - uses: actions/upload-artifact@v3
         with:
-          name: e2e-native-report
+          name: e2e-electron-report
           path: playwright-report
           retention-days: 5
 
@@ -155,7 +155,7 @@ jobs:
   release:
     if: github.event_name == 'push' && github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
-    needs: [lint, test, build-native, e2e-native]
+    needs: [lint, test, build-electron, e2e-electron]
     outputs:
       version: ${{ steps.semantic-release.outputs.version }}
     steps:

@@ -1,5 +1,4 @@
 import type { PlaywrightTestConfig } from "@playwright/test";
-import { devices } from "@playwright/test";
 
 /**
  * Read environment variables from file.
@@ -11,7 +10,7 @@ import { devices } from "@playwright/test";
  * See https://playwright.dev/docs/test-configuration.
  */
 const config: PlaywrightTestConfig = {
-  testDir: "./e2e/native",
+  testDir: "./e2e/electron",
   /* Retry on CI only */
   retries: process.env.CI ? 2 : 0,
   /* Opt out of parallel tests on CI. */

@@ -1,13 +1,13 @@
 import { FC, useEffect } from "react";
 import { useBehaviorSubject } from "../../../shared/hooks/useBehaviorSubject";
 import { Layout } from "../index";
-import { getColorSchemeChange, nativeTheme$ } from "./appearance";
+import { getColorSchemeChange, electronTheme$ } from "./appearance";
 
 export const ElectronLayout: FC = ({ children }) => {
-  const theme = useBehaviorSubject(nativeTheme$);
+  const theme = useBehaviorSubject(electronTheme$);
 
   useEffect(() => {
-    const subscription = getColorSchemeChange().subscribe((next) => nativeTheme$.next(next));
+    const subscription = getColorSchemeChange().subscribe((next) => electronTheme$.next(next));
     return () => subscription.unsubscribe();
   }, []);
 

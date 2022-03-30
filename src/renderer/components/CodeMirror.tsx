@@ -6,7 +6,7 @@ import { getEditorChanges } from "../domain";
 import { command$, editor$, notification$, view$ } from "../store";
 import { useBehaviorSubject } from "../shared/hooks/useBehaviorSubject";
 import { isElectron } from "../../isElectron";
-import { nativeTheme$ } from "./theme/native/appearance";
+import { electronTheme$ } from "./theme/electron/appearance";
 import {
   AppearanceSwitch,
   basics,
@@ -56,7 +56,7 @@ const NativeStatusbarPanel: FC<{ view: EditorView }> = ({ view }) => {
 
 export const CodeMirror: FC = () => {
   const ref = useRef<HTMLDivElement>(null);
-  const theme = useBehaviorSubject(isElectron() ? nativeTheme$ : webTheme$);
+  const theme = useBehaviorSubject(isElectron() ? electronTheme$ : webTheme$);
 
   const options = useMemo<EditorStateConfig>(
     () => ({
