@@ -214,6 +214,22 @@ jobs:
           node-version: "16"
           cache: "yarn"
       - run: yarn install --frozen-lockfile
-      - run: yarn run publish
+      - run: yarn run make --arch=${{ matrix.arch }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          APPLE_ID: ${{ secrets.APPLE_ID }}
+          APPLE_ID_PASSWORD: ${{ secrets.APPLE_ID_PASSWORD }}
+      - name: upload artifacts
+        # https://github.com/softprops/action-gh-release/issues/203#issuecomment-1029848473
+        # instead of creating a release we use this action to just upload the assets to the current release
+        uses: softprops/action-gh-release@v1
+        with:
+          tag_name: v${{ needs.release.outputs.version }}
+          files: |
+            out/**/*.deb
+            out/**/*.dmg
+            out/**/*setup*.exe
+            out/**/*.nupkg
+            out/**/*.rpm
+            out/**/*.zip
+            out/**/RELEASES
