@@ -1,3 +1,7 @@
+const packageJson = require("./package.json");
+
+const { version } = packageJson;
+
 /**
  * @type {import("@electron-forge/plugin-webpack").WebpackPluginConfig}
  */
@@ -53,8 +57,15 @@ const config = {
   makers: [
     {
       name: "@electron-forge/maker-squirrel",
-      config: {
-        name: "codewaffle",
+      platforms: ["win32"],
+      config: (arch) => {
+        return {
+          name: "codewaffle",
+          authors: "Florian Wiech",
+          exe: "codewaffle.exe",
+          noMsi: true,
+          setupExe: `codewaffle-${version}-win32-${arch}-setup.exe`,
+        };
       },
     },
     {
