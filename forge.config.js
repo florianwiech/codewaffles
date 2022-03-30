@@ -47,11 +47,17 @@ const config = {
     },
     {
       name: "@electron-forge/maker-deb",
-      config: {},
+      platforms: ["linux"],
+      config: {
+        mimeType: ["x-scheme-handler/codewaffle"],
+      },
     },
     {
       name: "@electron-forge/maker-rpm",
-      config: {},
+      platforms: ["linux"],
+      config: {
+        mimeType: ["x-scheme-handler/codewaffle"],
+      },
     },
   ],
   plugins: [
