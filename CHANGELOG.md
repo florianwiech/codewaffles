@@ -1,3 +1,9 @@
+### [0.3.1](https://github.com/florianwiech/codewaffle/compare/v0.3.0...v0.3.1) (2022-03-30)
+
+### Bug Fixes
+
+- provide package description to enable bundling ([95b16cd](https://github.com/florianwiech/codewaffle/commit/95b16cdef5013dbea5c11a479b988223bff6904e))
+
 ## [0.3.0](https://github.com/florianwiech/codewaffle/compare/v0.2.0...v0.3.0) (2022-03-30)
 
 ### Features
