@@ -3,6 +3,7 @@
   "name": "codewaffle",
   "version": "0.3.0",
   "repository": "git@github.com:florianwiech/codewaffle.git",
+  "description": "A utility for developers. Scriptable and extendable.",
   "author": "Florian Wiech <florian.wiech@gmail.com>",
   "keywords": [],
   "license": "MIT",
