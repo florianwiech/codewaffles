@@ -64,6 +64,7 @@ typings/
 .yarn-integrity
 
 # dotenv environment variables file
+.envrc
 .env
 .env.test
 
@@ -91,8 +92,9 @@ typings/
 # Webpack
 .webpack/
 
-# Electron-Forge
+# Electron
 out/
+dist
 
 # Web build
 build/
