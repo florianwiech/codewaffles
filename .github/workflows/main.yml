@@ -181,22 +181,8 @@ jobs:
     strategy:
       fail-fast: true
       matrix:
-        # Build for supported platforms
-        # https://github.com/electron/electron-packager/blob/ebcbd439ff3e0f6f92fa880ff28a8670a9bcf2ab/src/targets.js#L9
-        # 32-bit Linux unsupported as of 2019: https://www.electronjs.org/blog/linux-32bit-support
         os:
           - macOS-latest
-          - ubuntu-latest
-        #          exclude windows for now (I don't have a certificate yet)
-        #          - windows-latest
-        arch:
-          - x64
-          - arm64
-        include:
-          #          - os: windows-latest
-          #            arch: ia32
-          - os: ubuntu-latest
-            arch: armv7l
     steps:
       - uses: actions/checkout@v3
       - name: Adapt new release version
@@ -204,6 +190,10 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "<>"
           yarn version --new-version ${{ needs.release.outputs.version }}
+      - uses: actions/download-artifact@v3
+        with:
+          name: build-electron
+          path: ./
       - name: Set macOS signing certs
         if: matrix.os == 'macos-latest'
         run: chmod +x tools/add-macos-cert.sh && ./tools/add-macos-cert.sh
@@ -215,22 +205,10 @@ jobs:
           node-version: "16"
           cache: "yarn"
       - run: yarn install --frozen-lockfile
-      - run: yarn run make --arch=${{ matrix.arch }}
+      - run: yarn run make
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           APPLE_ID: ${{ secrets.APPLE_ID }}
           APPLE_ID_PASSWORD: ${{ secrets.APPLE_ID_PASSWORD }}
-      - name: upload artifacts
-        # https://github.com/softprops/action-gh-release/issues/203#issuecomment-1029848473
-        # instead of creating a release we use this action to just upload the assets to the current release
-        uses: softprops/action-gh-release@v1
-        with:
-          tag_name: v${{ needs.release.outputs.version }}
-          files: |
-            out/**/*.deb
-            out/**/*.dmg
-            out/**/*setup*.exe
-            out/**/*.nupkg
-            out/**/*.rpm
-            out/**/*.zip
-            out/**/RELEASES
+          CSC_LINK: ${{ secrets.MACOS_CERT_P12 }}
+          CSC_KEY_PASSWORD: ${{ secrets.MACOS_CERT_PASSWORD }}
