@@ -1,5 +1,5 @@
 import { app, MenuItemConstructorOptions } from "electron";
-import { getPreferencesItems } from "./shared-menu-items";
+import { getCheckForUpdatesItem, getPreferencesItems } from "./shared-menu-items";
 
 export function getAppMenu(name: string): MenuItemConstructorOptions {
   return {
@@ -9,6 +9,7 @@ export function getAppMenu(name: string): MenuItemConstructorOptions {
         label: "About " + name,
         role: "about",
       },
+      ...getCheckForUpdatesItem(),
       ...getPreferencesItems(),
       {
         label: "Services",

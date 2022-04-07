@@ -1,9 +1,9 @@
 {
   "private": true,
   "name": "codewaffle",
-  "version": "0.3.1",
+  "version": "0.4.0",
   "repository": "git@github.com:florianwiech/codewaffle.git",
-  "description": "A utility for developers. Scriptable and extendable.",
+  "description": "A utility for developers.",
   "author": "Florian Wiech <florian.wiech@gmail.com>",
   "homepage": "https://codewaffle.app",
   "keywords": [],
@@ -13,7 +13,7 @@
     "start": "electron-forge start",
     "build": "webpack --config webpack.web.config.js",
     "package": "electron-forge package",
-    "make": "electron-builder --config electron-builder.yml",
+    "make": "electron-builder --config electron-builder.config.js",
     "make:icons": "electron-icon-builder --input=./static/icon.png --output=./static",
     "serve": "serve build",
     "test": "jest",
@@ -26,7 +26,10 @@
     "lint:ci": "eslint src --format friendly --max-warnings=0",
     "lint:fix": "eslint src --format friendly --fix",
     "check:types": "tsc --noEmit",
-    "check:updates": "npx npm-check-updates"
+    "check:updates": "npx npm-check-updates",
+    "auto-update:up": "docker compose -f tools/auto-update/docker-compose.yml up -d",
+    "auto-update:make": "AWS_ACCESS_KEY_ID=AKIAIOSFODNN7EXAMPLE AWS_SECRET_ACCESS_KEY=wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY electron-builder --x64 --config electron-builder.auto-update.js --publish always",
+    "auto-update:down": "docker compose -f tools/auto-update/docker-compose.yml down"
   },
   "main": ".webpack/main",
   "config": {
@@ -54,6 +57,7 @@
     "bootstrap-icons": "^1.8.1",
     "electron-devtools-installer": "^3.2.0",
     "electron-squirrel-startup": "^1.0.0",
+    "electron-updater": "^4.6.5",
     "framer-motion": "^6.2.8",
     "fuse.js": "^6.5.3",
     "jwt-decode": "^3.1.2",

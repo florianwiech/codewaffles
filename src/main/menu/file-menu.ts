@@ -1,6 +1,6 @@
 import { MenuItemConstructorOptions } from "electron";
 import { createMainWindow } from "../windows/main-window";
-import { getPreferencesItems, getQuitItems } from "./shared-menu-items";
+import { getCheckForUpdatesItem, getPreferencesItems, getQuitItems } from "./shared-menu-items";
 
 export function getFileMenu(): MenuItemConstructorOptions {
   const submenu: MenuItemConstructorOptions[] = [
@@ -18,6 +18,7 @@ export function getFileMenu(): MenuItemConstructorOptions {
 
   // macOS has these items in the "CodeWaffle" menu
   if (process.platform !== "darwin") {
+    submenu.unshift(...getCheckForUpdatesItem(), { type: "separator" });
     submenu.splice(submenu.length, 0, ...getPreferencesItems(), ...getQuitItems());
   }
 
