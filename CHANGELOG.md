@@ -1,3 +1,10 @@
+## [0.4.0](https://github.com/florianwiech/codewaffle/compare/v0.3.1...v0.4.0) (2022-04-07)
+
+### Features
+
+- add app icon ([7d2e97d](https://github.com/florianwiech/codewaffle/commit/7d2e97dd8501ec045362543300763cd351e40311))
+- add auto-update ([d07a375](https://github.com/florianwiech/codewaffle/commit/d07a3755218e8c36f7c1f379f3efaaebcc1a0e60))
+
 ### [0.3.1](https://github.com/florianwiech/codewaffle/compare/v0.3.0...v0.3.1) (2022-03-30)
 
 ### Bug Fixes
