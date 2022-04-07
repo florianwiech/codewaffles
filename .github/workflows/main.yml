@@ -152,6 +152,39 @@ jobs:
 
       - run: sh ./deploy.sh
 
+  make:
+    if: github.event_name == 'pull_request'
+    needs: [build-electron]
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: true
+      matrix:
+        os:
+          - macOS-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/download-artifact@v3
+        with:
+          name: build-electron
+          path: ./
+      - uses: actions/setup-node@v3
+        with:
+          node-version: "16"
+          cache: "yarn"
+      - run: yarn install --frozen-lockfile
+      - run: yarn run make --publish never
+        env:
+          IS_PULL_REQUEST: true
+          CSC_LINK: ${{ secrets.MACOS_CERT_P12 }}
+          CSC_KEY_PASSWORD: ${{ secrets.MACOS_CERT_PASSWORD }}
+      - uses: actions/upload-artifact@v3
+        with:
+          name: make-${{ matrix.os }}
+          path: |
+            .webpack
+            dist
+          retention-days: 3
+
   release:
     if: github.event_name == 'push' && github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest

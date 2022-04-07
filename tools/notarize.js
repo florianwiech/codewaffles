@@ -10,6 +10,11 @@ exports.default = async function notarizing(context) {
     return;
   }
 
+  if (process.env.IS_PULL_REQUEST) {
+    console.log(`In PR, skipping notarization`);
+    return;
+  }
+
   if (!process.env.CI) {
     console.log(`Not in CI, skipping notarization`);
     return;
