@@ -5,6 +5,7 @@ import { setupMenu } from "./menu/setup-menu";
 import { setupTitleBarClickMac } from "./title-bar";
 import { setupAppearanceHandler } from "./appearance";
 import { setupSecurityHandlers } from "./setup-security-handlers";
+import { checkForUpdates, setupAutoUpdateHandlers } from "./auto-update";
 
 let argv: string[] = [];
 
@@ -31,6 +32,8 @@ export async function onReady() {
   setupTitleBarClickMac();
 
   // processCommandLine(argv);
+  setupAutoUpdateHandlers();
+  checkForUpdates({ silent: true });
 }
 
 /**

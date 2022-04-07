@@ -1,4 +1,5 @@
 import { Platform } from "process";
+import { IpcRendererEvent } from "electron";
 import { AppearanceState } from "./renderer/components/theme";
 
 export interface IApi {
@@ -6,7 +7,9 @@ export interface IApi {
   onTitleBarClick: () => void;
 }
 
-export interface IMain extends IApi {}
+export interface IMain extends IApi {
+  onAutoUpdate: (callback: (event: IpcRendererEvent, message: string) => void) => void;
+}
 
 export interface ISettings extends IApi {
   changeAppearance: (next: AppearanceState) => Promise<boolean>;

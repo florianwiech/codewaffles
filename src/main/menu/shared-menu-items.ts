@@ -1,5 +1,17 @@
-import { MenuItemConstructorOptions } from "electron";
+import { app, MenuItemConstructorOptions } from "electron";
 import { getOrCreateSettingsWindow } from "../windows/settings-window";
+import { checkForUpdates, checkUpdateMenuItemEnabled, checkUpdateMenuItemLabel } from "../auto-update";
+
+export function getCheckForUpdatesItem(): Array<MenuItemConstructorOptions> {
+  return [
+    { label: `Version ${app.getVersion()}`, enabled: false },
+    {
+      label: checkUpdateMenuItemLabel,
+      enabled: checkUpdateMenuItemEnabled,
+      click: () => checkForUpdates({ silent: false }),
+    },
+  ];
+}
 
 /**
  * Depending on the OS, the `Preferences` either go into the `CodeWaffle`

@@ -7,6 +7,13 @@ import { MacTitleBar } from "../components/MacTitleBar";
 import { Spotlight } from "../components/Spotlight";
 import { CodeMirror } from "../components/CodeMirror";
 
+if (isElectron()) {
+  window.main.onAutoUpdate((_, message) => {
+    // eslint-disable-next-line no-console
+    console.log(message);
+  });
+}
+
 const App: FC = () => {
   const Layout = isElectron() ? ElectronLayout : BrowserLayout;
 
