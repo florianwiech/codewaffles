@@ -16,8 +16,10 @@ export const getBackgroundColor = (shouldUseDarkColors: boolean) =>
 export const Layout: React.FC<{ theme?: Omit<AppearanceState, "system"> }> = ({ theme, children }) => {
   return (
     <ThemeProvider theme={theme === AppearanceState.DARK ? dark : light}>
-      <GlobalStyle />
-      {children}
+      <>
+        <GlobalStyle />
+        {children}
+      </>
     </ThemeProvider>
   );
 };
