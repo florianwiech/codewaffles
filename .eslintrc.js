@@ -10,10 +10,8 @@ module.exports = {
     es6: true,
     node: true,
   },
-  plugins: ["import"],
   extends: [
     //
-    "plugin:import/recommended",
     "plugin:import/electron",
     "plugin:import/typescript",
     "react-app",
