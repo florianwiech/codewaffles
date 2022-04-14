@@ -1,7 +1,7 @@
 {
   "private": true,
   "name": "codewaffle",
-  "version": "0.4.0",
+  "version": "0.4.1",
   "repository": "git@github.com:florianwiech/codewaffle.git",
   "description": "A utility for developers.",
   "author": "Florian Wiech <florian.wiech@gmail.com>",
