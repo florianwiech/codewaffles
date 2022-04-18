@@ -1,3 +1,9 @@
+### [0.4.1](https://github.com/florianwiech/codewaffle/compare/v0.4.0...v0.4.1) (2022-04-18)
+
+### Bug Fixes
+
+- **deps:** update codemirror packages ([425bee1](https://github.com/florianwiech/codewaffle/commit/425bee115d183356510596d72051147106045a66))
+
 ### [0.4.1](https://github.com/florianwiech/codewaffle/compare/v0.4.0...v0.4.1) (2022-04-14)
 
 ### Bug Fixes
