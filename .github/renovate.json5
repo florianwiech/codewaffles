@@ -5,24 +5,19 @@
   lockFileMaintenance: {
     enabled: true,
   },
+  schedule: ["every 3 months on the first day of the month"],
   packageRules: [
     {
-      matchUpdateTypes: ["lockFileMaintenance"],
-      schedule: ["before 2am on Monday"],
-    },
-    {
       matchUpdateTypes: ["major"],
-      schedule: ["before 2am on Wednesday"],
+      groupName: "Major Updates",
     },
     {
       matchUpdateTypes: ["minor"],
       groupName: "Minor Updates",
-      schedule: ["before 2am on Tuesday"],
     },
     {
       matchUpdateTypes: ["patch"],
       groupName: "Patch Updates",
-      schedule: ["before 2am on Thursday", "before 2am on Friday"],
     },
     {
       matchPackagePatterns: ["^@codemirror/"],
