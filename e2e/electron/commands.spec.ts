@@ -5,7 +5,7 @@ test.describe("execute commands", () => {
   let electronApp: ElectronApplication;
 
   test.beforeEach(async () => {
-    electronApp = await electron.launch({ args: ["./.webpack/main/index.js"] });
+    electronApp = await electron.launch({ args: ["./.webpack/main/index.js"], bypassCSP: true });
   });
 
   test.afterEach(async () => {
@@ -17,7 +17,7 @@ test.describe("execute commands", () => {
 
     await window.press(".cm-activeLine", "Control+k");
 
-    await window.type('input[aria-label="Search command..."]', "timestamp");
+    await window.fill('input[aria-label="Search command..."]', "timestamp");
 
     await window.locator("li.active").dblclick();
 
@@ -29,14 +29,14 @@ test.describe("execute commands", () => {
   test("content replacement", async () => {
     const window = await electronApp.firstWindow();
 
-    await window.type(
+    await window.fill(
       ".cm-activeLine",
       "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c",
     );
 
     await window.press(".cm-activeLine", "Control+k");
 
-    await window.type('input[aria-label="Search command..."]', "jwt decode");
+    await window.fill('input[aria-label="Search command..."]', "jwt decode");
 
     await window.locator("li.active").dblclick();
 
@@ -48,11 +48,11 @@ test.describe("execute commands", () => {
   test("failed content replacement", async () => {
     const window = await electronApp.firstWindow();
 
-    await window.type(".cm-activeLine", "no valid token here");
+    await window.fill(".cm-activeLine", "no valid token here");
 
     await window.press(".cm-activeLine", "Control+k");
 
-    await window.type('input[aria-label="Search command..."]', "jwt decode");
+    await window.fill('input[aria-label="Search command..."]', "jwt decode");
 
     await window.locator("li.active").dblclick();
 

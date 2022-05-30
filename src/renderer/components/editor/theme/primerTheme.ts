@@ -1,7 +1,8 @@
 import { EditorView } from "@codemirror/view";
 import { StyleSpec } from "style-mod";
 import { Extension } from "@codemirror/state";
-import { HighlightStyle, tags as t, TagStyle } from "@codemirror/highlight";
+import { tags as t } from "@lezer/highlight";
+import { HighlightStyle, TagStyle, syntaxHighlighting } from "@codemirror/language";
 import dark from "@primer/primitives/dist/js/colors/dark";
 import light from "@primer/primitives/dist/js/colors/light";
 
@@ -197,5 +198,5 @@ const primerDarkHighlightStyle = HighlightStyle.define(getPrimerHighlightSpecs({
 const primerLightTheme = EditorView.theme(getPrimerThemeSpec({ name: "light", theme: light }), { dark: false });
 const primerDarkTheme = EditorView.theme(getPrimerThemeSpec({ name: "dark", theme: dark }), { dark: true });
 
-export const primerLight: Extension = [primerLightTheme, primerLightHighlightStyle];
-export const primerDark: Extension = [primerDarkTheme, primerDarkHighlightStyle];
+export const primerLight: Extension = [primerLightTheme, syntaxHighlighting(primerLightHighlightStyle)];
+export const primerDark: Extension = [primerDarkTheme, syntaxHighlighting(primerDarkHighlightStyle)];

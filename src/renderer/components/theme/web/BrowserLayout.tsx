@@ -1,9 +1,12 @@
-import React, { FC, useEffect } from "react";
+import { FC, ReactNode, useEffect } from "react";
 import { useBehaviorSubject } from "../../../shared/hooks/useBehaviorSubject";
 import { Layout } from "../Layout";
 import { changeAppearance, getColorSchemeChange, webTheme$ } from "./appearance";
 
-export const BrowserLayout: FC = ({ children }) => {
+type Props = {
+  children?: ReactNode;
+};
+export const BrowserLayout: FC<Props> = ({ children }) => {
   const theme = useBehaviorSubject(webTheme$);
 
   useEffect(() => {

@@ -6,7 +6,7 @@ test.describe("execute commands", () => {
 
     await page.press(".cm-activeLine", "Control+k");
 
-    await page.type('input[aria-label="Search command..."]', "timestamp");
+    await page.fill('input[aria-label="Search command..."]', "timestamp");
 
     await page.locator("li.active").dblclick();
 
@@ -18,14 +18,14 @@ test.describe("execute commands", () => {
   test("content replacement", async ({ page }) => {
     await page.goto("/");
 
-    await page.type(
+    await page.fill(
       ".cm-activeLine",
       "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c",
     );
 
     await page.press(".cm-activeLine", "Control+k");
 
-    await page.type('input[aria-label="Search command..."]', "jwt decode");
+    await page.fill('input[aria-label="Search command..."]', "jwt decode");
 
     await page.locator("li.active").dblclick();
 
@@ -37,11 +37,11 @@ test.describe("execute commands", () => {
   test("failed content replacement", async ({ page }) => {
     await page.goto("/");
 
-    await page.type(".cm-activeLine", "no valid token here");
+    await page.fill(".cm-activeLine", "no valid token here");
 
     await page.press(".cm-activeLine", "Control+k");
 
-    await page.type('input[aria-label="Search command..."]', "jwt decode");
+    await page.fill('input[aria-label="Search command..."]', "jwt decode");
 
     await page.locator("li.active").dblclick();
 

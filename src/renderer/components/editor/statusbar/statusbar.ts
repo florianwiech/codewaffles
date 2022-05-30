@@ -1,17 +1,16 @@
-import ReactDOM from "react-dom";
-import { EditorView, ViewUpdate } from "@codemirror/view";
-import { showPanel } from "@codemirror/panel";
 import { createElement, FC } from "react";
+import { createRoot, Root } from "react-dom/client";
+import { EditorView, showPanel, ViewUpdate } from "@codemirror/view";
 
 export type StatusbarParams = FC<{ view: EditorView }>;
 
 type Params = {
   view: EditorView;
-  dom: HTMLElement;
+  root: Root;
   component: StatusbarParams;
 };
-const renderElement = ({ component, dom, view }: Params) => {
-  ReactDOM.render(createElement(component, { view }), dom);
+const renderElement = ({ component, root, view }: Params) => {
+  root.render(createElement(component, { view }));
 };
 
 export const statusbar = (component: StatusbarParams) =>
@@ -19,9 +18,11 @@ export const statusbar = (component: StatusbarParams) =>
     const dom = document.createElement("div");
     dom.className = "cm-statusbar";
 
-    const update = (update: ViewUpdate) => renderElement({ dom, view: update.view, component });
+    const root = createRoot(dom);
 
-    renderElement({ dom, view, component });
+    const update = (update: ViewUpdate) => renderElement({ root, view: update.view, component });
+
+    renderElement({ root, view, component });
 
     return {
       dom,

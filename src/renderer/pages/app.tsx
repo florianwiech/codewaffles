@@ -1,5 +1,5 @@
 import React, { FC } from "react";
-import ReactDOM from "react-dom";
+import { createRoot } from "react-dom/client";
 import { isElectron } from "../../isElectron";
 import { ElectronLayout } from "../components/theme/electron/ElectronLayout";
 import { BrowserLayout } from "../components/theme/web/BrowserLayout";
@@ -26,4 +26,6 @@ const App: FC = () => {
   );
 };
 
-ReactDOM.render(<App />, document.getElementById("root"));
+const container = document.getElementById("root");
+const root = createRoot(container);
+root.render(<App />);

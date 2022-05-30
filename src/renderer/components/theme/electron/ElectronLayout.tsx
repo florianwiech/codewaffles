@@ -1,9 +1,13 @@
-import { FC, useEffect } from "react";
+import { FC, ReactNode, useEffect } from "react";
 import { useBehaviorSubject } from "../../../shared/hooks/useBehaviorSubject";
 import { Layout } from "../index";
 import { getColorSchemeChange, electronTheme$ } from "./appearance";
 
-export const ElectronLayout: FC = ({ children }) => {
+type Props = {
+  children?: ReactNode;
+};
+
+export const ElectronLayout: FC<Props> = ({ children }) => {
   const theme = useBehaviorSubject(electronTheme$);
 
   useEffect(() => {

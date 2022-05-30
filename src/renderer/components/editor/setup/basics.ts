@@ -1,33 +1,44 @@
-import { highlightActiveLineGutter, lineNumbers } from "@codemirror/gutter";
-import { drawSelection, highlightActiveLine, highlightSpecialChars, keymap } from "@codemirror/view";
-import { history, historyKeymap } from "@codemirror/history";
-import { foldGutter, foldKeymap } from "@codemirror/fold";
-import { EditorState } from "@codemirror/state";
-import { indentOnInput } from "@codemirror/language";
-import { defaultHighlightStyle } from "@codemirror/highlight";
-import { bracketMatching } from "@codemirror/matchbrackets";
-import { closeBrackets, closeBracketsKeymap } from "@codemirror/closebrackets";
-import { autocompletion, completionKeymap } from "@codemirror/autocomplete";
-import { rectangularSelection } from "@codemirror/rectangular-selection";
-import { highlightSelectionMatches, search, searchKeymap } from "@codemirror/search";
-import { defaultKeymap, indentWithTab } from "@codemirror/commands";
-import { commentKeymap } from "@codemirror/comment";
+import {
+  keymap,
+  highlightSpecialChars,
+  drawSelection,
+  highlightActiveLine,
+  dropCursor,
+  rectangularSelection,
+  crosshairCursor,
+  lineNumbers,
+  highlightActiveLineGutter,
+} from "@codemirror/view";
+import { Extension, EditorState } from "@codemirror/state";
+import {
+  defaultHighlightStyle,
+  syntaxHighlighting,
+  indentOnInput,
+  bracketMatching,
+  foldGutter,
+  foldKeymap,
+} from "@codemirror/language";
+import { defaultKeymap, history, historyKeymap, indentWithTab } from "@codemirror/commands";
+import { searchKeymap, highlightSelectionMatches, search } from "@codemirror/search";
+import { autocompletion, completionKeymap, closeBrackets, closeBracketsKeymap } from "@codemirror/autocomplete";
 import { lintKeymap } from "@codemirror/lint";
 
-export const basics = [
+export const basics: Extension = [
   lineNumbers(),
   highlightActiveLineGutter(),
   highlightSpecialChars(),
   history(),
   foldGutter(),
   drawSelection(),
+  dropCursor(),
   EditorState.allowMultipleSelections.of(true),
   indentOnInput(),
-  defaultHighlightStyle.fallback,
+  syntaxHighlighting(defaultHighlightStyle, { fallback: true }),
   bracketMatching(),
   closeBrackets(),
   autocompletion(),
   rectangularSelection(),
+  crosshairCursor(),
   highlightActiveLine(),
   highlightSelectionMatches(),
   search({ top: true }),
@@ -37,7 +48,6 @@ export const basics = [
     ...searchKeymap,
     ...historyKeymap,
     ...foldKeymap,
-    ...commentKeymap,
     ...completionKeymap,
     ...lintKeymap,
     indentWithTab,

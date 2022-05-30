@@ -1,4 +1,4 @@
-import React from "react";
+import { ReactNode } from "react";
 import { ThemeProvider } from "styled-components";
 import dark from "@primer/primitives/dist/js/colors/dark";
 import light from "@primer/primitives/dist/js/colors/light";
@@ -13,7 +13,11 @@ export enum AppearanceState {
 export const getBackgroundColor = (shouldUseDarkColors: boolean) =>
   shouldUseDarkColors ? dark.canvas.default : light.canvas.default;
 
-export const Layout: React.FC<{ theme?: Omit<AppearanceState, "system"> }> = ({ theme, children }) => {
+type Props = {
+  children?: ReactNode;
+  theme?: Omit<AppearanceState, "system">;
+};
+export const Layout: React.FC<Props> = ({ theme, children }) => {
   return (
     <ThemeProvider theme={theme === AppearanceState.DARK ? dark : light}>
       <>

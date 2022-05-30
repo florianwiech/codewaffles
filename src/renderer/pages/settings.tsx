@@ -1,5 +1,5 @@
 import React, { FC } from "react";
-import * as ReactDOM from "react-dom";
+import { createRoot } from "react-dom/client";
 import { AppearanceState } from "../components/theme";
 import { ElectronLayout } from "../components/theme/electron/ElectronLayout";
 import { MacTitleBar } from "../components/MacTitleBar";
@@ -22,4 +22,6 @@ const Settings: FC = () => {
   );
 };
 
-ReactDOM.render(<Settings />, document.getElementById("root"));
+const container = document.getElementById("root");
+const root = createRoot(container);
+root.render(<Settings />);

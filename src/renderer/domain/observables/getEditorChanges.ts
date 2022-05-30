@@ -1,7 +1,7 @@
 import { combineLatest, merge, Observable, Subject } from "rxjs";
 import { EditorView } from "@codemirror/view";
 import { filter, tap } from "rxjs/operators";
-import { tag } from "rxjs-spy/operators";
+// import { tag } from "rxjs-spy/operators";
 import { Command, CommandTypes, isPerformTransformCommand, Notification } from "../types";
 import { transformContent, transformRanges } from "../operators";
 
@@ -21,13 +21,13 @@ export const getEditorChanges = ({ command$, notification$, view$ }: GetEditorCh
   const transforms$ = merge(editorTransform$.pipe(transformContent()), editorTransform$.pipe(transformRanges())).pipe(
     tap(({ view, tr }) => tr && view.dispatch(tr)),
     tap(({ notification }) => (notification ? notification$.next(notification) : undefined)),
-    tag("transforms$"),
+    // tag("transforms$"),
   );
 
   const closeSearchExtended$ = combineLatest([closeSearch$, view$], (command, view) => ({ command, view }));
 
   return merge(closeSearchExtended$, transforms$).pipe(
     tap(({ view }) => view.focus()),
-    tag("editor-changes"),
+    // tag("editor-changes"),
   );
 };

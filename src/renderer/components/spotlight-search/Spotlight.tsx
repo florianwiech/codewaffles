@@ -1,6 +1,6 @@
 import Fuse from "fuse.js";
 import debounce from "lodash.debounce";
-import React, { ChangeEventHandler, FC, forwardRef, useCallback, useRef, useState } from "react";
+import { ChangeEventHandler, FC, forwardRef, ReactNode, useCallback, useRef, useState } from "react";
 import { useKeyboardNavigation } from "./hooks/useKeyboardNavigation";
 import { useScrollIntoView } from "./hooks/useScrollIntoView";
 import { StyledInput } from "./styles/Input.style";
@@ -12,7 +12,7 @@ export type Command<T> = T & BaseCommand;
 
 export type SpotlightProps<T = BaseCommand> = {
   commands: ReadonlyArray<Command<T>>;
-  keys?: Array<Fuse.FuseOptionKey>;
+  keys?: Array<Fuse.FuseOptionKey<Command<T>>>;
 
   initialVisibility?: boolean;
   onSubmit: (command: Command<T>) => void;
@@ -92,7 +92,12 @@ export function useSpotlightSearch<T>(props: SpotlightProps<T>) {
   };
 }
 
-export const SpotlightWrapper: FC<{ visible: boolean; onClose: () => void }> = ({ visible, onClose, children }) => {
+type SpotlightWrapperProps = {
+  children: ReactNode;
+  visible: boolean;
+  onClose: () => void;
+};
+export const SpotlightWrapper: FC<SpotlightWrapperProps> = ({ visible, onClose, children }) => {
   if (!visible) return null;
   return (
     <>
