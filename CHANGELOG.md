@@ -1,3 +1,13 @@
+## [0.5.0](https://github.com/florianwiech/codewaffle/compare/v0.4.1...v0.5.0) (2022-05-30)
+
+### Features
+
+- update app icon ([d6a52c7](https://github.com/florianwiech/codewaffle/commit/d6a52c7ed37d8daa0181df80b4096413c226869c))
+
+### Bug Fixes
+
+- update dependencies ([abaa9ac](https://github.com/florianwiech/codewaffle/commit/abaa9ac28e26b523c1882c7ff424a0019811384b))
+
 ### [0.4.1](https://github.com/florianwiech/codewaffle/compare/v0.4.0...v0.4.1) (2022-04-18)
 
 ### Bug Fixes
