@@ -5,7 +5,7 @@ test.describe("execute commands", () => {
   let electronApp: ElectronApplication;
 
   test.beforeEach(async () => {
-    electronApp = await electron.launch({ args: ["./.webpack/main/index.js"], bypassCSP: true });
+    electronApp = await electron.launch({ args: ["./build/main/index.cjs"], bypassCSP: true });
   });
 
   test.afterEach(async () => {
