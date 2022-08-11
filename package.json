@@ -11,8 +11,6 @@
   "scripts": {
     "prepare": "husky install",
     "generate:icons": "electron-icon-builder --input=./static/icon.png --output=./static",
-    "e2e:web": "playwright test -c playwright.web.config.ts",
-    "e2e:web:debug": "playwright test -c playwright.web.config.ts --debug",
     "e2e:electron": "playwright test -c playwright.electron.config.ts",
     "e2e:electron:debug": "playwright test -c playwright.electron.config.ts --debug",
     "e2e:report": "playwright show-report",
