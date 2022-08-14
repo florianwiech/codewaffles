@@ -1,19 +1,17 @@
 {
   "compilerOptions": {
-    "allowJs": true,
-    "module": "commonjs",
+    "strict": true,
+    "module": "ESNext",
+    "target": "ESNext",
     "skipLibCheck": true,
-    "esModuleInterop": true,
-    "noImplicitAny": true,
-    "sourceMap": true,
-    "baseUrl": "./apps/electron",
-    "outDir": "dist",
-    "moduleResolution": "node",
-    "resolveJsonModule": true,
-    "jsx": "react-jsx",
-    "paths": {
-      "*": ["node_modules/*"]
-    }
+    "moduleResolution": "Node",
+    "isolatedModules": true,
+    "noEmit": true
   },
-  "include": ["src", "e2e", "*.ts"]
+  "include": [],
+  "references": [
+    { "path": "./tsconfig.main.json" },
+    { "path": "./tsconfig.preload.json" },
+    { "path": "./tsconfig.renderer.json" }
+  ]
 }

@@ -1,0 +1,16 @@
+{
+  "compilerOptions": {
+    "composite": true,
+    "module": "esnext",
+    "target": "esnext",
+    "sourceMap": false,
+    "moduleResolution": "Node",
+    "skipLibCheck": true,
+    "strict": true,
+    "isolatedModules": true,
+    "noEmit": true,
+
+    "types": ["node"]
+  },
+  "include": ["./packages/preload/**/*.ts", "./packages/shared/**/*.ts", "./types/**/*.d.ts"]
+}
