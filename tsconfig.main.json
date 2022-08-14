@@ -1,0 +1,17 @@
+{
+  "compilerOptions": {
+    "composite": true,
+    "module": "esnext",
+    "target": "esnext",
+    "sourceMap": false,
+    "moduleResolution": "Node",
+    "skipLibCheck": true,
+    "strict": true,
+    "isolatedModules": true,
+    "noEmit": true,
+    "allowSyntheticDefaultImports": true,
+
+    "types": ["node"]
+  },
+  "include": ["./packages/main/**/*.ts", "./packages/shared/**/*.ts", "./types/**/*.d.ts"]
+}
