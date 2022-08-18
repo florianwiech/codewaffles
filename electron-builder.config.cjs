@@ -4,7 +4,7 @@
  */
 module.exports = {
   productName: "CodeWaffle",
-  appId: "app.codewaffle",
+  appId: "io.github.florianwiech.codewaffle",
   copyright: "Copyright © 2022 Florian Wiech",
   asar: false,
 
