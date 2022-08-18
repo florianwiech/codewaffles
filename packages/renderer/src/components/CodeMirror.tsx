@@ -5,10 +5,8 @@ import { EditorStateConfig } from "@codemirror/state";
 import { getEditorChanges } from "../domain";
 import { command$, editor$, notification$, view$ } from "../store";
 import { useBehaviorSubject } from "../shared/hooks/useBehaviorSubject";
-import { isElectron } from "../../../shared/isElectron";
 import { electronTheme$ } from "./theme/electron/appearance";
 import {
-  AppearanceSwitch,
   basics,
   CursorInformation,
   initialLanguageSetup,
@@ -21,7 +19,6 @@ import {
   useCodeMirrorTheme,
 } from "./editor";
 import { MAC_OS_TITLE_BAR_HEIGHT } from "./MacTitleBar";
-import { changeAppearance, webAppearance$, webTheme$ } from "./theme/web/appearance";
 
 const macEditorHeight = css`
   height: calc(100% - ${MAC_OS_TITLE_BAR_HEIGHT});
@@ -31,20 +28,7 @@ const StyledElectronEditor = styled(StyledEditor)`
   ${window.main?.platform === "darwin" ? macEditorHeight : ""}
 `;
 
-const WebStatusbarPanel: FC<{ view: EditorView }> = ({ view }) => {
-  const appearance = useBehaviorSubject(webAppearance$)!;
-
-  return (
-    <>
-      <div className="spacer" />
-      <CursorInformation state={view.state} />
-      <AppearanceSwitch appearance={appearance} onAppearanceChange={changeAppearance} />
-      <LanguageSwitch view={view} />
-    </>
-  );
-};
-
-const NativeStatusbarPanel: FC<{ view: EditorView }> = ({ view }) => {
+const StatusbarPanel: FC<{ view: EditorView }> = ({ view }) => {
   return (
     <>
       <div className="spacer" />
@@ -56,7 +40,7 @@ const NativeStatusbarPanel: FC<{ view: EditorView }> = ({ view }) => {
 
 export const CodeMirror: FC = () => {
   const ref = useRef<HTMLDivElement>(null);
-  const theme = useBehaviorSubject(isElectron() ? electronTheme$ : webTheme$);
+  const theme = useBehaviorSubject(electronTheme$);
 
   const options = useMemo<EditorStateConfig>(
     () => ({
@@ -65,7 +49,7 @@ export const CodeMirror: FC = () => {
         basics,
         initialThemeSetup,
         initialLanguageSetup,
-        statusbar(isElectron() ? NativeStatusbarPanel : WebStatusbarPanel),
+        statusbar(StatusbarPanel),
         notification(notification$),
       ],
     }),
