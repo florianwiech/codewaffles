@@ -4,13 +4,9 @@ on:
   push:
     branches:
       - main
-    paths-ignore:
-      - infrastructure/**
   pull_request:
     branches:
       - main
-    paths-ignore:
-      - infrastructure/**
   workflow_dispatch:
 
 jobs:
@@ -50,23 +46,6 @@ jobs:
       - run: yarn install --frozen-lockfile
       - run: yarn test
 
-  build-web:
-    runs-on: ubuntu-latest
-    needs: [install]
-    steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-node@v3
-        with:
-          node-version: "16"
-          cache: "yarn"
-      - run: yarn install --frozen-lockfile
-      - run: yarn build
-      - uses: actions/upload-artifact@v3
-        with:
-          name: build-web
-          path: build
-          retention-days: 5
-
   build-electron:
     runs-on: ubuntu-latest
     needs: [install]
@@ -84,30 +63,6 @@ jobs:
           path: |
             .webpack
             out
-          retention-days: 5
-
-  # https://playwright.dev/docs/ci#github-actions
-  e2e-web:
-    timeout-minutes: 60
-    runs-on: ubuntu-latest
-    needs: [build-web]
-    steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-node@v3
-        with:
-          node-version: "16"
-          cache: "yarn"
-      - uses: actions/download-artifact@v3
-        with:
-          name: build-web
-          path: build
-      - run: yarn install --frozen-lockfile
-      - run: npx playwright install --with-deps
-      - run: yarn e2e:web
-      - uses: actions/upload-artifact@v3
-        with:
-          name: e2e-web-report
-          path: playwright-report
           retention-days: 5
 
   e2e-electron:
@@ -132,29 +87,6 @@ jobs:
           name: e2e-electron-report
           path: playwright-report
           retention-days: 5
-
-  deploy-web:
-    timeout-minutes: 60
-    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
-    runs-on: ubuntu-latest
-    needs: [lint, test, build-web, e2e-web]
-    permissions:
-      id-token: write
-      contents: read
-    steps:
-      - uses: actions/checkout@v3
-      - uses: actions/download-artifact@v3
-        with:
-          name: build-web
-          path: build
-
-      - name: Configure AWS credentials
-        uses: aws-actions/configure-aws-credentials@v1
-        with:
-          aws-region: eu-central-1
-          role-to-assume: arn:aws:iam::${{ secrets.AWS_ACCOUNT_ID }}:role/deploy-codewaffle
-
-      - run: sh ./deploy.sh
 
   make:
     if: github.event_name == 'pull_request'
