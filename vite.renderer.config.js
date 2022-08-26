@@ -1,6 +1,7 @@
 import { dirname, join } from "path";
 import { fileURLToPath } from "url";
 import { createRequire } from "module";
+import { loadEnv } from "vite";
 import react from "@vitejs/plugin-react";
 import svgr from "vite-plugin-svgr";
 
@@ -11,6 +12,14 @@ const { chrome } = require("./static/.electron-vendors.cache.json");
 const PACKAGE_ROOT = dirname(fileURLToPath(import.meta.url));
 const rendererPath = "/packages/renderer";
 const sharedPath = "/packages/shared";
+
+// https://github.com/vitejs/vite/issues/3105#issuecomment-939703781
+const env = loadEnv(process.env.MODE, ".");
+
+const htmlPlugin = () => ({
+  name: "html-transform",
+  transformIndexHtml: (html) => html.replace(/<%=\s*([a-zA-Z_]+)\s*%>/g, (_match, variableName) => env[variableName]),
+});
 
 /**
  * @type {import("vite").UserConfig}
@@ -54,7 +63,7 @@ const config = {
       dir: "../../.vitest/renderer",
     },
   },
-  plugins: [react(), svgr()],
+  plugins: [react(), svgr(), htmlPlugin()],
 };
 
 export default config;
