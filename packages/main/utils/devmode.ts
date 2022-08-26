@@ -3,6 +3,4 @@
  *
  * @returns {boolean}
  */
-export function isDevMode(): boolean {
-  return !!process.defaultApp;
-}
+export const isDevMode = () => import.meta.env.DEV;
