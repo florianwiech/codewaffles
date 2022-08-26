@@ -1,4 +1,5 @@
 import Store from "electron-store";
+import { AppearanceState } from "../../../shared/appearance-state";
 import { schema } from "./schema";
 import type { State } from "./types";
 
@@ -7,6 +8,7 @@ const defaults: State = {
     home: {},
     settings: {},
   },
+  appearance: AppearanceState.SYSTEM,
 };
 
 export const state = new Store<State>({ schema, name: "state", defaults });
