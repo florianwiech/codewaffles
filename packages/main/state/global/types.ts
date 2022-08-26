@@ -1,4 +1,5 @@
 import type { Rectangle } from "electron";
+import type { AppearanceState } from "../../../shared/appearance-state";
 
 export type State = {
   windowsState: {
@@ -10,6 +11,7 @@ export type State = {
     };
     settings: SettingsWindowState;
   };
+  appearance: AppearanceState;
 };
 
 export type SettingsWindowState = {
