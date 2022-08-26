@@ -18,6 +18,7 @@
     "build:preload": "tsc -p tsconfig.preload.json --noEmit && vite -c vite.preload.config.js build",
     "build:renderer": "tsc -p tsconfig.renderer.json --noEmit && vite -c vite.renderer.config.js build",
     "make": "electron-builder --config electron-builder.config.cjs",
+    "dist": "run-s build make",
     "dev": "node tools/dev.js",
     "format": "prettier --write .",
     "generate:icons": "electron-icon-builder --input=./static/icon.png --output=./static",
