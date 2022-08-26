@@ -17,6 +17,8 @@ interface ImportMetaEnv {
    */
   readonly VITE_EDITOR_DEV_SERVER_URL: undefined | string;
   readonly VITE_SETTINGS_DEV_SERVER_URL: undefined | string;
+
+  readonly VITE_CSP: string;
 }
 
 interface ImportMeta {
