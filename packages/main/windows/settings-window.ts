@@ -3,8 +3,10 @@ import { URL } from "url";
 import { join } from "path";
 import dark from "@primer/primitives/dist/js/colors/dark";
 import light from "@primer/primitives/dist/js/colors/light";
-
-const isDevMode = () => process.env.NODE_ENV !== "production";
+import { isDevMode } from "../utils/devmode";
+import { windowObserver } from "../state/window-observer";
+import { state } from "../state/global/state";
+import type { SettingsWindowState } from "../state/global/types";
 
 export let settingsWindow: BrowserWindow | null = null;
 
@@ -20,15 +22,16 @@ const pageUrl =
 
 const preloadPath = join(__dirname, "../preload/index.cjs");
 
+const settingsWindowDimensions = { width: 780, height: 560 };
+
 /**
  * Gets default options for the main window
  */
 export function getSettingsWindowOptions(): Electron.BrowserWindowConstructorOptions {
   return {
-    width: isDevMode() ? 1357 : 570,
-    height: 600,
     titleBarStyle: process.platform === "darwin" ? "hidden" : undefined,
     acceptFirstMouse: true,
+    minimizable: false,
     fullscreenable: false,
     resizable: false,
     show: false,
@@ -44,19 +47,37 @@ export function getSettingsWindowOptions(): Electron.BrowserWindowConstructorOpt
  * Creates a settings window.
  */
 export function createSettingsWindow(): Electron.BrowserWindow {
-  settingsWindow = new BrowserWindow(getSettingsWindowOptions());
+  const windowStateObserver = windowObserver({
+    defaultWidth: settingsWindowDimensions.width,
+    defaultHeight: settingsWindowDimensions.height,
+    getState: () => {
+      const windowState = state.get<"windowsState.settings", SettingsWindowState>("windowsState.settings");
 
-  if (isDevMode()) {
-    // Open the DevTools.
-    settingsWindow.webContents.openDevTools();
-  }
+      return { ...windowState, ...settingsWindowDimensions };
+    },
+    setState: (nextState) => {
+      state.set("windowsState.settings", {
+        x: nextState.x,
+        y: nextState.y,
+        displayBounds: nextState.displayBounds,
+      });
+    },
+  });
+
+  settingsWindow = new BrowserWindow({
+    ...getSettingsWindowOptions(),
+    ...windowStateObserver.rectangle,
+  });
 
   settingsWindow.webContents.once("dom-ready", () => {
     if (settingsWindow) {
+      windowStateObserver.manage(settingsWindow);
       settingsWindow.show();
+      settingsWindow?.focus();
 
-      // todo try it out
-      // createContextMenu(browserWindow);
+      if (isDevMode()) {
+        settingsWindow?.webContents.openDevTools({ mode: "detach", activate: false });
+      }
     }
   });
 

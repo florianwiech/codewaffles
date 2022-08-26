@@ -3,6 +3,9 @@ import { URL } from "url";
 import { join } from "path";
 import dark from "@primer/primitives/dist/js/colors/dark";
 import light from "@primer/primitives/dist/js/colors/light";
+import { isDevMode } from "../utils/devmode";
+import { windowObserver } from "../state/window-observer";
+import { state } from "../state/global/state";
 
 // Keep a global reference of the window objects, if we don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
@@ -25,8 +28,6 @@ const preloadPath = join(__dirname, "../preload/index.cjs");
  */
 export function getMainWindowOptions(): Electron.BrowserWindowConstructorOptions {
   return {
-    width: 800,
-    height: 600,
     minHeight: 600,
     minWidth: 320,
     titleBarStyle: process.platform === "darwin" ? "hidden" : undefined,
@@ -45,11 +46,27 @@ export function getMainWindowOptions(): Electron.BrowserWindowConstructorOptions
  */
 export function createMainWindow(): Electron.BrowserWindow {
   let browserWindow: BrowserWindow | null;
-  browserWindow = new BrowserWindow(getMainWindowOptions());
+
+  const windowStateObserver = windowObserver({
+    defaultWidth: 800,
+    defaultHeight: 600,
+    getState: () => state.get("windowsState.home"),
+    setState: (s) => state.set("windowsState.home", s),
+  });
+
+  browserWindow = new BrowserWindow({
+    ...getMainWindowOptions(),
+    ...windowStateObserver.rectangle,
+  });
 
   browserWindow.webContents.once("dom-ready", () => {
+    if (browserWindow) windowStateObserver.manage(browserWindow);
     browserWindow?.show();
     browserWindow?.focus();
+
+    if (isDevMode()) {
+      browserWindow?.webContents.openDevTools();
+    }
   });
 
   browserWindow.on("closed", () => {
