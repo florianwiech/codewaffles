@@ -9,7 +9,7 @@ export function getHelpMenu(): MenuItemConstructorOptions {
       {
         label: "Learn More",
         click: function () {
-          shell.openExternal("https://electronjs.org").then();
+          shell.openExternal("https://github.com/florianwiech/codewaffle").then();
         },
       },
     ],
