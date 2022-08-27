@@ -56,13 +56,12 @@ jobs:
           node-version: "16"
           cache: "yarn"
       - run: yarn install --frozen-lockfile
-      - run: yarn package
+      - run: yarn build
       - uses: actions/upload-artifact@v3
         with:
           name: build-electron
           path: |
-            .webpack
-            out
+            build
           retention-days: 5
 
   e2e-electron:
