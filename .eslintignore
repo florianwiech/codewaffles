@@ -1,2 +1,5 @@
 tools
+build
+e2e
 *.config.js
+*.config.ts

@@ -1,11 +1,12 @@
 import { test, expect } from "@playwright/test";
-import { _electron as electron, ElectronApplication } from "playwright";
+import type { ElectronApplication } from "playwright";
+import { _electron as electron } from "playwright";
 
 test.describe("execute commands", () => {
   let electronApp: ElectronApplication;
 
   test.beforeEach(async () => {
-    electronApp = await electron.launch({ args: ["./build/main/index.cjs"], bypassCSP: true });
+    electronApp = await electron.launch({ args: ["./build/main/main.cjs"], bypassCSP: true });
   });
 
   test.afterEach(async () => {

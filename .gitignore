@@ -16,6 +16,7 @@ out
 .eslintcache
 .browserslistrc
 .electron-vendors.cache.json
+playwright-report
 
 # Editor directories and files
 .vscode/*
