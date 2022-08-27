@@ -4,8 +4,8 @@ import { setupDevTools } from "./devtools";
 import { setupMenu } from "./menu/setup-menu";
 import { setupTitleBarClickMac } from "./title-bar";
 import { setupAppearanceHandler } from "./appearance";
-import { setupSecurityHandlers } from "./setup-security-handlers";
 import { checkForUpdates, setupAutoUpdateHandlers } from "./auto-update";
+import { securityRestrictions } from "./security-restrictions";
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 let argv: string[] = [];
@@ -19,7 +19,6 @@ const shouldQuit = () => require("electron-squirrel-startup");
 export async function onReady() {
   // todo
   // await onFirstRunMaybe();
-  setupSecurityHandlers();
 
   getOrCreateMainWindow();
 
@@ -65,6 +64,7 @@ export function main(argv_in: string[]) {
 
   // https://www.electronjs.org/docs/latest/api/app#appenablesandbox
   app.enableSandbox();
+  app.on("web-contents-created", securityRestrictions);
 
   app.name = "CodeWaffle";
 
