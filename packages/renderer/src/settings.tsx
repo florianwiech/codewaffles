@@ -1,24 +1,24 @@
 import React, { FC } from "react";
 import { createRoot } from "react-dom/client";
-import { AppearanceState } from "./components/theme";
+import { MemoryRouter, Navigate, Route, Routes } from "react-router-dom";
 import { ElectronLayout } from "./components/theme/electron/ElectronLayout";
-import { MacTitleBar } from "./components/MacTitleBar";
+import { SettingsHeader } from "./components/settings/SettingsHeader";
+import { SettingsGeneral } from "./components/settings/SettingsGeneral";
+import { SettingsLanguages } from "./components/settings/SettingsLanguages";
 
 const Settings: FC = () => {
   return (
-    <ElectronLayout>
-      <MacTitleBar
-        title="CodeWaffle"
-        platform={window.settings?.platform}
-        onTitleBarClick={window.settings?.onTitleBarClick}
-      />
+    <MemoryRouter initialEntries={["/general"]}>
+      <ElectronLayout>
+        <SettingsHeader onTitleBarClick={window.settings?.onTitleBarClick} />
 
-      <h2>⚙️ Settings</h2>
-
-      <button onClick={() => window.settings?.changeAppearance(AppearanceState.SYSTEM)}>System</button>
-      <button onClick={() => window.settings?.changeAppearance(AppearanceState.DARK)}>Dark</button>
-      <button onClick={() => window.settings?.changeAppearance(AppearanceState.LIGHT)}>Light</button>
-    </ElectronLayout>
+        <Routes>
+          <Route path="general" element={<SettingsGeneral />} />
+          <Route path="languages" element={<SettingsLanguages />} />
+          <Route path="*" element={<Navigate to="general" replace />} />
+        </Routes>
+      </ElectronLayout>
+    </MemoryRouter>
   );
 };
 

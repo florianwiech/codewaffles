@@ -22,7 +22,7 @@ const pageUrl =
 
 const preloadPath = join(__dirname, "../preload/index.cjs");
 
-const settingsWindowDimensions = { width: 780, height: 560 };
+const settingsWindowDimensions = { width: 420, height: 360 };
 
 /**
  * Gets default options for the main window
