@@ -1,7 +1,7 @@
 import { ipcMain, nativeTheme } from "electron";
-import { AppearanceState } from "../shared/appearance-state";
-import { IpcEvents } from "../shared/ipc-events";
-import { state } from "./state/global/state";
+import { AppearanceState } from "../../shared/appearance-state";
+import { IpcEvents } from "../../shared/ipc-events";
+import { state } from "../state/global/state";
 
 export function setupAppearanceHandler() {
   nativeTheme.themeSource = state.get("appearance");
