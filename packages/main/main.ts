@@ -3,7 +3,7 @@ import { getOrCreateMainWindow } from "./windows/main-window";
 import { setupDevTools } from "./devtools";
 import { setupMenu } from "./menu/setup-menu";
 import { setupTitleBarClickMac } from "./title-bar";
-import { setupAppearanceHandler } from "./appearance";
+import { setupAppearanceHandler } from "./core/appearance-handler";
 import { checkForUpdates, setupAutoUpdateHandlers } from "./auto-update";
 import { securityRestrictions } from "./security-restrictions";
 import { setupLanguageHandler } from "./core/laguage-handler";
