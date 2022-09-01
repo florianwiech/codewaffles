@@ -57,7 +57,12 @@ export const SettingsLanguages: FC = () => {
         {languages.map((lang) => (
           <li key={lang}>
             <span>{lang}</span>
-            <input type="checkbox" checked={activeLanguages.includes(lang)} onChange={() => onLanguageChange(lang)} />
+            <input
+              type="checkbox"
+              checked={activeLanguages.includes(lang)}
+              onChange={() => onLanguageChange(lang)}
+              aria-label={activeLanguages.includes(lang) ? `Activate ${lang} language` : `Deactivate ${lang} language`}
+            />
           </li>
         ))}
       </StyledLanguageList>
