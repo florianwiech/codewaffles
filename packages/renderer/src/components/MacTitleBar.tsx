@@ -12,6 +12,7 @@ const StyledTitleBar = styled.div`
   -webkit-app-region: drag;
   height: ${MAC_OS_TITLE_BAR_HEIGHT};
   line-height: ${MAC_OS_TITLE_BAR_HEIGHT};
+  font-weight: bold;
 
   user-select: none;
 `;
