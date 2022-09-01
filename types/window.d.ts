@@ -14,6 +14,7 @@ export interface IMain extends IApi {
 }
 
 export interface ISettings extends IApi {
+  getAppearance: () => Promise<AppearanceState>;
   changeAppearance: (next: AppearanceState) => Promise<boolean>;
   toggleLanguage: (lang: string) => Promise<string[]>;
 }
