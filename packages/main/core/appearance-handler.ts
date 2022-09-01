@@ -6,6 +6,8 @@ import { state } from "../state/global/state";
 export function setupAppearanceHandler() {
   nativeTheme.themeSource = state.get("appearance");
 
+  ipcMain.handle(IpcEvents.GET_APPEARANCE, () => state.get("appearance"));
+
   ipcMain.handle(IpcEvents.CHANGE_APPEARANCE, (event, next: AppearanceState) => {
     if (next !== AppearanceState.SYSTEM && next !== AppearanceState.DARK && next !== AppearanceState.LIGHT) return;
 

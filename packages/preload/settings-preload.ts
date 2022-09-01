@@ -6,6 +6,7 @@ import { apiBasics } from "./api-basics";
 
 export const settings: ISettings = {
   ...apiBasics,
+  getAppearance: () => ipcRenderer.invoke(IpcEvents.GET_APPEARANCE),
   changeAppearance: (next: AppearanceState) => ipcRenderer.invoke(IpcEvents.CHANGE_APPEARANCE, next),
   toggleLanguage: (lang: string) => ipcRenderer.invoke(IpcEvents.TOGGLE_LANGUAGE, lang),
 };

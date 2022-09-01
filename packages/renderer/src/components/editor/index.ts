@@ -3,7 +3,6 @@ export * from "./setup/createEditor";
 export * from "./setup/language";
 export * from "./extensions/notification";
 export * from "./statusbar/statusbar";
-export * from "./statusbar/AppearanceSwitch";
 export * from "./statusbar/LanguageSwitch";
 export * from "./statusbar/CursorInformation";
 export * from "./theme/useCodeMirrorTheme";
