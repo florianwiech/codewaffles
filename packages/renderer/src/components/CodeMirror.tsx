@@ -1,4 +1,6 @@
 import { FC, useEffect, useMemo, useRef } from "react";
+import { fromEvent } from "rxjs";
+import { filter, tap } from "rxjs/operators";
 import styled, { css } from "styled-components";
 import { EditorView } from "@codemirror/view";
 import { EditorStateConfig } from "@codemirror/state";
@@ -66,6 +68,17 @@ export const CodeMirror: FC = () => {
 
   useEffect(() => {
     const sub = getEditorChanges({ notification$, command$, view$ }).subscribe();
+    return () => sub.unsubscribe();
+  }, []);
+
+  useEffect(() => {
+    const sub = fromEvent<KeyboardEvent>(document, "keydown")
+      .pipe(
+        filter((event) => event.key === "Escape"),
+        tap(() => editor$.value?.focus()),
+      )
+      .subscribe();
+
     return () => sub.unsubscribe();
   }, []);
 
