@@ -6,6 +6,7 @@ import { setupTitleBarClickMac } from "./title-bar";
 import { setupAppearanceHandler } from "./appearance";
 import { checkForUpdates, setupAutoUpdateHandlers } from "./auto-update";
 import { securityRestrictions } from "./security-restrictions";
+import { setupLanguageHandler } from "./core/laguage-handler";
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 let argv: string[] = [];
@@ -30,6 +31,8 @@ export async function onReady() {
   // setupDialogs();
   setupDevTools().then();
   setupTitleBarClickMac();
+
+  setupLanguageHandler();
 
   // processCommandLine(argv);
   setupAutoUpdateHandlers();
