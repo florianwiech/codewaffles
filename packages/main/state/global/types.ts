@@ -12,6 +12,7 @@ export type State = {
     settings: SettingsWindowState;
   };
   appearance: AppearanceState;
+  activeLanguages: string[];
 };
 
 export type SettingsWindowState = {

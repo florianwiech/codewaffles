@@ -2,6 +2,7 @@ import { FC } from "react";
 import styled from "styled-components";
 import { NavLink } from "react-router-dom";
 import { ReactComponent as GeneralIcon } from "bootstrap-icons/icons/gear-fill.svg";
+import { ReactComponent as LanguageIcon } from "bootstrap-icons/icons/cassette-fill.svg";
 
 const StyledNavigation = styled.nav`
   text-align: center;
@@ -59,6 +60,12 @@ export const SettingsNavigation: FC = () => {
           <StyledNavItem to="general">
             <GeneralIcon />
             <span>General</span>
+          </StyledNavItem>
+        </li>
+        <li>
+          <StyledNavItem to="languages">
+            <LanguageIcon />
+            <span>Languages</span>
           </StyledNavItem>
         </li>
       </ul>

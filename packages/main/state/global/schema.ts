@@ -51,4 +51,7 @@ export const schema: Schema<State> = {
   appearance: {
     type: JSONSchemaType.String,
   },
+  activeLanguages: {
+    type: JSONSchemaType.Array,
+  },
 };

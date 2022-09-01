@@ -1,9 +1,15 @@
-import React, { ChangeEvent, FC, useState } from "react";
+import React, { ChangeEvent, FC, useEffect, useState } from "react";
 import { EditorView } from "@codemirror/view";
-import { languageConf, languageExtensions, supportedLanguages } from "../setup/language";
+import { languageConf, languageExtensions } from "../setup/language";
 
 export const LanguageSwitch: FC<{ view: EditorView }> = ({ view }) => {
   const [lang, setLang] = useState(languageExtensions[0].name);
+  const [languages, setLanguages] = useState<string[]>([]);
+
+  useEffect(() => {
+    window.main?.getActiveLanguages().then(setLanguages);
+    window.main?.onLanguageActivation((event, activeLanguages) => setLanguages(activeLanguages));
+  }, []);
 
   const onChange = async (event: ChangeEvent<HTMLSelectElement>) => {
     const nextLangName = event.target.value;
@@ -18,9 +24,9 @@ export const LanguageSwitch: FC<{ view: EditorView }> = ({ view }) => {
 
   return (
     <select value={lang} onChange={onChange} className="language-switch" aria-label="Select language mode">
-      {supportedLanguages.map((optionName) => (
-        <option key={optionName} value={optionName}>
-          {optionName}
+      {languages.map((option) => (
+        <option key={option} value={option}>
+          {option}
         </option>
       ))}
     </select>
