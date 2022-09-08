@@ -1,3 +1,17 @@
+## [0.6.0](https://github.com/florianwiech/codewaffle/compare/v0.5.0...v0.6.0) (2022-09-08)
+
+### Features
+
+- ability to configure which languages should be selectable ([7eb8e5c](https://github.com/florianwiech/codewaffle/commit/7eb8e5c95a5849c3e4037ea91d1512bccb10ab4b))
+- add base64 encode & decode script ([2b8a4ea](https://github.com/florianwiech/codewaffle/commit/2b8a4eaabdf649bec3d9d0548cdc24d92bef427a))
+- focus editor on Escape click ([947abae](https://github.com/florianwiech/codewaffle/commit/947abae013ffbdbd0ce6dc78c0994d5e8a2c73a7))
+- minor view improvements ([a6354ad](https://github.com/florianwiech/codewaffle/commit/a6354add42ffba4c222fadaa15a47f397a631dd4))
+- new appearance switch layout ([fa18fa5](https://github.com/florianwiech/codewaffle/commit/fa18fa5d199f0c4fe1380d75efebffbb7b03f419))
+- new settings window style ([aa3cd4f](https://github.com/florianwiech/codewaffle/commit/aa3cd4fd0408d9e0f0dcfd8a76cbc0aaf1c6427a))
+- persist appearance setting ([16622b9](https://github.com/florianwiech/codewaffle/commit/16622b962c7b44a4193c5b833f74eafaa04d6b9d))
+- persist window sizes & positions ([4430872](https://github.com/florianwiech/codewaffle/commit/4430872732347868978bc15323e870a981e867c6))
+- restructure menu items ([c78fdef](https://github.com/florianwiech/codewaffle/commit/c78fdef449bee90e5fab08988deaaba10587a2b3))
+
 ## [0.5.0](https://github.com/florianwiech/codewaffle/compare/v0.4.1...v0.5.0) (2022-05-30)
 
 ### Features
