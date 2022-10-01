@@ -1,3 +1,9 @@
+## [0.6.1](https://github.com/florianwiech/codewaffle/compare/v0.6.0...v0.6.1) (2022-10-01)
+
+### Bug Fixes
+
+- **deps:** pin dependency react-router-dom to 6.4.1 ([2f711a6](https://github.com/florianwiech/codewaffle/commit/2f711a60ad5ecc2004886fc5408a1fd3b76a33ec))
+
 ## [0.6.0](https://github.com/florianwiech/codewaffle/compare/v0.5.0...v0.6.0) (2022-09-08)
 
 ### Features
