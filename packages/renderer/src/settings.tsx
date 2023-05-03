@@ -5,6 +5,7 @@ import { ElectronLayout } from "./components/theme/electron/ElectronLayout";
 import { SettingsHeader } from "./components/settings/SettingsHeader";
 import { SettingsGeneral } from "./components/settings/SettingsGeneral";
 import { SettingsLanguages } from "./components/settings/SettingsLanguages";
+import "./assets/index.css";
 
 const Settings: FC = () => {
   return (

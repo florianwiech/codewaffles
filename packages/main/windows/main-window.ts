@@ -27,11 +27,11 @@ const preloadPath = join(__dirname, "../preload/index.cjs");
 export function getMainWindowOptions(): Electron.BrowserWindowConstructorOptions {
   return {
     minHeight: 600,
-    minWidth: 320,
-    titleBarStyle: process.platform === "darwin" ? "hidden" : undefined,
+    minWidth: 540,
+    titleBarStyle: process.platform === "darwin" ? "hiddenInset" : undefined,
     acceptFirstMouse: true,
     show: false,
-    backgroundColor: nativeTheme.shouldUseDarkColors ? "#0d1117" : "#ffffff",
+    backgroundColor: nativeTheme.shouldUseDarkColors ? "#171717" : "#ffffff",
     webPreferences: {
       preload: preloadPath,
       additionalArguments: ["common", "editor"],
