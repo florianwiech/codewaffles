@@ -1,8 +1,6 @@
 import { BrowserWindow, nativeTheme } from "electron";
 import { URL } from "url";
-import { join } from "path";
-import dark from "@primer/primitives/dist/js/colors/dark";
-import light from "@primer/primitives/dist/js/colors/light";
+import { join } from "node:path";
 import { isDevMode } from "../utils/devmode";
 import { windowObserver } from "../state/window-observer";
 import { state } from "../state/global/state";
@@ -35,7 +33,7 @@ export function getSettingsWindowOptions(): Electron.BrowserWindowConstructorOpt
     fullscreenable: false,
     resizable: false,
     show: false,
-    backgroundColor: nativeTheme.shouldUseDarkColors ? dark.canvas.default : light.canvas.default,
+    backgroundColor: nativeTheme.shouldUseDarkColors ? "#0d1117" : "#ffffff",
     webPreferences: {
       preload: preloadPath,
       additionalArguments: ["common", "settings"],
@@ -76,7 +74,7 @@ export function createSettingsWindow(): Electron.BrowserWindow {
       settingsWindow?.focus();
 
       if (isDevMode()) {
-        settingsWindow?.webContents.openDevTools({ mode: "detach", activate: false });
+        // settingsWindow?.webContents.openDevTools({ mode: "detach", activate: false });
       }
     }
   });

@@ -1,6 +1,6 @@
-import { dirname, join } from "path";
-import { fileURLToPath } from "url";
-import { createRequire } from "module";
+import { dirname, join } from "node:path";
+import { fileURLToPath } from "node:url";
+import { createRequire } from "node:module";
 
 // https://www.stefanjudis.com/snippets/how-to-import-json-files-in-es-modules-node-js
 const require = createRequire(import.meta.url);

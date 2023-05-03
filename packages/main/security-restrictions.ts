@@ -1,5 +1,5 @@
 import { URL } from "url";
-import type { WebContents } from "electron";
+import type { Session, WebContents } from "electron";
 import { shell } from "electron";
 
 // Based on:
@@ -13,27 +13,16 @@ import { shell } from "electron";
 // https://github.com/reZach/secure-electron-template/blob/e2a7df9f8eef30a57c137616a8f69d37186f0c24/docs/scripts.md#audit-your-application
 
 /**
+ * Union for all existing permissions in electron
+ */
+type Permission = Parameters<Exclude<Parameters<Session["setPermissionRequestHandler"]>[0], null>>[1];
+
+/**
  * List of origins that you allow open INSIDE the application and permissions for each of them.
  *
  * In development mode you need allow open `VITE_DEV_SERVER_URL` for each window
  */
-const ALLOWED_ORIGINS_AND_PERMISSIONS = new Map<
-  string,
-  Set<
-    | "clipboard-read"
-    | "media"
-    | "display-capture"
-    | "mediaKeySystem"
-    | "geolocation"
-    | "notifications"
-    | "midi"
-    | "midiSysex"
-    | "pointerLock"
-    | "fullscreen"
-    | "openExternal"
-    | "unknown"
-  >
->(
+const ALLOWED_ORIGINS_AND_PERMISSIONS = new Map<string, Set<Permission>>(
   import.meta.env.DEV &&
   import.meta.env.VITE_HOME_DEV_SERVER_URL &&
   import.meta.env.VITE_EDITOR_DEV_SERVER_URL &&

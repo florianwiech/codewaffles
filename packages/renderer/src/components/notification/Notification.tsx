@@ -1,5 +1,5 @@
 import React, { FC, useEffect, useRef } from "react";
-import { ReactComponent as CloseIcon } from "bootstrap-icons/icons/x-circle-fill.svg";
+// import { ReactComponent as CloseIcon } from "bootstrap-icons/icons/x-circle-fill.svg";
 import { EditorView } from "@codemirror/view";
 import { Subject } from "rxjs";
 import { AnimatePresence, motion } from "framer-motion";
@@ -36,7 +36,7 @@ export const NotificationComponent: FC<{ view: EditorView; notification$: Subjec
   }, [notification$, state]);
 
   return (
-    <AnimatePresence exitBeforeEnter>
+    <AnimatePresence mode="wait">
       {state ? (
         <motion.div
           key={state.message}
@@ -47,7 +47,8 @@ export const NotificationComponent: FC<{ view: EditorView; notification$: Subjec
         >
           <span>{state.message}</span>
           <button onClick={() => notification$.next(null)}>
-            <CloseIcon />
+            Close
+            {/*<CloseIcon />*/}
           </button>
         </motion.div>
       ) : null}

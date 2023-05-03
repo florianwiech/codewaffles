@@ -1,4 +1,4 @@
-import { resolve } from "path";
+import { resolve } from "node:path";
 import { writeFileSync } from "fs";
 
 const electronRelease = process.versions;

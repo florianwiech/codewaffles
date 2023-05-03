@@ -9,7 +9,11 @@ import { isDevMode } from "./utils/devmode";
 export async function setupDevTools(): Promise<void> {
   if (!isDevMode()) return;
 
-  const { default: installExtension, REACT_DEVELOPER_TOOLS } = await import("electron-devtools-installer");
+  const {
+    // @ts-expect-error Hotfix for https://github.com/vitejs/vite/issues/2139
+    default: { default: installExtension },
+    REACT_DEVELOPER_TOOLS,
+  } = await import("electron-devtools-installer");
 
   try {
     const react = await installExtension(REACT_DEVELOPER_TOOLS);
