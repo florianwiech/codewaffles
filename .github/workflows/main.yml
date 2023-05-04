@@ -169,6 +169,7 @@ jobs:
       - run: yarn run make
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          TEAM_ID: ${{ secrets.TEAM_ID }}
           APPLE_ID: ${{ secrets.APPLE_ID }}
           APPLE_ID_PASSWORD: ${{ secrets.APPLE_ID_PASSWORD }}
           CSC_LINK: ${{ secrets.MACOS_CERT_P12 }}

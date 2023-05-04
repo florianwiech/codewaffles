@@ -20,7 +20,7 @@ exports.default = async function notarizing(context) {
     return;
   }
 
-  if (!process.env.APPLE_ID || !process.env.APPLE_ID_PASSWORD) {
+  if (!process.env.TEAM_ID || !process.env.APPLE_ID || !process.env.APPLE_ID_PASSWORD) {
     console.warn("Should be notarizing, but environment variables APPLE_ID or APPLE_ID_PASSWORD are missing!");
     return;
   }
@@ -32,6 +32,6 @@ exports.default = async function notarizing(context) {
     appPath: `${appOutDir}/${appName}.app`,
     appleId: process.env.APPLE_ID,
     appleIdPassword: process.env.APPLE_ID_PASSWORD,
-    ascProvider: "28563WWU78",
+    ascProvider: process.env.TEAM_ID,
   });
 };

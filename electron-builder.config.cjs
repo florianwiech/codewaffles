@@ -5,7 +5,7 @@
 module.exports = {
   productName: "CodeWaffle",
   appId: "app.codewaffle",
-  copyright: "Copyright © 2022 Florian Wiech",
+  copyright: `Copyright © ${new Date().getFullYear()} Florian Wiech`,
 
   afterSign: "./tools/notarize.cjs",
 
