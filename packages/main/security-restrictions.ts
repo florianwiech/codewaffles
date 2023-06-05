@@ -1,5 +1,5 @@
 import { URL } from "url";
-import type { Session, WebContents } from "electron";
+import type { Session, WebContents, Event } from "electron";
 import { shell } from "electron";
 
 // Based on:
