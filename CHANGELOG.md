@@ -1,3 +1,9 @@
+## [0.6.2](https://github.com/florianwiech/codewaffle/compare/v0.6.1...v0.6.2) (2023-06-05)
+
+### Bug Fixes
+
+- **deps:** update dependencies ([cb97ad6](https://github.com/florianwiech/codewaffle/commit/cb97ad67ef1c7bb24c75b3fd9024aeb897623a08))
+
 ## [0.6.1](https://github.com/florianwiech/codewaffle/compare/v0.6.0...v0.6.1) (2022-10-01)
 
 ### Bug Fixes
