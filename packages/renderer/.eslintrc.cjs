@@ -6,7 +6,7 @@ module.exports = {
   parserOptions: {
     parser: "@typescript-eslint/parser",
     ecmaVersion: 12,
-    project: ["./tsconfig.renderer.json"],
+    project: ["../../tsconfig.renderer.json"],
     sourceType: "module",
   },
   extends: ["plugin:import/typescript", "react-app", "react-app/jest"],
