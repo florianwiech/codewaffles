@@ -57,7 +57,7 @@ const config = {
     brotliSize: false,
   },
   test: {
-    environment: "happy-dom",
+    environment: "jsdom",
     setupFiles: join(PACKAGE_ROOT, rendererPath, "src", "setupTests.ts"),
     cache: {
       dir: "../../.vitest/renderer",
