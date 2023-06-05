@@ -5740,7 +5740,7 @@ electron@25.0.1:
   integrity sha512-YD3xCrH01LiPeLlG90DWgMXJK69UxY4NiXKqXT12HOiXLqEaKrLWap+CiiS7J7SWUXz+4XOItQI8g1dtG7zkkA==
   dependencies:
     "@electron/get" "^2.0.0"
-    "@types/node" "^16.11.26"
+    "@types/node" "^18.11.18"
     extract-zip "^2.0.1"
 
 emoji-regex@^8.0.0:
@@ -6524,7 +6524,7 @@ fast-diff@^1.2.0:
   resolved "https://registry.yarnpkg.com/fast-diff/-/fast-diff-1.3.0.tgz#ece407fa550a64d638536cd727e129c61616e0f0"
   integrity sha512-VxPP4NqbUjj6MaAOafWeUn2cXWLcCtljklUtZf0Ind4XQ+QPtmA0b18zZy0jIQx+ExRVCR/ZQpBmik5lXshNsw==
 
-fast-glob@^3.2.12, fast-glob@^3.2.9:
+fast-glob@^3.2.11, fast-glob@^3.2.12, fast-glob@^3.2.9:
   version "3.2.12"
   resolved "https://registry.yarnpkg.com/fast-glob/-/fast-glob-3.2.12.tgz#7f39ec99c2e6ab030337142da9e0c18f37afae80"
   integrity sha512-DVj4CQIYYow0BlaelwK1pHl5n5cRSJfM60UA0zK891sVInoPri2Ekj7+e1CT3/3qxXenpI+nBBmQAcJPJgaj4w==
