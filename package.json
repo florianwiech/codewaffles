@@ -40,7 +40,7 @@
     "verify": "electronegativity -i build"
   },
   "dependencies": {
-    "@codemirror/language-data": "6.3.1",
+    "@codemirror/language-data": "6.5.1",
     "@primer/primitives": "7.11.11",
     "bootstrap-icons": "1.10.5",
     "codemirror": "6.0.1",
